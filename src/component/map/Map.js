@@ -3,46 +3,11 @@ import * as d3 from "d3";
 import "./Map.css";
 import SvgUsMap from "./UsMap";
 
-export default function Map() {
-  const [choosenState, setChoosenState] = useState(null);
-  const [choosenStateTitle, setChoosenStateTitle] = useState(null);
-
-  const ChoosenStatePicker = (currState) => {
-    setChoosenState(currState);
-  };
+export default function Map({ choosenState, choosenStateTitle }) {
   useEffect(() => {
-    const states = Array.from(
-      document.getElementsByClassName("usMap_svg__sm_state ")
-    );
-
-    const stateTitles = Array.from(
-      document.getElementsByClassName("usMap_svg__sm_label ")
-    );
-    states.map((state) => {
-      state.addEventListener("click", function () {
-        ChoosenStatePicker(state);
-        stateTitles.map((stateTitle) => {
-          if (stateTitle.id === state.id) {
-            setChoosenStateTitle(stateTitle);
-            console.log("hi");
-            console.log(state);
-            console.log(stateTitle);
-          }
-        });
-      });
-    });
-
-    if (choosenState) {
-      states.map((state) => {
-        state.removeEventListener("click", function () {
-          ChoosenStatePicker(state);
-        });
-      });
-    }
-
     if (choosenState) {
       let width = 487,
-        height = 300;
+        height = 280.8;
 
       const zoom = d3.zoom().scaleExtent([1, 3]).on("zoom", zoomed);
       d3.select(choosenState).style("fill", "red");
