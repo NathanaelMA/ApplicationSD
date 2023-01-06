@@ -4,6 +4,7 @@ import "./Map.css";
 import SvgUsMap from "./UsMap";
 import { AppContext } from "../../App";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { AnimatePresence, motion } from "framer-motion";
 
 export default function Map() {
   const {
@@ -18,7 +19,7 @@ export default function Map() {
   useEffect(() => {
     if (choosenState && !USMainMap) {
       let width = 487,
-        height = 430.8;
+        height = 455;
 
       const zoom = d3.zoom().scaleExtent([1, 3]).on("zoom", zoomed);
       d3.select(choosenState).style("fill", "red");
@@ -60,5 +61,13 @@ export default function Map() {
     }
   }, [choosenState, USMainMap, compareStates]);
 
-  return <div id="map-svg">{compareStates ? null : <SvgUsMap />}</div>;
+  return (
+    <motion.div
+      layout
+      transition={{ type: "spring", ease: "easeOut" }}
+      id="map-svg"
+    >
+      {compareStates ? null : <SvgUsMap />}
+    </motion.div>
+  );
 }

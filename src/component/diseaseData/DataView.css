@@ -1,36 +1,18 @@
 .data-section {
     background-color: rgb(173, 144, 201);
-    animation: slide 1s forwards;
+    animation: slide 2s forwards;
     animation-delay: 0s;
-    height: 35rem;
+    height: 40rem;
 
-
-/* 
-    animation: slide 1s ease-out 1s ;  */
 }
 
+/* .data-section[checking=true] {
+    height:35rem;
+} */
+
 @keyframes slide {
-    /* 100% { left: 0; } */
     100% { 
         flex-grow: 1; 
       }
-}
-
-
-.comparing-data-section {
-    background-color: rgb(173, 144, 201);
-    animation: comparing-slide 1s forwards;
-    animation-delay: 0s;
-    height: 35rem;
-/* 
-    animation: slide 1s ease-out 1s ;  */
-}
-
-@keyframes comparing-slide {
-    /* 100% { left: 0; } */
-    100% { 
-        flex-grow: 3; 
-      }
-}
-
+} 
 

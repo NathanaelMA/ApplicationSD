@@ -6,6 +6,7 @@ import Map from "./component/map/Map";
 import ColorLegend from "./component/map/ColorLegend";
 import { useEffect, useState } from "react";
 import DiseaseFilter from "./component/diseaseData/DiseaseFilter";
+import { AnimatePresence, motion } from "framer-motion";
 export const AppContext = React.createContext();
 
 export default function App() {
@@ -73,7 +74,8 @@ export default function App() {
         }}
       >
         <TitleHeader />
-        <div className="main-container">
+
+        <motion.div layout className="main-container">
           {USMainMap ? (
             <DataView />
           ) : choosenState ? (
@@ -81,11 +83,12 @@ export default function App() {
           ) : compareStates ? (
             <DataView />
           ) : null}
+          {/* <DataView /> */}
           <Map />
 
           {compareStates ? <DataView /> : null}
           {choosenState ? null : compareStates ? null : <ColorLegend />}
-        </div>
+        </motion.div>
       </AppContext.Provider>
     </>
   );

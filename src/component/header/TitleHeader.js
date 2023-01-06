@@ -18,13 +18,16 @@ export default function TitleHeader() {
     if (choosenState || compareStates) {
       setUSMainMap(true);
       setCompareStates(false);
-      // setCompareStates(false);
     } else setUSMainMap(false);
   }
 
   function handleCompare() {
     setCompareStates(true);
     setUSMainMap(false);
+  }
+  function runThis(e) {
+    console.log(e.target.value);
+    setDiseaseType(e.target.value);
   }
 
   return (
@@ -34,7 +37,23 @@ export default function TitleHeader() {
         <img src={logo}></img>
       </button>
       <button onClick={handleCompare}> Compare States</button>
-      <CustomizedMenus />
+      {/* <CustomizedMenus /> */}
+
+      <div className="col-sm-2">
+        <select
+          className="form-control"
+          id="state"
+          name="state"
+          onChange={runThis}
+        >
+          <option value="">Choose Disease Type</option>
+          <option value="Covid">Covid</option>
+          <option value="Covid2">ACovid</option>
+          <option value="Covid3">ArCovid</option>
+          <option value="Covid4">ACovid</option>
+          <option value="Covid5">CaliCovid</option>
+        </select>
+      </div>
     </div>
   );
 }
