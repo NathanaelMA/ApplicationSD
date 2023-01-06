@@ -1,19 +1,28 @@
 import "./App.css";
+import React from "react";
 import TitleHeader from "./component/header/TitleHeader";
 import DataView from "./component/diseaseData/DataView";
 import Map from "./component/map/Map";
 import ColorLegend from "./component/map/ColorLegend";
 import { useEffect, useState } from "react";
 import DiseaseFilter from "./component/diseaseData/DiseaseFilter";
+export const AppContext = React.createContext();
 
 export default function App() {
   const [choosenState, setChoosenState] = useState(null);
   const [choosenStateTitle, setChoosenStateTitle] = useState(null);
+  const [USMainMap, setUSMainMap] = useState(null);
+  const [diseaseType, setDiseaseType] = useState(null);
+  const [compareStates, setCompareStates] = useState(null);
 
   const ChoosenStatePicker = (currState) => {
     setChoosenState(currState);
   };
   useEffect(() => {
+    const states_and_titles = Array.from(
+      document.getElementsByClassName("usMap_svg")
+    );
+
     const states = Array.from(
       document.getElementsByClassName("usMap_svg__sm_state ")
     );
@@ -22,38 +31,62 @@ export default function App() {
       document.getElementsByClassName("usMap_svg__sm_label ")
     );
 
-    states.map((state) => {
-      state.addEventListener("click", function () {
+    states_and_titles.map((SaT) => {
+      SaT.addEventListener("click", function () {
+        const state = states.find((stateElem) => stateElem.id === SaT.id);
         ChoosenStatePicker(state);
-        stateTitles.map((stateTitle) => {
-          if (stateTitle.id === state.id) {
-            setChoosenStateTitle(stateTitle);
-          }
-        });
+        const stateTitle = stateTitles.find(
+          (titleElem) => titleElem.id === SaT.id
+        );
+        setChoosenStateTitle(stateTitle);
       });
     });
 
     if (choosenState) {
-      states.map((state) => {
-        state.removeEventListener("click", function () {
+      states_and_titles.map((SaT) => {
+        SaT.removeEventListener("click", function () {
+          const state = states.find((stateElem) => stateElem.id === SaT.id);
           ChoosenStatePicker(state);
+          const stateTitle = stateTitles.find(
+            (titleElem) => titleElem.id === SaT.id
+          );
+          setChoosenStateTitle(stateTitle);
         });
       });
     }
-  }, [choosenState]);
+  }, [compareStates]);
 
   return (
     <>
-      <TitleHeader />
-      <div className="main-container">
-        {choosenState ? <DataView /> : null}
-        <Map
-          choosenState={choosenState}
-          choosenStateTitle={choosenStateTitle}
-        />
-        <DiseaseFilter />
-        {choosenState ? null : <ColorLegend />}
-      </div>
+      <AppContext.Provider
+        value={{
+          choosenState,
+          setChoosenState,
+          choosenStateTitle,
+          setChoosenStateTitle,
+          USMainMap,
+          setUSMainMap,
+          diseaseType,
+          setDiseaseType,
+          compareStates,
+          setCompareStates,
+        }}
+      >
+        <TitleHeader />
+        <div className="main-container">
+          {USMainMap ? (
+            <DataView />
+          ) : choosenState ? (
+            <DataView />
+          ) : compareStates ? (
+            <DataView />
+          ) : null}
+          <Map />
+
+          {compareStates ? <DataView /> : null}
+          {choosenState ? null : compareStates ? null : <ColorLegend />}
+        </div>
+      </AppContext.Provider>
     </>
   );
 }

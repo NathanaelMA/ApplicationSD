@@ -1,13 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import * as d3 from "d3";
 import "./Map.css";
 import SvgUsMap from "./UsMap";
+import { AppContext } from "../../App";
+import "bootstrap/dist/css/bootstrap.min.css";
 
-export default function Map({ choosenState, choosenStateTitle }) {
+export default function Map() {
+  const {
+    choosenState,
+    setChoosenState,
+    choosenStateTitle,
+    USMainMap,
+    setUSMainMap,
+    compareStates,
+  } = useContext(AppContext);
+
   useEffect(() => {
-    if (choosenState) {
+    if (choosenState && !USMainMap) {
       let width = 487,
-        height = 280.8;
+        height = 430.8;
 
       const zoom = d3.zoom().scaleExtent([1, 3]).on("zoom", zoomed);
       d3.select(choosenState).style("fill", "red");
@@ -39,8 +50,15 @@ export default function Map({ choosenState, choosenStateTitle }) {
         d3.select("g").attr("transform", transform);
         d3.select("g").attr("stroke-width", 1 / transform.k);
       }
-    }
-  }, [choosenState]);
+    } else {
+      setChoosenState(null);
+      setUSMainMap(false);
 
-  return <>{<SvgUsMap />}</>;
+      const svg = d3.select("svg").attr("viewBox", [-20, 3, 600, 280]);
+      svg.on(".zoom", null);
+      d3.select("g").attr("transform", "translate(0,0) scale(1.0)");
+    }
+  }, [choosenState, USMainMap, compareStates]);
+
+  return <div id="map-svg">{compareStates ? null : <SvgUsMap />}</div>;
 }

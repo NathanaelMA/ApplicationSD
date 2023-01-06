@@ -1,5 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
+import "./DiseaseFilter.css";
+import { AppContext } from "../../App";
 
 export default function DiseaseFilter() {
-  return <div>DiseaseFilter</div>;
+  const {} = useContext(AppContext);
+  return (
+    <div id="disease-container">
+      Disease Filter
+      <p></p>
+    </div>
+  );
 }
