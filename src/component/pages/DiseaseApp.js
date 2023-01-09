@@ -14,6 +14,7 @@ export default function DiseaseApp() {
   const [USMainMap, setUSMainMap] = useState(true);
   const [diseaseType, setDiseaseType] = useState(null);
   const [compareStates, setCompareStates] = useState(null);
+  const [theme, setTheme] = useState("dark");
 
   const ChoosenStatePicker = (currState) => {
     setChoosenState(currState);
@@ -70,11 +71,13 @@ export default function DiseaseApp() {
           setDiseaseType,
           compareStates,
           setCompareStates,
+          theme,
+          setTheme,
         }}
       >
         <TitleHeader />
 
-        <div className="main-container">
+        <div className="main-container" themeValue={theme}>
           {USMainMap ? null : choosenState || compareStates ? (
             <DataView />
           ) : null}

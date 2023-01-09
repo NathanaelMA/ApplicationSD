@@ -3,9 +3,9 @@ import "./DiseaseFilter.css";
 import { AppContext } from "../pages/DiseaseApp";
 
 export default function DiseaseFilter() {
-  const {} = useContext(AppContext);
+  const { theme } = useContext(AppContext);
   return (
-    <div id="disease-container">
+    <div id="disease-container" themeValue={theme}>
       Disease Filter
       <p></p>
     </div>

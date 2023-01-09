@@ -13,6 +13,7 @@ export default function Map() {
     USMainMap,
     setUSMainMap,
     compareStates,
+    theme,
   } = useContext(AppContext);
 
   useEffect(() => {
@@ -66,6 +67,7 @@ export default function Map() {
       {compareStates ? (
         <motion.div
           layout
+          themeValue={theme}
           initial={{ width: "-20%" }}
           animate={{ width: "20%" }}
           transition={{ delay: 1 }}
@@ -74,6 +76,7 @@ export default function Map() {
       ) : (
         <motion.div
           layout
+          themeValue={theme}
           key="USmap"
           initial={{ x: "50%", opacity: 0 }}
           animate={{ x: "0%", opacity: 1, transition: { duration: 1 } }}

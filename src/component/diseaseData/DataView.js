@@ -4,7 +4,8 @@ import { AppContext } from "../pages/DiseaseApp";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function DataView() {
-  const { choosenState, diseaseType, compareStates } = useContext(AppContext);
+  const { choosenState, diseaseType, compareStates, theme } =
+    useContext(AppContext);
   const [displayData, setDisplayData] = useState(null);
   function chooseStateData(e) {
     setDisplayData(e.target.value);
@@ -13,16 +14,16 @@ export default function DataView() {
     <>
       {/* <AnimatePresence>
         {(compareStates || choosenState) && ( */}
-      {console.log(compareStates)}
       <motion.div
         className="data-section"
+        themeValue={theme}
         layout
         activeState={JSON.stringify(compareStates)}
       >
-        <p> {diseaseType}</p>
+        <p themeValue={theme}> {diseaseType}</p>
         <div className="form-group">
           <label htmlFor="state" className="col-sm-4 control-label">
-            <p> Pick a State to view Data </p>
+            <p themeValue={theme}> Pick a State to view Data </p>
           </label>
           <div className="col-sm-5">
             <select
@@ -87,7 +88,7 @@ export default function DataView() {
             </select>
           </div>
         </div>
-        <p> {displayData} </p>
+        <p themeValue={theme}> {displayData} </p>
       </motion.div>
       {/* )}
       </AnimatePresence> */}
