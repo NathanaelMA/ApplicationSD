@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import "./TitleHeader.css";
-import logo from "../../images/favicon.png";
-import CustomizedMenus from "../CustomizedMenus";
-import { AppContext } from "../../App";
-import "bootstrap/dist/css/bootstrap.min.css";
+import Maplogo from "../../images/NAMap.png";
+import scalelogo from "../../images/scale.png";
+import { AppContext } from "../pages/DiseaseApp";
+import { Link } from "react-router-dom";
 export default function TitleHeader() {
   const {
     choosenState,
@@ -25,35 +25,31 @@ export default function TitleHeader() {
     setCompareStates(true);
     setUSMainMap(false);
   }
-  function runThis(e) {
+  function handleDiseaseSelection(e) {
     console.log(e.target.value);
     setDiseaseType(e.target.value);
   }
 
   return (
-    <div id="header-container">
+    <nav id="header-container">
+      <Link to={"/"}>
+        <header id="home">Home</header>
+      </Link>
       <h1>Infectious Disease Risk Predictor </h1>
-      <button onClick={handleMapView}>
-        <img src={logo}></img>
-      </button>
-      <button onClick={handleCompare}> Compare States</button>
-      {/* <CustomizedMenus /> */}
-
-      <div className="col-sm-2">
-        <select
-          className="form-control"
-          id="state"
-          name="state"
-          onChange={runThis}
-        >
-          <option value="">Choose Disease Type</option>
-          <option value="Covid">Covid</option>
-          <option value="Covid2">ACovid</option>
-          <option value="Covid3">ArCovid</option>
-          <option value="Covid4">ACovid</option>
-          <option value="Covid5">CaliCovid</option>
-        </select>
+      <div id="nav-items">
+        <img className="logo" src={Maplogo} onClick={handleMapView}></img>
+        <img className="logo" src={scalelogo} onClick={handleCompare}></img>
+        <span className="col-sm-2">
+          <select id="diseases" onChange={handleDiseaseSelection}>
+            <option value="">Choose Disease Type</option>
+            <option value="Covid">Covid</option>
+            <option value="Covid2">ACovid</option>
+            <option value="Covid3">ArCovid</option>
+            <option value="Covid4">ACovid</option>
+            <option value="Covid5">CaliCovid</option>
+          </select>
+        </span>
       </div>
-    </div>
+    </nav>
   );
 }

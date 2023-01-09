@@ -2,8 +2,7 @@ import React, { useEffect, useContext } from "react";
 import * as d3 from "d3";
 import "./Map.css";
 import SvgUsMap from "./UsMap";
-import { AppContext } from "../../App";
-import "bootstrap/dist/css/bootstrap.min.css";
+import { AppContext } from "../pages/DiseaseApp";
 import { AnimatePresence, motion } from "framer-motion";
 
 export default function Map() {
@@ -34,7 +33,7 @@ export default function Map() {
 
       svg
         .transition()
-        .duration(750)
+        .duration(200)
         .call(
           zoom.transform,
           d3.zoomIdentity
@@ -62,12 +61,28 @@ export default function Map() {
   }, [choosenState, USMainMap, compareStates]);
 
   return (
-    <motion.div
-      layout
-      transition={{ type: "spring", ease: "easeOut" }}
-      id="map-svg"
-    >
-      {compareStates ? null : <SvgUsMap />}
-    </motion.div>
+    <AnimatePresence>
+      {" "}
+      {compareStates ? (
+        <motion.div
+          layout
+          initial={{ width: "-20%" }}
+          animate={{ width: "20%" }}
+          transition={{ delay: 1 }}
+          id="state-space"
+        ></motion.div>
+      ) : (
+        <motion.div
+          layout
+          key="USmap"
+          initial={{ x: "50%", opacity: 0 }}
+          animate={{ x: "0%", opacity: 1, transition: { duration: 1 } }}
+          exit={{ opacity: 0, transition: { duration: 1 } }}
+          id="map-svg"
+        >
+          <SvgUsMap />
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }
