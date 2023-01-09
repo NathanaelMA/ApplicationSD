@@ -13,7 +13,12 @@ export default function DataView() {
     <>
       {/* <AnimatePresence>
         {(compareStates || choosenState) && ( */}
-      <motion.div className="data-section" layout>
+      {console.log(compareStates)}
+      <motion.div
+        className="data-section"
+        layout
+        activeState={JSON.stringify(compareStates)}
+      >
         <p> {diseaseType}</p>
         <div className="form-group">
           <label htmlFor="state" className="col-sm-4 control-label">

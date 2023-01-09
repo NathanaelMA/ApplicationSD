@@ -1,8 +1,23 @@
 .data-section {
-    background: rgb(37,35,36);
-    background: rgb(255,255,255);
-    background: linear-gradient(0deg, rgba(255,255,255,1) 8%, rgba(82,81,81,1) 20%, rgba(0,0,0,1) 45%);   animation: slide 2s forwards;
+
+    /* background: rgb(255,255,255); */
+    /* background: linear-gradient(0deg, rgba(255,255,255,1) 8%, rgba(82,81,81,1) 20%, rgba(0,0,0,1) 45%);   */
+     animation: slide 2s forwards;
     animation-delay: 0s;
+
+/* new code */
+    background: rgb(255,255,255);
+    background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(0,0,0,1) 100%);
+    height: 40rem;
+}
+
+
+.data-section[activeState='true'] {
+
+    background: rgb(255,255,255);
+     background: linear-gradient(0deg, rgba(255,255,255,1) 8%, rgba(82,81,81,1) 20%, rgba(0,0,0,1) 45%);   
+     /* animation: slide 2s forwards; */
+    /* animation-delay: 0s;     */
     height: 40rem;
 
 }
