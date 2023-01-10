@@ -1,58 +1,58 @@
 * {
     margin: 0;
 }
-/* dark mode */
-#header-container[themeValue='dark'] {
+/* Dark mode */
+#header-container[theme-value='Dark'] {
     display: flex;
     background: rgb(0,0,0);
     justify-content: space-around;
     align-items: center;
 }
 
-#header-container h1[themeValue='dark'] {
+#header-container h1[theme-value='Dark'] {
     color: white;
     border-radius: 20%;
     padding: .5em;
     border: 2px white solid;
 }
 
-#diseases[themeValue='dark'] {
+#diseases[theme-value='Dark'] {
     padding: .7rem;
     border-radius: 50px;
     background: rgb(255,255,255);
     background: linear-gradient(94deg, rgba(255,255,255,1) 0%, rgba(160,172,255,1) 32%, rgba(55,79,255,1) 97%);
 }
 
-#home[themeValue='dark'] {
+#home[theme-value='Dark'] {
     color: white;
     font-size: 1.5em;
     font-weight: bold;
 }
 
-/* light mode */
+/* Light mode */
 
-#header-container[themeValue='light'] {
+#header-container[theme-value='Light'] {
     display: flex;
     background: white;
     justify-content: space-around;
     align-items: center;
 }
 
-#header-container h1[themeValue='light'] {
+#header-container h1[theme-value='Light'] {
     color: black;
     border-radius: 20%;
     padding: .5em;
     border: 2px black solid;
 }
 
-#diseases[themeValue='light'] {
+#diseases[theme-value='Light'] {
     padding: .7rem;
     border-radius: 50px;
     background: rgb(255,255,255);
     background: linear-gradient(94deg, rgba(255,255,255,1) 0%, rgba(160,172,255,1) 32%, rgba(55,79,255,1) 97%);
 }
 
-#home[themeValue='light'] {
+#home[theme-value='Light'] {
     color: black;
     font-size: 1.5em;
     font-weight: bold;

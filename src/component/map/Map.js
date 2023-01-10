@@ -67,7 +67,7 @@ export default function Map() {
       {compareStates ? (
         <motion.div
           layout
-          themeValue={theme}
+          theme-value={theme}
           initial={{ width: "-20%" }}
           animate={{ width: "20%" }}
           transition={{ delay: 1 }}
@@ -76,10 +76,10 @@ export default function Map() {
       ) : (
         <motion.div
           layout
-          themeValue={theme}
+          theme-value={theme}
           key="USmap"
-          initial={{ x: "50%", opacity: 0 }}
-          animate={{ x: "0%", opacity: 1, transition: { duration: 1 } }}
+          initial={{ x: "100%", opacity: 0 }}
+          animate={{ x: "0%", opacity: 1, transition: { duration: 3 } }}
           exit={{ opacity: 0, transition: { duration: 1 } }}
           id="map-svg"
         >

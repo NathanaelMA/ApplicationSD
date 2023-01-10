@@ -1,16 +1,12 @@
 import React from "react";
-import Home from "./component/pages/Home";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import DiseaseApp from "./component/pages/DiseaseApp";
+import { BrowserRouter as Router } from "react-router-dom";
+import AnimatedRoutes from "./component/Routes/AnimatedRoutes";
 
 export default function App() {
   return (
     <>
       <Router>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/disease" element={<DiseaseApp />} />
-        </Routes>
+        <AnimatedRoutes />
       </Router>
     </>
   );

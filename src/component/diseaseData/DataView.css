@@ -5,9 +5,9 @@
 } 
 
 
-/* dark mode */
+/* Dark mode */
 
-.data-section[themeValue='dark'] {
+.data-section[theme-value='Dark'] {
 
     animation: slide 2s forwards;
     animation-delay: 0s;
@@ -17,13 +17,13 @@
 }
 
 
-p[themeValue='dark'] {
+p[theme-value='Dark'] {
     color: white;
 }
 
 
 
-.data-section[activeState='true'][themeValue='dark']  {
+.data-section[active-state='true'][theme-value='Dark']  {
 
     background: rgb(255,255,255);
      background: linear-gradient(0deg, rgba(255,255,255,1) 8%, rgba(82,81,81,1) 20%, rgba(0,0,0,1) 45%);   
@@ -33,7 +33,7 @@ p[themeValue='dark'] {
 
 /* light mode */
 
-.data-section[themeValue='light'] {
+.data-section[theme-value='Light'] {
 
     animation: slide 2s forwards;
     animation-delay: 0s;
@@ -43,13 +43,13 @@ p[themeValue='dark'] {
 }
 
 
-p[themeValue='light'] {
+p[theme-value='Light'] {
     color: black;
 }
 
 
 
-.data-section[activeState='true'][themeValue='light']  {
+.data-section[active-state='true'][theme-value='Light']  {
 
     background: rgb(255,255,255);
     height: 40rem;

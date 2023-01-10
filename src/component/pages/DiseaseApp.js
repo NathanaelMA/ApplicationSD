@@ -5,6 +5,7 @@ import DataView from "../diseaseData/DataView";
 import Map from "../map/Map";
 import ColorLegend from "../map/ColorLegend";
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 export const AppContext = React.createContext();
 
@@ -14,7 +15,7 @@ export default function DiseaseApp() {
   const [USMainMap, setUSMainMap] = useState(true);
   const [diseaseType, setDiseaseType] = useState(null);
   const [compareStates, setCompareStates] = useState(null);
-  const [theme, setTheme] = useState("dark");
+  const [theme, setTheme] = useState("Dark");
 
   const ChoosenStatePicker = (currState) => {
     setChoosenState(currState);
@@ -59,35 +60,37 @@ export default function DiseaseApp() {
 
   return (
     <>
-      <AppContext.Provider
-        value={{
-          choosenState,
-          setChoosenState,
-          choosenStateTitle,
-          setChoosenStateTitle,
-          USMainMap,
-          setUSMainMap,
-          diseaseType,
-          setDiseaseType,
-          compareStates,
-          setCompareStates,
-          theme,
-          setTheme,
-        }}
-      >
-        <TitleHeader />
+      <motion.div exit={{ y: window.innerWidth, transition: { duration: 1 } }}>
+        <AppContext.Provider
+          value={{
+            choosenState,
+            setChoosenState,
+            choosenStateTitle,
+            setChoosenStateTitle,
+            USMainMap,
+            setUSMainMap,
+            diseaseType,
+            setDiseaseType,
+            compareStates,
+            setCompareStates,
+            theme,
+            setTheme,
+          }}
+        >
+          <TitleHeader />
 
-        <div className="main-container" themeValue={theme}>
-          {USMainMap ? null : choosenState || compareStates ? (
-            <DataView />
-          ) : null}
+          <div className="main-container" theme-value={theme}>
+            {USMainMap ? null : choosenState || compareStates ? (
+              <DataView />
+            ) : null}
 
-          <Map />
+            <Map />
 
-          {compareStates ? <DataView /> : null}
-          {choosenState ? null : compareStates ? null : <ColorLegend />}
-        </div>
-      </AppContext.Provider>
+            {compareStates ? <DataView /> : null}
+            {choosenState ? null : compareStates ? null : <ColorLegend />}
+          </div>
+        </AppContext.Provider>
+      </motion.div>
     </>
   );
 }

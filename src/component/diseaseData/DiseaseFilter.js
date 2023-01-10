@@ -5,7 +5,7 @@ import { AppContext } from "../pages/DiseaseApp";
 export default function DiseaseFilter() {
   const { theme } = useContext(AppContext);
   return (
-    <div id="disease-container" themeValue={theme}>
+    <div id="disease-container" theme-value={theme}>
       Disease Filter
       <p></p>
     </div>

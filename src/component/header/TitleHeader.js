@@ -18,12 +18,10 @@ export default function TitleHeader() {
     setTheme,
   } = useContext(AppContext);
 
-  //new code
-
   const [isOn, setIsOn] = useState(false);
 
   const toggleSwitch = () => {
-    theme === "dark" ? setTheme("light") : setTheme("dark");
+    theme === "Dark" ? setTheme("Light") : setTheme("Dark");
     setIsOn(!isOn);
   };
 
@@ -32,8 +30,6 @@ export default function TitleHeader() {
     stiffness: 700,
     damping: 30,
   };
-
-  //end code
 
   function handleMapView() {
     if (choosenState || compareStates) {
@@ -52,20 +48,20 @@ export default function TitleHeader() {
   }
 
   return (
-    <nav id="header-container" themeValue={theme}>
+    <nav id="header-container" theme-value={theme}>
       <Link to={"/"}>
-        <header id="home" themeValue={theme}>
+        <header id="home" theme-value={theme}>
           Home
         </header>
       </Link>
-      <h1 themeValue={theme}>Infectious Disease Risk Predictor </h1>
-      <div id="nav-items" themeValue={theme}>
+      <h1 theme-value={theme}>Infectious Disease Risk Predictor </h1>
+      <div id="nav-items" theme-value={theme}>
         <img className="logo" src={Maplogo} onClick={handleMapView}></img>
         <img className="logo" src={scalelogo} onClick={handleCompare}></img>
         <span className="col-sm-2">
           <select
             id="diseases"
-            themeValue={theme}
+            theme-value={theme}
             onChange={handleDiseaseSelection}
           >
             <option value="">Choose Disease Type</option>
@@ -79,6 +75,7 @@ export default function TitleHeader() {
         <div className="switch" data-is-on={isOn} onClick={toggleSwitch}>
           <motion.div className="handle" layout transition={spring} />
         </div>
+        <p theme-value={theme}>{theme} Mode</p>
       </div>
     </nav>
   );

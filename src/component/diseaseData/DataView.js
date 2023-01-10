@@ -16,14 +16,14 @@ export default function DataView() {
         {(compareStates || choosenState) && ( */}
       <motion.div
         className="data-section"
-        themeValue={theme}
+        theme-value={theme}
         layout
-        activeState={JSON.stringify(compareStates)}
+        active-state={JSON.stringify(compareStates)}
       >
-        <p themeValue={theme}> {diseaseType}</p>
+        <p theme-value={theme}> {diseaseType}</p>
         <div className="form-group">
           <label htmlFor="state" className="col-sm-4 control-label">
-            <p themeValue={theme}> Pick a State to view Data </p>
+            <p theme-value={theme}> Pick a State to view Data </p>
           </label>
           <div className="col-sm-5">
             <select
@@ -88,7 +88,7 @@ export default function DataView() {
             </select>
           </div>
         </div>
-        <p themeValue={theme}> {displayData} </p>
+        <p theme-value={theme}> {displayData} </p>
       </motion.div>
       {/* )}
       </AnimatePresence> */}
