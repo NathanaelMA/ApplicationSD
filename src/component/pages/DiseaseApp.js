@@ -1,7 +1,8 @@
 import "./DiseaseApp.css";
 import React from "react";
 import TitleHeader from "../header/TitleHeader";
-import DataView from "../diseaseData/DataView";
+import DataViewLeft from "../diseaseData/DataViewLeft";
+import DataViewRight from "../diseaseData/DataViewRight";
 import Map from "../map/Map";
 import ColorLegend from "../map/ColorLegend";
 import { useEffect, useState } from "react";
@@ -80,14 +81,18 @@ export default function DiseaseApp() {
           <TitleHeader />
 
           <div className="main-container" theme-value={theme}>
-            {USMainMap ? null : choosenState || compareStates ? (
+            {/* {USMainMap ? null : choosenState || compareStates ? (
               <DataView />
-            ) : null}
+            ) : null} */}
+
+            <DataViewLeft />
 
             <Map />
 
-            {compareStates ? <DataView /> : null}
-            {choosenState ? null : compareStates ? null : <ColorLegend />}
+            <DataViewRight />
+
+            {/* {compareStates ? <DataView /> : null}*/}
+            {/* {choosenState ? null : compareStates ? null : <ColorLegend />} */}
           </div>
         </AppContext.Provider>
       </motion.div>
