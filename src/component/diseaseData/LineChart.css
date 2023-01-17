@@ -1,0 +1,34 @@
+line {
+    stroke: brown;
+    stroke-width: 3;
+}
+
+
+path {
+    stroke: blue;
+    stroke-width: 2;
+    fill: none;
+}
+
+
+g.hidden line, g.hidden path {
+    diplsy: none;
+}
+
+g.grp3 circle, 
+g.grp3 path, 
+g.grp4 circle,
+g.grp0 circle {
+    stroke: orange;
+    fill: none;
+    stroke-width: 3;
+}
+
+g.tick line {
+    stroke: green;
+}
+
+g.tick text {
+    font-size: 12;
+    fill: blue;
+}

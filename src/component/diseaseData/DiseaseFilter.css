@@ -1,0 +1,6 @@
+#disease-container {
+    border: 1px solid black;
+    margin-bottom: 20%;
+    padding: 1%;
+    /* flex: 0 1 1%; */
+}

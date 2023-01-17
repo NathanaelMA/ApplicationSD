@@ -3,45 +3,40 @@ import "./DataViewRight.css";
 import { AppContext } from "../pages/DiseaseApp";
 import { motion, AnimatePresence } from "framer-motion";
 import Folder from "../../InfectiousDiseaseDataSets-main/Diseases2022Data/CovidData/month01.csv";
-import Papa from "papaparse";
 import { csv } from "d3";
+import LineChart from "./LineChart";
 
 export default function DataViewRight() {
-  const { choosenState, diseaseType, compareStates, theme } =
-    useContext(AppContext);
+  const {
+    choosenState,
+    diseaseType,
+    compareStates,
+    theme,
+    CSVData,
+    rightStateSelector,
+    setRightStateSelector,
+  } = useContext(AppContext);
   const [displayData, setDisplayData] = useState([]);
   const [dropDownState, setDropDownState] = useState(null);
-  const [CSVData, setCSVData] = useState(null);
-  //   const [run, setRun] = useState(false);
 
   function chooseStateData(e) {
-    //setDisplayData(e.target.value);
     let stateName = e.target.selectedOptions[0].text;
     setDropDownState(stateName);
+    setRightStateSelector(stateName);
 
     setDisplayData([]);
-    console.log("here");
     if (CSVData) {
       //loop through csvdata and print all the states names Alabama
       for (let j = 0; j < CSVData.length; j++) {
         if (CSVData[j].state === stateName) {
-          setDisplayData((prevData) => [...prevData, CSVData[j].deaths]);
+          setDisplayData((prevData) => [
+            ...prevData,
+            CSVData[j].deaths + "\n ",
+          ]);
         }
       }
     }
   }
-
-  // using d3 parse the csv file with the name folder and return the data
-  useEffect(() => {
-    const row = (d) => {
-      d.deaths = +d.deaths;
-      return d;
-    };
-
-    csv(Folder, row).then((data) => {
-      setCSVData(data);
-    });
-  }, []);
 
   return (
     <>
@@ -128,8 +123,9 @@ export default function DataViewRight() {
             )}
             <div id="display-state-data">
               <p theme-value={theme}>{dropDownState} </p>
-              <p theme-value={theme}> {displayData} </p>
+              {/* <p theme-value={theme}> {displayData}  </p> */}
             </div>
+            rightStateSelector ? <LineChart /> : null
           </motion.div>
         )}
       </AnimatePresence>

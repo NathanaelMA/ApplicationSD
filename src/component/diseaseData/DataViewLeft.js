@@ -4,6 +4,7 @@ import { AppContext } from "../pages/DiseaseApp";
 import { motion, AnimatePresence } from "framer-motion";
 import Folder from "../../InfectiousDiseaseDataSets-main/Diseases2022Data/CovidData/month01.csv";
 import Papa from "papaparse";
+import * as d3 from "d3";
 
 export default function DataViewLeft() {
   const { choosenState, diseaseType, compareStates, theme } =

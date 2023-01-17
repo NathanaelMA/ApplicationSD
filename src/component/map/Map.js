@@ -14,6 +14,7 @@ export default function Map() {
     setUSMainMap,
     compareStates,
     theme,
+    CSVData,
   } = useContext(AppContext);
 
   useEffect(() => {
