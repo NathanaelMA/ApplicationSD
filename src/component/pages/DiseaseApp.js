@@ -16,7 +16,7 @@ export default function DiseaseApp() {
   const [USMainMap, setUSMainMap] = useState(true);
   const [diseaseType, setDiseaseType] = useState(null);
   const [compareStates, setCompareStates] = useState(null);
-  const [theme, setTheme] = useState("Dark");
+  const [theme, setTheme] = useState("Light");
   const [date, setDate] = useState([]);
   const [deaths, setDeaths] = useState([]);
 
