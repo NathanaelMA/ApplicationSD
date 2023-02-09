@@ -17,6 +17,8 @@ export default function DiseaseApp() {
   const [diseaseType, setDiseaseType] = useState(null);
   const [compareStates, setCompareStates] = useState(null);
   const [theme, setTheme] = useState("Dark");
+  const [date, setDate] = useState([]);
+  const [deaths, setDeaths] = useState([]);
 
   const ChoosenStatePicker = (currState) => {
     setChoosenState(currState);
@@ -76,6 +78,10 @@ export default function DiseaseApp() {
             setCompareStates,
             theme,
             setTheme,
+            date,
+            setDate,
+            deaths,
+            setDeaths,
           }}
         >
           <TitleHeader />

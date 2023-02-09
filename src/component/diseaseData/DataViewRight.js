@@ -2,17 +2,26 @@ import React, { useContext, useState, useEffect } from "react";
 import "./DataViewRight.css";
 import { AppContext } from "../pages/DiseaseApp";
 import { motion, AnimatePresence } from "framer-motion";
+//all states data for january
 import Folder from "../../InfectiousDiseaseDataSets-main/Diseases2022Data/CovidData/month01.csv";
 import Papa from "papaparse";
 import { csv } from "d3";
+import ChartDisplay from "../chart/ChartDisplay";
 
 export default function DataViewRight() {
-  const { choosenState, diseaseType, compareStates, theme } =
-    useContext(AppContext);
+  const {
+    choosenState,
+    diseaseType,
+    compareStates,
+    theme,
+    date,
+    setDate,
+    deaths,
+    setDeaths,
+  } = useContext(AppContext);
   const [displayData, setDisplayData] = useState([]);
   const [dropDownState, setDropDownState] = useState(null);
   const [CSVData, setCSVData] = useState(null);
-  //   const [run, setRun] = useState(false);
 
   function chooseStateData(e) {
     //setDisplayData(e.target.value);
@@ -20,12 +29,14 @@ export default function DataViewRight() {
     setDropDownState(stateName);
 
     setDisplayData([]);
-    console.log("here");
+    setDate([]);
+    setDeaths([]);
     if (CSVData) {
-      //loop through csvdata and print all the states names Alabama
       for (let j = 0; j < CSVData.length; j++) {
         if (CSVData[j].state === stateName) {
-          setDisplayData((prevData) => [...prevData, CSVData[j].deaths]);
+          setDate((prevData) => [...prevData, CSVData[j].date + " "]);
+          setDeaths((prevData) => [...prevData, CSVData[j].deaths + " "]);
+          setDisplayData((prevData) => [...prevData, CSVData[j].deaths + " "]);
         }
       }
     }
@@ -127,8 +138,7 @@ export default function DataViewRight() {
               </div>
             )}
             <div id="display-state-data">
-              <p theme-value={theme}>{dropDownState} </p>
-              <p theme-value={theme}> {displayData} </p>
+              <ChartDisplay />
             </div>
           </motion.div>
         )}

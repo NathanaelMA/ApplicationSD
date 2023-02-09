@@ -1,23 +1,27 @@
 import React, { useContext, useState, useEffect } from "react";
-import "./DataViewLeft.css";
+import "./DataViewRight.css";
 import { AppContext } from "../pages/DiseaseApp";
 import { motion, AnimatePresence } from "framer-motion";
+//all states data for january
 import Folder from "../../InfectiousDiseaseDataSets-main/Diseases2022Data/CovidData/month01.csv";
 import Papa from "papaparse";
+import { csv } from "d3";
 import ChartDisplay from "../chart/ChartDisplay";
-
 export default function DataViewLeft() {
-  const { choosenState, diseaseType, compareStates, theme } =
-    useContext(AppContext);
+  const {
+    choosenState,
+    diseaseType,
+    compareStates,
+    theme,
+    date,
+    setDate,
+    deaths,
+    setDeaths,
+  } = useContext(AppContext);
   const [displayData, setDisplayData] = useState([]);
-
+  const [dropDownState, setDropDownState] = useState(null);
   const [CSVData, setCSVData] = useState(null);
-  const [run, setRun] = useState(false);
-  const [stateName, setStateName] = useState(null);
 
-  function chooseStateData(e) {
-    setDisplayData(e.target.value);
-  }
   const states = [
     ["Alabama", "AL"],
     ["Alaska", "AK"],
@@ -81,36 +85,56 @@ export default function DataViewLeft() {
     ["Wyoming", "WY"],
   ];
 
-  //parse the csv file with the name folder and return the data
+  function chooseStateData(e) {
+    //setDisplayData(e.target.value);
+    let stateName = e.target.selectedOptions[0].text;
+    setDropDownState(stateName);
+
+    setDisplayData([]);
+    setDate([]);
+    setDeaths([]);
+    if (CSVData) {
+      for (let j = 0; j < CSVData.length; j++) {
+        if (CSVData[j].state === stateName) {
+          setDate((prevData) => [...prevData, CSVData[j].date + " "]);
+          setDeaths((prevData) => [...prevData, CSVData[j].deaths + " "]);
+          setDisplayData((prevData) => [...prevData, CSVData[j].deaths + " "]);
+        }
+      }
+    }
+  }
+
+  // using d3 parse the csv file with the name folder and return the data
   useEffect(() => {
-    Papa.parse(Folder, {
-      download: true,
-      header: true,
-      complete: function (results) {
-        setCSVData(results.data);
-        setRun(true);
-      },
+    const row = (d) => {
+      d.deaths = +d.deaths;
+      return d;
+    };
+
+    csv(Folder, row).then((data) => {
+      setCSVData(data);
     });
   }, []);
 
   useEffect(() => {
     if (choosenState) {
-      setDisplayData([]);
-      for (let i = 0; i < states.length; i++) {
-        if (states[i][1] === choosenState.id) {
-          if (CSVData) {
-            //loop through csvdata and print all the states names Alabama
-            for (let j = 0; j < CSVData.length; j++) {
-              if (CSVData[j].state === states[i][0]) {
-                setStateName(CSVData[j].state);
-                setDisplayData((prevData) => [...prevData, CSVData[j].deaths]);
-              }
-            }
+      let displayStateData = states.find(
+        (state) => state[1] === choosenState.id
+      );
+      console.log(displayStateData[0]);
+      console.log(choosenState.id);
+      setDate([]);
+      setDeaths([]);
+      if (CSVData) {
+        for (let j = 0; j < CSVData.length; j++) {
+          if (CSVData[j].state === displayStateData[0]) {
+            setDate((prevData) => [...prevData, CSVData[j].date + " "]);
+            setDeaths((prevData) => [...prevData, CSVData[j].deaths + " "]);
           }
         }
       }
     }
-  }, [choosenState, run]);
+  }, [choosenState]);
 
   return (
     <>
@@ -203,9 +227,7 @@ export default function DataViewLeft() {
               animate={{ opacity: 1, transition: { delay: 2 } }}
               exit={{ width: "10%", transition: { duration: 2 } }}
             >
-              <p theme-value={theme}>{stateName} </p>
-              <motion.p theme-value={theme}> {displayData} </motion.p>
-              {/* <ChartDisplay /> */}
+              <ChartDisplay />
             </motion.div>
           </motion.div>
         )}
