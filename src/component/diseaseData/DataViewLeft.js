@@ -4,6 +4,7 @@ import { AppContext } from "../pages/DiseaseApp";
 import { motion, AnimatePresence } from "framer-motion";
 import Folder from "../../InfectiousDiseaseDataSets-main/Diseases2022Data/CovidData/month01.csv";
 import Papa from "papaparse";
+import ChartDisplay from "../chart/ChartDisplay";
 
 export default function DataViewLeft() {
   const { choosenState, diseaseType, compareStates, theme } =
@@ -204,6 +205,7 @@ export default function DataViewLeft() {
             >
               <p theme-value={theme}>{stateName} </p>
               <motion.p theme-value={theme}> {displayData} </motion.p>
+              {/* <ChartDisplay /> */}
             </motion.div>
           </motion.div>
         )}

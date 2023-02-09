@@ -81,18 +81,11 @@ export default function DiseaseApp() {
           <TitleHeader />
 
           <div className="main-container" theme-value={theme}>
-            {/* {USMainMap ? null : choosenState || compareStates ? (
-              <DataView />
-            ) : null} */}
-
             <DataViewLeft />
 
             <Map />
 
             <DataViewRight />
-
-            {/* {compareStates ? <DataView /> : null}*/}
-            {/* {choosenState ? null : compareStates ? null : <ColorLegend />} */}
           </div>
         </AppContext.Provider>
       </motion.div>
