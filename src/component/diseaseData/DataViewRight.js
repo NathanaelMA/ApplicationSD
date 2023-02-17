@@ -6,25 +6,19 @@ import { motion, AnimatePresence } from "framer-motion";
 import Folder from "../../InfectiousDiseaseDataSets-main/Diseases2022Data/CovidData/month01.csv";
 import Papa from "papaparse";
 import { csv } from "d3";
+import { Line } from "react-chartjs-2";
 import ChartDisplay from "../chart/ChartDisplay";
 
 export default function DataViewRight() {
-  const {
-    choosenState,
-    diseaseType,
-    compareStates,
-    theme,
-    date,
-    setDate,
-    deaths,
-    setDeaths,
-  } = useContext(AppContext);
+  const { choosenState, diseaseType, compareStates, theme } =
+    useContext(AppContext);
   const [displayData, setDisplayData] = useState([]);
   const [dropDownState, setDropDownState] = useState(null);
   const [CSVData, setCSVData] = useState(null);
+  const [date, setDate] = useState([]);
+  const [deaths, setDeaths] = useState([]);
 
   function chooseStateData(e) {
-    //setDisplayData(e.target.value);
     let stateName = e.target.selectedOptions[0].text;
     setDropDownState(stateName);
 
@@ -138,7 +132,19 @@ export default function DataViewRight() {
               </div>
             )}
             <div id="display-state-data">
-              <ChartDisplay />
+              <Line
+                datasetIdKey="id"
+                data={{
+                  labels: [...date],
+                  datasets: [
+                    {
+                      id: 1,
+                      label: "Covid Deaths",
+                      data: [...deaths],
+                    },
+                  ],
+                }}
+              />
             </div>
           </motion.div>
         )}

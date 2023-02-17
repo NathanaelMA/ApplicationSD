@@ -66,10 +66,12 @@ export default function TitleHeader() {
           >
             <option value="">Choose Disease Type</option>
             <option value="Covid">Covid</option>
-            <option value="Covid2">Covid2</option>
-            <option value="Covid3">Covid3</option>
-            <option value="Covid4">Covid4</option>
-            <option value="Covid5">Covid5</option>
+            <option value="Measles">Covid2</option>
+            <option value="Malaria">Covid2</option>
+            <option value="Mumps">Covid3</option>
+            <option value="Pneumoccal">Covid4</option>
+            <option value="Syphilis">Covid5</option>
+            <option value="Tuberculosis">Covid5</option>
           </select>
         </span>
         <div className="switch" data-is-on={isOn} onClick={toggleSwitch}>

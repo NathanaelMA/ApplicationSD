@@ -5,22 +5,17 @@ import { motion, AnimatePresence } from "framer-motion";
 //all states data for january
 import Folder from "../../InfectiousDiseaseDataSets-main/Diseases2022Data/CovidData/month01.csv";
 import Papa from "papaparse";
+import { Line } from "react-chartjs-2";
 import { csv } from "d3";
 import ChartDisplay from "../chart/ChartDisplay";
 export default function DataViewLeft() {
-  const {
-    choosenState,
-    diseaseType,
-    compareStates,
-    theme,
-    date,
-    setDate,
-    deaths,
-    setDeaths,
-  } = useContext(AppContext);
+  const { choosenState, diseaseType, compareStates, theme } =
+    useContext(AppContext);
   const [displayData, setDisplayData] = useState([]);
   const [dropDownState, setDropDownState] = useState(null);
   const [CSVData, setCSVData] = useState(null);
+  const [date, setDate] = useState([]);
+  const [deaths, setDeaths] = useState([]);
 
   const states = [
     ["Alabama", "AL"],
@@ -149,7 +144,6 @@ export default function DataViewLeft() {
             exit={{ width: "10%", transition: { duration: 2 } }}
             active-state={JSON.stringify(compareStates)}
           >
-            <p theme-value={theme}> {diseaseType}</p>
             {compareStates && (
               <div className="form-group">
                 <label htmlFor="state" className="col-sm-4 control-label">
@@ -227,7 +221,19 @@ export default function DataViewLeft() {
               animate={{ opacity: 1, transition: { delay: 2 } }}
               exit={{ width: "10%", transition: { duration: 2 } }}
             >
-              <ChartDisplay />
+              <Line
+                datasetIdKey="id"
+                data={{
+                  labels: [...date],
+                  datasets: [
+                    {
+                      id: 1,
+                      label: diseaseType + " Deaths",
+                      data: [...deaths],
+                    },
+                  ],
+                }}
+              />
             </motion.div>
           </motion.div>
         )}
