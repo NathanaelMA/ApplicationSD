@@ -61,7 +61,6 @@ export default function DataViewRight() {
             exit={{ width: "10%", transition: { duration: 2 } }}
             active-state={JSON.stringify(compareStates)}
           >
-            <p theme-value={theme}> {diseaseType}</p>
             {compareStates && (
               <div className="form-group">
                 <label htmlFor="state" className="col-sm-4 control-label">
@@ -139,7 +138,7 @@ export default function DataViewRight() {
                   datasets: [
                     {
                       id: 1,
-                      label: "Covid Deaths",
+                      label: diseaseType,
                       data: [...deaths],
                     },
                   ],

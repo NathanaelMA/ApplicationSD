@@ -228,7 +228,7 @@ export default function DataViewLeft() {
                   datasets: [
                     {
                       id: 1,
-                      label: diseaseType + " Deaths",
+                      label: diseaseType,
                       data: [...deaths],
                     },
                   ],
