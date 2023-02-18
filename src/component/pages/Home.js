@@ -10,28 +10,28 @@ import Art4 from "../../images/art4.jpeg";
 import Me from "../../images/me.txt";
 
 export default function Home() {
-  const [pic1, setPic1] = React.useState({
+  const [person1, setPerson1] = React.useState({
     pic: Art1,
     name: "blue and purple and orange art",
   });
-  const [pic2, setPic2] = React.useState({
+  const [person2, setPerson2] = React.useState({
     pic: Art2,
     name: "blue and pink art",
   });
-  const [pic3, setPic3] = React.useState({
+  const [person3, setPerson3] = React.useState({
     pic: Art3,
     name: "art museum",
   });
-  const [pic4, setPic4] = React.useState({
+  const [person4, setPerson4] = React.useState({
     pic: Art4,
     name: "tree",
   });
-  const [mainPic, setMainPic] = React.useState({
+  const [focusedPerson, setFocusedPerson] = React.useState({
     pic: logo,
     name: "pic of scale",
   });
   const [bioInfo, setBioInfo] = React.useState("");
-  const [bioName, setBioName] = React.useState(mainPic.name);
+  const [bioName, setBioName] = React.useState(focusedPerson.name);
 
   useEffect(() => {
     fetch(Me).then((response) => {
@@ -39,7 +39,7 @@ export default function Home() {
         setBioInfo(text);
       });
     });
-  }, [mainPic]);
+  }, [focusedPerson]);
 
   return (
     <>
@@ -58,53 +58,53 @@ export default function Home() {
             <h2>{bioName}</h2>
             <p>{bioInfo}</p>
           </div>
-          <img src={mainPic.pic}></img>
+          <img src={focusedPerson.pic}></img>
         </div>
         <div id="teamImages">
           <div>
             <img
-              src={pic1.pic}
+              src={person1.pic}
               onClick={() => {
-                setMainPic(pic1);
-                setPic1(mainPic);
-                setBioName(pic1.name);
+                setFocusedPerson(person1);
+                setPerson1(focusedPerson);
+                setBioName(person1.name);
               }}
             ></img>
-            <h3>{pic1.name}</h3>
+            <h3>{person1.name}</h3>
           </div>
           <div>
             <img
-              src={pic2.pic}
+              src={person2.pic}
               onClick={() => {
-                setMainPic(pic2);
-                setPic2(mainPic);
-                setBioName(pic2.name);
+                setFocusedPerson(person2);
+                setPerson2(focusedPerson);
+                setBioName(person2.name);
                 setBioInfo();
               }}
             ></img>
-            <h3>{pic2.name}</h3>
+            <h3>{person2.name}</h3>
           </div>
           <div>
             <img
-              src={pic3.pic}
+              src={person3.pic}
               onClick={() => {
-                setMainPic(pic3);
-                setPic3(mainPic);
-                setBioName(pic3.name);
+                setFocusedPerson(person3);
+                setPerson3(focusedPerson);
+                setBioName(person3.name);
               }}
             ></img>
-            <h3> {pic3.name} </h3>
+            <h3> {person3.name} </h3>
           </div>
           <div>
             <img
-              src={pic4.pic}
+              src={person4.pic}
               onClick={() => {
-                setMainPic(pic4);
-                setPic4(mainPic);
-                setBioName(pic4.name);
+                setFocusedPerson(person4);
+                setPerson4(focusedPerson);
+                setBioName(person4.name);
               }}
             ></img>
-            <h3> {pic4.name}</h3>
+            <h3> {person4.name}</h3>
           </div>
         </div>
       </motion.div>
