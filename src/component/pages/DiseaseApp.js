@@ -1,10 +1,12 @@
 import "./DiseaseApp.css";
 import React from "react";
 import TitleHeader from "../header/TitleHeader";
-import DataView from "../diseaseData/DataView";
+import DataViewLeft from "../diseaseData/DataViewLeft";
+import DataViewRight from "../diseaseData/DataViewRight";
 import Map from "../map/Map";
 import ColorLegend from "../map/ColorLegend";
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 export const AppContext = React.createContext();
 
@@ -12,8 +14,11 @@ export default function DiseaseApp() {
   const [choosenState, setChoosenState] = useState(null);
   const [choosenStateTitle, setChoosenStateTitle] = useState(null);
   const [USMainMap, setUSMainMap] = useState(true);
-  const [diseaseType, setDiseaseType] = useState(null);
+  const [diseaseType, setDiseaseType] = useState("");
   const [compareStates, setCompareStates] = useState(null);
+  const [theme, setTheme] = useState("Light");
+  const [date, setDate] = useState([]);
+  const [deaths, setDeaths] = useState([]);
 
   const ChoosenStatePicker = (currState) => {
     setChoosenState(currState);
@@ -58,33 +63,38 @@ export default function DiseaseApp() {
 
   return (
     <>
-      <AppContext.Provider
-        value={{
-          choosenState,
-          setChoosenState,
-          choosenStateTitle,
-          setChoosenStateTitle,
-          USMainMap,
-          setUSMainMap,
-          diseaseType,
-          setDiseaseType,
-          compareStates,
-          setCompareStates,
-        }}
-      >
-        <TitleHeader />
+      <motion.div exit={{ y: window.innerWidth, transition: { duration: 1 } }}>
+        <AppContext.Provider
+          value={{
+            choosenState,
+            setChoosenState,
+            choosenStateTitle,
+            setChoosenStateTitle,
+            USMainMap,
+            setUSMainMap,
+            diseaseType,
+            setDiseaseType,
+            compareStates,
+            setCompareStates,
+            theme,
+            setTheme,
+            date,
+            setDate,
+            deaths,
+            setDeaths,
+          }}
+        >
+          <TitleHeader />
 
-        <div className="main-container">
-          {USMainMap ? null : choosenState || compareStates ? (
-            <DataView />
-          ) : null}
+          <div className="main-container" theme-value={theme}>
+            <DataViewLeft />
 
-          <Map />
+            <Map />
 
-          {compareStates ? <DataView /> : null}
-          {choosenState ? null : compareStates ? null : <ColorLegend />}
-        </div>
-      </AppContext.Provider>
+            <DataViewRight />
+          </div>
+        </AppContext.Provider>
+      </motion.div>
     </>
   );
 }

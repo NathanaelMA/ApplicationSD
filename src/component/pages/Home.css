@@ -1,3 +1,68 @@
 h1 {
 color: black;
 }
+
+body {
+    background: rgb(255,255,255);
+    background: linear-gradient(94deg, rgba(255,255,255,1) 0%, rgba(160,172,255,1) 32%, rgba(55,79,255,1) 97%);
+
+}
+
+#homePage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: beige;
+    margin: 1.5em;
+}
+
+#inFocusBio{
+    display: flex;
+}
+
+#inFocusBio img {
+    width: 15rem;
+    height: 15rem;
+    margin: 0 12em 0 2em;
+}
+
+#inFocusBio p {
+    width: 70%;
+}
+
+#inFocusBioInfo{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 0 0 2em;
+}
+
+
+#teamImages {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 7em 2em 1em 2em;
+}
+
+#teamImages img {
+    width: 15rem;
+    height: 12rem;
+    border: 1px black solid;
+    border-radius: 50%;
+    margin: 0 2em;
+    cursor: pointer;
+}
+
+#teamImages img:hover {
+    border: 1px black solid;
+    border-radius: 50%;
+    margin: 0 2em;
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+#teamImages h3 {
+    margin: 0 0 0 3.5rem;
+}
