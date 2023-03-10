@@ -1,13 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import * as d3 from "d3";
 import "./Map.css";
 import SvgUsMap from "./UsMap";
+import { AppContext } from "../pages/DiseaseApp";
+import { AnimatePresence, motion } from "framer-motion";
 
-export default function Map({ choosenState, choosenStateTitle }) {
+export default function Map() {
+  const {
+    choosenState,
+    setChoosenState,
+    choosenStateTitle,
+    USMainMap,
+    setUSMainMap,
+    compareStates,
+    theme,
+  } = useContext(AppContext);
+
   useEffect(() => {
-    if (choosenState) {
+    if (choosenState && !USMainMap) {
       let width = 487,
-        height = 280.8;
+        height = 455;
 
       const zoom = d3.zoom().scaleExtent([1, 3]).on("zoom", zoomed);
       d3.select(choosenState).style("fill", "red");
@@ -22,7 +34,7 @@ export default function Map({ choosenState, choosenStateTitle }) {
 
       svg
         .transition()
-        .duration(750)
+        .duration(200)
         .call(
           zoom.transform,
           d3.zoomIdentity
@@ -39,8 +51,41 @@ export default function Map({ choosenState, choosenStateTitle }) {
         d3.select("g").attr("transform", transform);
         d3.select("g").attr("stroke-width", 1 / transform.k);
       }
-    }
-  }, [choosenState]);
+    } else {
+      setChoosenState(null);
+      setUSMainMap(false);
 
-  return <>{<SvgUsMap />}</>;
+      const svg = d3.select("svg").attr("viewBox", [-20, 3, 600, 280]);
+      svg.on(".zoom", null);
+      d3.select("g").attr("transform", "translate(0,0) scale(1.0)");
+    }
+  }, [choosenState, USMainMap, compareStates]);
+
+  return (
+    <AnimatePresence>
+      {" "}
+      {compareStates ? (
+        <motion.div
+          layout
+          theme-value={theme}
+          initial={{ width: "-20%" }}
+          animate={{ width: "20%" }}
+          transition={{ delay: 1 }}
+          id="state-space"
+        ></motion.div>
+      ) : (
+        <motion.div
+          layout
+          theme-value={theme}
+          key="USmap"
+          initial={{ x: "100%", opacity: 0 }}
+          animate={{ x: "0%", opacity: 1, transition: { duration: 3 } }}
+          exit={{ opacity: 0, transition: { duration: 1 } }}
+          id="map-svg"
+        >
+          <SvgUsMap />
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
 }
