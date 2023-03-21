@@ -4,6 +4,7 @@ import Chart from "chart.js/auto";
 import "./ChartDisplay.css";
 import { AppContext } from "../pages/DiseaseApp";
 
+//not used - moved to dataViewRight & dataViewLeft
 export default function ChartDisplay() {
   const { date, setDate, deaths, setDeaths } = useContext(AppContext);
   return (

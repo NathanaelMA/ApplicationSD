@@ -20,17 +20,12 @@ export default function DataViewLeft() {
   const states = [
     ["Alabama", "AL"],
     ["Alaska", "AK"],
-    ["American Samoa", "AS"],
     ["Arizona", "AZ"],
     ["Arkansas", "AR"],
-    ["Armed Forces Americas", "AA"],
-    ["Armed Forces Europe", "AE"],
-    ["Armed Forces Pacific", "AP"],
     ["California", "CA"],
     ["Colorado", "CO"],
     ["Connecticut", "CT"],
     ["Delaware", "DE"],
-    ["District Of Columbia", "DC"],
     ["Florida", "FL"],
     ["Georgia", "GA"],
     ["Guam", "GU"],
@@ -43,7 +38,6 @@ export default function DataViewLeft() {
     ["Kentucky", "KY"],
     ["Louisiana", "LA"],
     ["Maine", "ME"],
-    ["Marshall Islands", "MH"],
     ["Maryland", "MD"],
     ["Massachusetts", "MA"],
     ["Michigan", "MI"],
@@ -59,7 +53,6 @@ export default function DataViewLeft() {
     ["New York", "NY"],
     ["North Carolina", "NC"],
     ["North Dakota", "ND"],
-    ["Northern Mariana Islands", "NP"],
     ["Ohio", "OH"],
     ["Oklahoma", "OK"],
     ["Oregon", "OR"],
@@ -70,7 +63,6 @@ export default function DataViewLeft() {
     ["South Dakota", "SD"],
     ["Tennessee", "TN"],
     ["Texas", "TX"],
-    ["US Virgin Islands", "VI"],
     ["Utah", "UT"],
     ["Vermont", "VT"],
     ["Virginia", "VA"],
@@ -116,8 +108,6 @@ export default function DataViewLeft() {
       let displayStateData = states.find(
         (state) => state[1] === choosenState.id
       );
-      console.log(displayStateData[0]);
-      console.log(choosenState.id);
       setDate([]);
       setDeaths([]);
       if (CSVData) {
@@ -139,12 +129,12 @@ export default function DataViewLeft() {
             className="data-section"
             theme-value={theme}
             layout
-            initial={{ width: "0%" }}
-            animate={{ width: "50%", transition: { duration: 2 } }}
-            exit={{ width: "10%", transition: { duration: 2 } }}
+            initial={{ x: "-50%" }}
+            animate={{ x: "0%", transition: { duration: 1.8 } }}
+            exit={{ opacity: "0", transition: { duration: 2 } }}
             active-state={JSON.stringify(compareStates)}
           >
-            {compareStates && (
+            {(compareStates || choosenState) && (
               <div className="form-group">
                 <label htmlFor="state" className="col-sm-4 control-label">
                   <p theme-value={theme}> Pick a State to view Data </p>
@@ -213,13 +203,13 @@ export default function DataViewLeft() {
                 </div>
               </div>
             )}
-            <motion.div
+            <div
               id="display-state-data"
               theme-value={theme}
-              layout
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1, transition: { delay: 2 } }}
-              exit={{ width: "10%", transition: { duration: 2 } }}
+              // layout
+              // initial={{ opacity: 0 }}
+              // animate={{ opacity: 1, transition: { delay: 2 } }}
+              // exit={{ width: "10%", transition: { duration: 2 } }}
             >
               <Line
                 datasetIdKey="id"
@@ -234,7 +224,7 @@ export default function DataViewLeft() {
                   ],
                 }}
               />
-            </motion.div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

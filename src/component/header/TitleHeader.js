@@ -43,7 +43,6 @@ export default function TitleHeader() {
     setUSMainMap(false);
   }
   function handleDiseaseSelection(e) {
-    console.log(e.target.value);
     setDiseaseType(e.target.value);
   }
 

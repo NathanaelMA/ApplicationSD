@@ -34,7 +34,8 @@ export default function Map() {
 
       svg
         .transition()
-        .duration(200)
+        .duration(300)
+        .delay(800)
         .call(
           zoom.transform,
           d3.zoomIdentity
@@ -78,9 +79,9 @@ export default function Map() {
           layout
           theme-value={theme}
           key="USmap"
-          initial={{ x: "100%", opacity: 0 }}
-          animate={{ x: "0%", opacity: 1, transition: { duration: 3 } }}
-          exit={{ opacity: 0, transition: { duration: 1 } }}
+          // initial={{ x: "100%", opacity: 0 }}
+          // animate={{ x: "0%", opacity: 1, transition: { duration: 2.2 } }}
+          exit={{ opacity: "0", transition: { duration: 2 } }}
           id="map-svg"
         >
           <SvgUsMap />

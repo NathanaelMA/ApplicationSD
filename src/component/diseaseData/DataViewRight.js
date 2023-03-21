@@ -58,7 +58,7 @@ export default function DataViewRight() {
             layout
             initial={{ width: "0%" }}
             animate={{ width: "50%", transition: { duration: 2 } }}
-            exit={{ width: "10%", transition: { duration: 2 } }}
+            exit={{ opacity: "0", transition: { duration: 2 } }}
             active-state={JSON.stringify(compareStates)}
           >
             {compareStates && (
