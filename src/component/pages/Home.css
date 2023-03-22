@@ -2,7 +2,7 @@ h1 {
 color: black;
 }
 
-body {
+#homePage {
     background: rgb(255,255,255);
     background: linear-gradient(94deg, rgba(255,255,255,1) 0%, rgba(160,172,255,1) 32%, rgba(55,79,255,1) 97%);
 
@@ -13,7 +13,15 @@ body {
     flex-direction: column;
     align-items: center;
     background-color: beige;
-    margin: 1.5em;
+    margin: 1.5em ;
+}
+
+#mission-statement {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2em;
+    background-color: white;
 }
 
 #inFocusBio{
@@ -65,4 +73,11 @@ body {
 
 #teamImages h3 {
     margin: 0 0 0 3.5rem;
+}
+
+#credits {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: gray;
 }

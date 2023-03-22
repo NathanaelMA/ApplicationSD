@@ -63,7 +63,7 @@ export default function TitleHeader() {
             theme-value={theme}
             onChange={handleDiseaseSelection}
           >
-            <option value="">Choose Disease Type</option>
+            {/* <option value="">Choose Disease Type</option> */}
             <option value="Covid">Covid</option>
             <option value="Measles">Measles</option>
             <option value="Malaria">Malaria</option>

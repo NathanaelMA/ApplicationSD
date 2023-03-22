@@ -52,6 +52,27 @@ export default function Home() {
         <h1>
           <Link to={"/disease"}> Disease Page</Link>
         </h1>
+
+        <h2>Mission Statement</h2>
+        <p id="mission-statement">
+          {" "}
+          This project aims to create a credible infectious disease predictor
+          that can provide integrated information on a few dangerous infectious
+          diseases with prediction of its trend and risk level. The system will
+          provide both visualization of consolidated information of any
+          infectious disease and the correctly sourced information that will be
+          retrieved from multiple verified sources including the CDC and WHO.
+          This project will explore a number of relevant subjects within
+          computer science. This includes big data processing techniques to
+          transform the collected big data, database knowledge to design, create
+          and maintain databases as a backend to store the processed information
+          and intermediate results to retrieve our current summarized data for
+          visualization. Lastly, it includes semi-supervised learning from the
+          processed data with machine learning algorithms which allows our
+          system to produce an up to date prediction of trends and risk level of
+          the user given disease.
+        </p>
+
         <h2>Our Team</h2>
         <div id="inFocusBio">
           <div id="inFocusBioInfo">
@@ -108,6 +129,15 @@ export default function Home() {
           </div>
         </div>
       </motion.div>
+      <motion.p id="credits">
+        For more information on the data used on this webpage, please visit the{" "}
+        <a href="https://www.who.int/"> WHO </a> and
+        <a href="https://covid.cdc.gov/covid-data-tracker/#datatracker-home">
+          {" "}
+          CDC{"- "}
+        </a>{" "}
+        websites
+      </motion.p>
     </>
   );
 }

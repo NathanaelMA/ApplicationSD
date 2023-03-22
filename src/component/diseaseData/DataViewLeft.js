@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import "./DataViewRight.css";
+import "./DataViewLeft.css";
 import { AppContext } from "../pages/DiseaseApp";
 import { motion, AnimatePresence } from "framer-motion";
 //all states data for january
@@ -9,13 +9,15 @@ import { Line } from "react-chartjs-2";
 import { csv } from "d3";
 import ChartDisplay from "../chart/ChartDisplay";
 export default function DataViewLeft() {
-  const { choosenState, diseaseType, compareStates, theme } =
+  const { choosenState, setChoosenState, diseaseType, compareStates, theme } =
     useContext(AppContext);
   const [displayData, setDisplayData] = useState([]);
   const [dropDownState, setDropDownState] = useState(null);
   const [CSVData, setCSVData] = useState(null);
   const [date, setDate] = useState([]);
   const [deaths, setDeaths] = useState([]);
+  const [cases, setCases] = useState([]);
+  const [scroll, setScroll] = useState("true");
 
   const states = [
     ["Alabama", "AL"],
@@ -72,19 +74,22 @@ export default function DataViewLeft() {
     ["Wyoming", "WY"],
   ];
 
+  //used for state selected from main map view
   function chooseStateData(e) {
-    //setDisplayData(e.target.value);
     let stateName = e.target.selectedOptions[0].text;
     setDropDownState(stateName);
+    setScroll("true");
 
     setDisplayData([]);
     setDate([]);
     setDeaths([]);
+    setCases([]);
     if (CSVData) {
       for (let j = 0; j < CSVData.length; j++) {
         if (CSVData[j].state === stateName) {
           setDate((prevData) => [...prevData, CSVData[j].date + " "]);
           setDeaths((prevData) => [...prevData, CSVData[j].deaths + " "]);
+          setCases((prevData) => [...prevData, CSVData[j].cases + " "]);
           setDisplayData((prevData) => [...prevData, CSVData[j].deaths + " "]);
         }
       }
@@ -95,6 +100,7 @@ export default function DataViewLeft() {
   useEffect(() => {
     const row = (d) => {
       d.deaths = +d.deaths;
+      d.cases = +d.cases;
       return d;
     };
 
@@ -103,23 +109,37 @@ export default function DataViewLeft() {
     });
   }, []);
 
+  //used for comparison view
   useEffect(() => {
+    if (compareStates) {
+      setScroll("false");
+      setChoosenState(null);
+      setDeaths([]);
+      setCases([]);
+      setDate([]);
+      setDisplayData([]);
+    }
+
     if (choosenState) {
+      setScroll("true");
       let displayStateData = states.find(
         (state) => state[1] === choosenState.id
       );
       setDate([]);
       setDeaths([]);
+      setCases([]);
       if (CSVData) {
         for (let j = 0; j < CSVData.length; j++) {
           if (CSVData[j].state === displayStateData[0]) {
             setDate((prevData) => [...prevData, CSVData[j].date + " "]);
             setDeaths((prevData) => [...prevData, CSVData[j].deaths + " "]);
+            setCases((prevData) => [...prevData, CSVData[j].cases + " "]);
           }
         }
       }
     }
-  }, [choosenState]);
+    console.log(scroll);
+  }, [choosenState, compareStates]);
 
   return (
     <>
@@ -134,7 +154,7 @@ export default function DataViewLeft() {
             exit={{ opacity: "0", transition: { duration: 2 } }}
             active-state={JSON.stringify(compareStates)}
           >
-            {(compareStates || choosenState) && (
+            {compareStates && (
               <div className="form-group">
                 <label htmlFor="state" className="col-sm-4 control-label">
                   <p theme-value={theme}> Pick a State to view Data </p>
@@ -204,8 +224,9 @@ export default function DataViewLeft() {
               </div>
             )}
             <div
-              id="display-state-data"
+              id="left-display-state-data"
               theme-value={theme}
+              scroll-value={scroll}
               // layout
               // initial={{ opacity: 0 }}
               // animate={{ opacity: 1, transition: { delay: 2 } }}
@@ -218,8 +239,22 @@ export default function DataViewLeft() {
                   datasets: [
                     {
                       id: 1,
-                      label: diseaseType,
+                      label: diseaseType + " Deaths",
                       data: [...deaths],
+                    },
+                  ],
+                }}
+              />
+
+              <Line
+                datasetIdKey="id"
+                data={{
+                  labels: [...date],
+                  datasets: [
+                    {
+                      id: 1,
+                      label: diseaseType + " Cases",
+                      data: [...cases],
                     },
                   ],
                 }}

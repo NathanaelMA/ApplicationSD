@@ -4,7 +4,6 @@ import { AppContext } from "../pages/DiseaseApp";
 import { motion, AnimatePresence } from "framer-motion";
 //all states data for january
 import Folder from "../../InfectiousDiseaseDataSets-main/Diseases2022Data/CovidData/month01.csv";
-import Papa from "papaparse";
 import { csv } from "d3";
 import { Line } from "react-chartjs-2";
 import ChartDisplay from "../chart/ChartDisplay";
