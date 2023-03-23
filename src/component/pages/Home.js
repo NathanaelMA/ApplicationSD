@@ -47,85 +47,87 @@ export default function Home() {
         initial={{ y: "100%" }}
         animate={{ y: "0%", opacity: 1, transition: { duration: 1.5 } }}
         exit={{ opacity: 0, transition: { duration: 0.7 } }}
-        id="homePage"
+        // id="homePage"
       >
-        <h1>
-          <Link to={"/disease"}> Disease Page</Link>
-        </h1>
+        <div id="home-page">
+          <h1>
+            <Link to={"/disease"}> Disease Page</Link>
+          </h1>
 
-        <h2>Mission Statement</h2>
-        <p id="mission-statement">
-          {" "}
-          This project aims to create a credible infectious disease predictor
-          that can provide integrated information on a few dangerous infectious
-          diseases with prediction of its trend and risk level. The system will
-          provide both visualization of consolidated information of any
-          infectious disease and the correctly sourced information that will be
-          retrieved from multiple verified sources including the CDC and WHO.
-          This project will explore a number of relevant subjects within
-          computer science. This includes big data processing techniques to
-          transform the collected big data, database knowledge to design, create
-          and maintain databases as a backend to store the processed information
-          and intermediate results to retrieve our current summarized data for
-          visualization. Lastly, it includes semi-supervised learning from the
-          processed data with machine learning algorithms which allows our
-          system to produce an up to date prediction of trends and risk level of
-          the user given disease.
-        </p>
+          <h2>Mission Statement</h2>
+          <p id="mission-statement">
+            {" "}
+            This project aims to create a credible infectious disease predictor
+            that can provide integrated information on a few dangerous
+            infectious diseases with prediction of its trend and risk level. The
+            system will provide both visualization of consolidated information
+            of any infectious disease and the correctly sourced information that
+            will be retrieved from multiple verified sources including the CDC
+            and WHO. This project will explore a number of relevant subjects
+            within computer science. This includes big data processing
+            techniques to transform the collected big data, database knowledge
+            to design, create and maintain databases as a backend to store the
+            processed information and intermediate results to retrieve our
+            current summarized data for visualization. Lastly, it includes
+            semi-supervised learning from the processed data with machine
+            learning algorithms which allows our system to produce an up to date
+            prediction of trends and risk level of the user given disease.
+          </p>
 
-        <h2>Our Team</h2>
-        <div id="inFocusBio">
-          <div id="inFocusBioInfo">
-            <h2>{bioName}</h2>
-            <p>{bioInfo}</p>
+          <h2>Our Team</h2>
+          <div id="inFocusBio">
+            <div id="inFocusBioInfo">
+              <h2>{bioName}</h2>
+              <p>{bioInfo}</p>
+            </div>
+            <img src={focusedPerson.pic}></img>
           </div>
-          <img src={focusedPerson.pic}></img>
-        </div>
-        <div id="teamImages">
-          <div>
-            <img
-              src={person1.pic}
-              onClick={() => {
-                setFocusedPerson(person1);
-                setPerson1(focusedPerson);
-                setBioName(person1.name);
-              }}
-            ></img>
-            <h3>{person1.name}</h3>
-          </div>
-          <div>
-            <img
-              src={person2.pic}
-              onClick={() => {
-                setFocusedPerson(person2);
-                setPerson2(focusedPerson);
-                setBioName(person2.name);
-                setBioInfo();
-              }}
-            ></img>
-            <h3>{person2.name}</h3>
-          </div>
-          <div>
-            <img
-              src={person3.pic}
-              onClick={() => {
-                setFocusedPerson(person3);
-                setPerson3(focusedPerson);
-                setBioName(person3.name);
-              }}
-            ></img>
-            <h3> {person3.name} </h3>
-          </div>
-          <div>
-            <img
-              src={person4.pic}
-              onClick={() => {
-                setFocusedPerson(person4);
-                setPerson4(focusedPerson);
-                setBioName(person4.name);
-              }}
-            ></img>
-            <h3> {person4.name}</h3>
+          <div id="teamImages">
+            <div>
+              <img
+                src={person1.pic}
+                onClick={() => {
+                  setFocusedPerson(person1);
+                  setPerson1(focusedPerson);
+                  setBioName(person1.name);
+                }}
+              ></img>
+              <h3>{person1.name}</h3>
+            </div>
+            <div>
+              <img
+                src={person2.pic}
+                onClick={() => {
+                  setFocusedPerson(person2);
+                  setPerson2(focusedPerson);
+                  setBioName(person2.name);
+                  setBioInfo();
+                }}
+              ></img>
+              <h3>{person2.name}</h3>
+            </div>
+            <div>
+              <img
+                src={person3.pic}
+                onClick={() => {
+                  setFocusedPerson(person3);
+                  setPerson3(focusedPerson);
+                  setBioName(person3.name);
+                }}
+              ></img>
+              <h3> {person3.name} </h3>
+            </div>
+            <div>
+              <img
+                src={person4.pic}
+                onClick={() => {
+                  setFocusedPerson(person4);
+                  setPerson4(focusedPerson);
+                  setBioName(person4.name);
+                }}
+              ></img>
+              <h3> {person4.name}</h3>
+            </div>
           </div>
         </div>
       </motion.div>

@@ -2,13 +2,18 @@ h1 {
 color: black;
 }
 
-#homePage {
-    background: rgb(255,255,255);
-    background: linear-gradient(94deg, rgba(255,255,255,1) 0%, rgba(160,172,255,1) 32%, rgba(55,79,255,1) 97%);
+#home-page {
 
+    /* left to right
+    background: rgb(255,255,255);
+    background: linear-gradient(94deg, rgba(255,255,255,1) 0%, rgba(160,172,255,1) 32%, rgba(55,79,255,1) 97%); */
+
+
+    background: rgb(255,255,255);
+background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(160,172,255,1) 32%, rgba(55,79,255,1) 70%);
 }
 
-#homePage {
+#home-page {
     display: flex;
     flex-direction: column;
     align-items: center;
