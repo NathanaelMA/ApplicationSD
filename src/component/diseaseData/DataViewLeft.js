@@ -84,7 +84,6 @@ export default function DataViewLeft() {
   function chooseStateData(e) {
     let stateName = e.target.selectedOptions[0].text;
     setDropDownState(stateName);
-    setScroll("true");
 
     setDisplayData([]);
     setDate([]);
@@ -117,8 +116,10 @@ export default function DataViewLeft() {
 
   //used for comparison view
   useEffect(() => {
+    if (diseaseType === "Covid" && !compareStates) setScroll("true");
+    else setScroll("false");
+
     if (compareStates) {
-      setScroll("false");
       setChoosenState(null);
       setDeaths([]);
       setCases([]);
@@ -127,7 +128,6 @@ export default function DataViewLeft() {
     }
 
     if (choosenState) {
-      setScroll("true");
       let displayStateData = states.find(
         (state) => state[1] === choosenState.id
       );
@@ -144,7 +144,7 @@ export default function DataViewLeft() {
         }
       }
     }
-  }, [choosenState, compareStates]);
+  }, [choosenState, compareStates, diseaseType]);
 
   return (
     <>
@@ -156,7 +156,7 @@ export default function DataViewLeft() {
             layout
             initial={{ x: "-70%" }}
             animate={{ x: "0%", transition: { duration: 1.8 } }}
-            exit={{ x: "-70%", transition: { duration: 1.5 } }}
+            // exit={{ x: "-70%", transition: { duration: 1 } }}
             active-state={JSON.stringify(compareStates)}
           >
             {compareStates && (
@@ -233,19 +233,21 @@ export default function DataViewLeft() {
               theme-value={theme}
               scroll-value={scroll}
             >
-              <Line
-                datasetIdKey="id"
-                data={{
-                  labels: [...date],
-                  datasets: [
-                    {
-                      id: 1,
-                      label: diseaseType + " Deaths",
-                      data: [...deaths],
-                    },
-                  ],
-                }}
-              />
+              {diseaseType === "Covid" ? (
+                <Line
+                  datasetIdKey="id"
+                  data={{
+                    labels: [...date],
+                    datasets: [
+                      {
+                        id: 1,
+                        label: diseaseType + " Deaths",
+                        data: [...deaths],
+                      },
+                    ],
+                  }}
+                />
+              ) : null}
 
               <Line
                 datasetIdKey="id"
@@ -260,6 +262,9 @@ export default function DataViewLeft() {
                   ],
                 }}
               />
+              {console.log(scroll)}
+              <h1> % of Population infected</h1>
+              <h2>total confirmed cases</h2>
             </div>
           </motion.div>
         )}

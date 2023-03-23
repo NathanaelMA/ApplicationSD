@@ -20,7 +20,7 @@ export default function Map() {
   useEffect(() => {
     if (choosenState && !USMainMap) {
       let width = 487,
-        height = 455;
+        height = 360;
 
       const zoom = d3.zoom().scaleExtent([1, 3]).on("zoom", zoomed);
       d3.select(choosenState).style("fill", "red");
@@ -57,7 +57,7 @@ export default function Map() {
       d3.select(choosenState).style("fill", "red");
       setChoosenState(null);
       setUSMainMap(false);
-      const svg = d3.select("svg").attr("viewBox", [-20, 3, 400, 280]);
+      const svg = d3.select("svg").attr("viewBox", [-20, 3, 700, 280]);
       svg.on(".zoom", null);
       d3.select("g").attr("transform", "translate(0,0) scale(1.0)");
     }
@@ -65,17 +65,14 @@ export default function Map() {
 
   return (
     <AnimatePresence>
-      {console.log(compareStates + " compareStates")}
-      {console.log(rankingPage + " rankingPage")}
-      {console.log(USMainMap + " USMainMap")}
       {compareStates || rankingPage ? null : (
         <motion.div
           layout
           theme-value={theme}
           key="USmap"
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1, transition: { duration: 1 } }}
-          exit={{ opacity: 0, transition: { duration: 1 } }}
+          animate={{ opacity: 1, transition: { duration: 2 } }}
+          // exit={{ opacity: 0, transition: { duration: 1 } }}
           id="map-svg"
         >
           <SvgUsMap />

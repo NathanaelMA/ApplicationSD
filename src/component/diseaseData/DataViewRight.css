@@ -62,8 +62,8 @@ p[theme-value='Light'] {
 
 }
 
-.data-section #display-state-data {
-    width: 40em;
+.data-section #right-display-state-data {
+    width: 42em;
     word-wrap: break-word;
     white-space: pre-wrap;
 } 

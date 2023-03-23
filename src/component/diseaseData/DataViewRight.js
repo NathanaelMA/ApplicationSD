@@ -16,6 +16,7 @@ export default function DataViewRight() {
   const [CSVData, setCSVData] = useState(null);
   const [date, setDate] = useState([]);
   const [deaths, setDeaths] = useState([]);
+  const [cases, setCases] = useState([]);
 
   function chooseStateData(e) {
     let stateName = e.target.selectedOptions[0].text;
@@ -24,21 +25,37 @@ export default function DataViewRight() {
     setDisplayData([]);
     setDate([]);
     setDeaths([]);
+    setCases([]);
     if (CSVData) {
       for (let j = 0; j < CSVData.length; j++) {
         if (CSVData[j].state === stateName) {
           setDate((prevData) => [...prevData, CSVData[j].date + " "]);
           setDeaths((prevData) => [...prevData, CSVData[j].deaths + " "]);
           setDisplayData((prevData) => [...prevData, CSVData[j].deaths + " "]);
+          setCases((prevData) => [...prevData, CSVData[j].cases + " "]);
         }
       }
     }
   }
 
+  //new
+  useEffect(() => {
+    // if (diseaseType === "Covid" && !compareStates) setScroll("true");
+    // else setScroll("false");
+
+    setDeaths([]);
+    setCases([]);
+    setDate([]);
+    setDisplayData([]);
+  }, [choosenState, compareStates]);
+
+  //end
+
   // using d3 parse the csv file with the name folder and return the data
   useEffect(() => {
     const row = (d) => {
       d.deaths = +d.deaths;
+      d.cases = +d.cases;
       return d;
     };
 
@@ -57,7 +74,7 @@ export default function DataViewRight() {
             layout
             initial={{ x: "70%" }}
             animate={{ x: "27%", transition: { duration: 1.8 } }}
-            exit={{ x: "70%", transition: { duration: 1 } }}
+            // exit={{ x: "70%", transition: { duration: 1 } }}
             active-state={JSON.stringify(compareStates)}
           >
             {compareStates && (
@@ -129,7 +146,22 @@ export default function DataViewRight() {
                 </div>
               </div>
             )}
-            <div id="display-state-data">
+            <div id="right-display-state-data">
+              {diseaseType == "Covid" ? (
+                <Line
+                  datasetIdKey="id"
+                  data={{
+                    labels: [...date],
+                    datasets: [
+                      {
+                        id: 1,
+                        label: diseaseType,
+                        data: [...deaths],
+                      },
+                    ],
+                  }}
+                />
+              ) : null}
               <Line
                 datasetIdKey="id"
                 data={{
@@ -137,12 +169,15 @@ export default function DataViewRight() {
                   datasets: [
                     {
                       id: 1,
-                      label: diseaseType,
-                      data: [...deaths],
+                      label: diseaseType + " Cases",
+                      data: [...cases],
                     },
                   ],
                 }}
               />
+
+              <h1> % of Population infected</h1>
+              <h2>total confirmed cases</h2>
             </div>
           </motion.div>
         )}

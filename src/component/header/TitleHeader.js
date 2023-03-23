@@ -56,7 +56,7 @@ export default function TitleHeader() {
 
   function handleRanking() {
     // setUSMainMap(false);
-    // // setChoosenState(null);
+    //setChoosenState(null);
     setCompareStates(false);
     setRankingPage(true);
   }

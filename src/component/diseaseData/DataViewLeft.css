@@ -48,14 +48,10 @@ p[theme-value='Light'] {
     height: 35rem;
     overflow-y: scroll;
      width: 44em;
-    /* word-wrap: break-word;
-    white-space: pre-wrap; */
 } 
 
 .data-section #left-display-state-data[scroll-value="false"] {
-    /* height: 35rem;
-    overflow-y: scroll; */
-     width: 44em;
+     width: 42em;
     word-wrap: break-word;
     white-space: pre-wrap;
 } 
