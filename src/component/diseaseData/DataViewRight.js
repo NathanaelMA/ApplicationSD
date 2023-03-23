@@ -55,9 +55,9 @@ export default function DataViewRight() {
             className="data-section"
             theme-value={theme}
             layout
-            initial={{ width: "0%" }}
-            animate={{ width: "50%", transition: { duration: 2 } }}
-            exit={{ opacity: "0", transition: { duration: 2 } }}
+            initial={{ x: "70%" }}
+            animate={{ x: "27%", transition: { duration: 1.8 } }}
+            exit={{ x: "70%", transition: { duration: 1 } }}
             active-state={JSON.stringify(compareStates)}
           >
             {compareStates && (

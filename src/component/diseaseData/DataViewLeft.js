@@ -9,8 +9,14 @@ import { Line } from "react-chartjs-2";
 import { csv } from "d3";
 import ChartDisplay from "../chart/ChartDisplay";
 export default function DataViewLeft() {
-  const { choosenState, setChoosenState, diseaseType, compareStates, theme } =
-    useContext(AppContext);
+  const {
+    rankingPage,
+    choosenState,
+    setChoosenState,
+    diseaseType,
+    compareStates,
+    theme,
+  } = useContext(AppContext);
   const [displayData, setDisplayData] = useState([]);
   const [dropDownState, setDropDownState] = useState(null);
   const [CSVData, setCSVData] = useState(null);
@@ -138,20 +144,19 @@ export default function DataViewLeft() {
         }
       }
     }
-    console.log(scroll);
   }, [choosenState, compareStates]);
 
   return (
     <>
       <AnimatePresence>
-        {(compareStates || choosenState) && (
+        {(compareStates || choosenState) && !rankingPage && (
           <motion.div
             className="data-section"
             theme-value={theme}
             layout
-            initial={{ x: "-50%" }}
+            initial={{ x: "-70%" }}
             animate={{ x: "0%", transition: { duration: 1.8 } }}
-            exit={{ opacity: "0", transition: { duration: 2 } }}
+            exit={{ x: "-70%", transition: { duration: 1.5 } }}
             active-state={JSON.stringify(compareStates)}
           >
             {compareStates && (
@@ -227,10 +232,6 @@ export default function DataViewLeft() {
               id="left-display-state-data"
               theme-value={theme}
               scroll-value={scroll}
-              // layout
-              // initial={{ opacity: 0 }}
-              // animate={{ opacity: 1, transition: { delay: 2 } }}
-              // exit={{ width: "10%", transition: { duration: 2 } }}
             >
               <Line
                 datasetIdKey="id"

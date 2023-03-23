@@ -2,12 +2,14 @@ import React, { useContext, useState } from "react";
 import "./TitleHeader.css";
 import Maplogo from "../../images/NAMap.png";
 import scalelogo from "../../images/scale.png";
+import Rank from "../../images/rank.png";
 import { AppContext } from "../pages/DiseaseApp";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 export default function TitleHeader() {
   const {
     choosenState,
+    setChoosenState,
     choosenStateTitle,
     USMainMap,
     setUSMainMap,
@@ -16,6 +18,8 @@ export default function TitleHeader() {
     setCompareStates,
     theme,
     setTheme,
+    rankingPage,
+    setRankingPage,
   } = useContext(AppContext);
 
   const [isOn, setIsOn] = useState(false);
@@ -32,18 +36,29 @@ export default function TitleHeader() {
   };
 
   function handleMapView() {
-    if (choosenState || compareStates) {
+    if (choosenState || compareStates || rankingPage) {
       setUSMainMap(true);
       setCompareStates(false);
-    } else setUSMainMap(false);
+      setRankingPage(false);
+    } else {
+      setUSMainMap(false);
+    }
   }
 
   function handleCompare() {
     setCompareStates(true);
     setUSMainMap(false);
+    setRankingPage(false);
   }
   function handleDiseaseSelection(e) {
     setDiseaseType(e.target.value);
+  }
+
+  function handleRanking() {
+    // setUSMainMap(false);
+    // // setChoosenState(null);
+    setCompareStates(false);
+    setRankingPage(true);
   }
 
   return (
@@ -57,6 +72,7 @@ export default function TitleHeader() {
       <div id="nav-items" theme-value={theme}>
         <img className="logo" src={Maplogo} onClick={handleMapView}></img>
         <img className="logo" src={scalelogo} onClick={handleCompare}></img>
+        <img className="logo" src={Rank} onClick={handleRanking}></img>
         <span className="col-sm-2">
           <select
             id="diseases"

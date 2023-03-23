@@ -7,6 +7,7 @@ import Map from "../map/Map";
 import ColorLegend from "../map/ColorLegend";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import Rank from "../rank/Rank";
 
 export const AppContext = React.createContext();
 
@@ -15,10 +16,11 @@ export default function DiseaseApp() {
   const [choosenStateTitle, setChoosenStateTitle] = useState(null);
   const [USMainMap, setUSMainMap] = useState(true);
   const [diseaseType, setDiseaseType] = useState("Covid");
-  const [compareStates, setCompareStates] = useState(null);
+  const [compareStates, setCompareStates] = useState(false);
   const [theme, setTheme] = useState("Light");
   const [date, setDate] = useState([]);
   const [deaths, setDeaths] = useState([]);
+  const [rankingPage, setRankingPage] = useState(false);
 
   const ChoosenStatePicker = (currState) => {
     setChoosenState(currState);
@@ -59,7 +61,7 @@ export default function DiseaseApp() {
         });
       });
     }
-  }, [compareStates]);
+  }, [compareStates, rankingPage]);
 
   return (
     <>
@@ -82,15 +84,16 @@ export default function DiseaseApp() {
             setDate,
             deaths,
             setDeaths,
+            rankingPage,
+            setRankingPage,
           }}
         >
           <TitleHeader />
 
           <div className="main-container" theme-value={theme}>
             <DataViewLeft />
-
             <Map />
-
+            <Rank />
             <DataViewRight />
           </div>
         </AppContext.Provider>
