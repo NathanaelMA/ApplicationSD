@@ -5,11 +5,19 @@ import scalelogo from "../../images/scale.png";
 import Rank from "../../images/rank.png";
 import { AppContext } from "../pages/DiseaseApp";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import Axios from "axios";
 export default function TitleHeader() {
+  const getDiseaseData = () => {
+    Axios.get("http://127.0.0.1:3001/get").then((response) => {
+      console.log(response.data);
+    });
+  };
+
   const {
     choosenState,
     setChoosenState,
+    choosenStateName,
+    setChoosenStateName,
     choosenStateTitle,
     USMainMap,
     setUSMainMap,
@@ -29,11 +37,11 @@ export default function TitleHeader() {
     setIsOn(!isOn);
   };
 
-  const spring = {
-    type: "spring",
-    stiffness: 700,
-    damping: 30,
-  };
+  // const spring = {
+  //   type: "spring",
+  //   stiffness: 700,
+  //   damping: 30,
+  // };
 
   function handleMapView() {
     if (choosenState || compareStates || rankingPage) {
@@ -52,11 +60,15 @@ export default function TitleHeader() {
   }
   function handleDiseaseSelection(e) {
     setDiseaseType(e.target.value);
+    console.log(e.target.value);
+    Axios.post("http://localhost:3001/post", {
+      diseaseType: e.target.value,
+      state: choosenStateName,
+    });
+    getDiseaseData();
   }
 
   function handleRanking() {
-    // setUSMainMap(false);
-    //setChoosenState(null);
     setCompareStates(false);
     setRankingPage(true);
   }
@@ -73,6 +85,7 @@ export default function TitleHeader() {
         <img className="logo" src={Maplogo} onClick={handleMapView}></img>
         <img className="logo" src={scalelogo} onClick={handleCompare}></img>
         <img className="logo" src={Rank} onClick={handleRanking}></img>
+        <button onClick={getDiseaseData}>get Disease</button>
         <span className="col-sm-2">
           <select
             id="diseases"
@@ -84,8 +97,8 @@ export default function TitleHeader() {
             <option value="Measles">Measles</option>
             <option value="Malaria">Malaria</option>
             <option value="Mumps">Mumps</option>
-            <option value="Pneumoccal Diseases">Pneumoccal Diseases</option>
-            <option value="Syphilis">Syphilis</option>
+            <option value="Pneumococcal disease">Pneumococcal Diseases</option>
+            <option value="CSyphilis">Syphilis</option>
             <option value="Tuberculosis">Tuberculosis</option>
           </select>
         </span>

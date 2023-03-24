@@ -11,12 +11,6 @@ import Me from "../../images/me.txt";
 import Axios from "axios";
 
 export default function Home() {
-  const getDiseaseData = () => {
-    Axios.get("http://127.0.0.1:3001/get").then((response) => {
-      console.log(response);
-    });
-  };
-
   const [person1, setPerson1] = React.useState({
     pic: Art1,
     name: "blue and purple and orange art",
@@ -54,7 +48,6 @@ export default function Home() {
         initial={{ y: "-100%" }}
         animate={{ y: "0%", opacity: 1, transition: { duration: 1.5 } }}
       >
-        <button onClick={getDiseaseData}> click me</button>
         <h1 id="title">
           <Link id="link" to={"/disease"}>
             Infectious Disease Risk Predictor

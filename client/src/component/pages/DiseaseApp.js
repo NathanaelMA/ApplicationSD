@@ -22,6 +22,7 @@ export default function DiseaseApp() {
   const [date, setDate] = useState([]);
   const [deaths, setDeaths] = useState([]);
   const [rankingPage, setRankingPage] = useState(false);
+  const [choosenStateName, setChoosenStateName] = useState("");
 
   const ChoosenStatePicker = (currState) => {
     setChoosenState(currState);
@@ -73,6 +74,8 @@ export default function DiseaseApp() {
           value={{
             choosenState,
             setChoosenState,
+            choosenStateName,
+            setChoosenStateName,
             choosenStateTitle,
             setChoosenStateTitle,
             USMainMap,

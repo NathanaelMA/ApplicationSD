@@ -12,6 +12,8 @@ export default function DataViewLeft() {
   const {
     rankingPage,
     choosenState,
+    choosenStateName,
+    setChoosenStateName,
     setChoosenState,
     diseaseType,
     compareStates,
@@ -131,6 +133,8 @@ export default function DataViewLeft() {
       let displayStateData = states.find(
         (state) => state[1] === choosenState.id
       );
+      console.log(displayStateData[0]);
+      setChoosenStateName(displayStateData[0]);
       setDate([]);
       setDeaths([]);
       setCases([]);
