@@ -47,14 +47,14 @@ export default function Home() {
         initial={{ y: "100%" }}
         animate={{ y: "0%", opacity: 1, transition: { duration: 1.5 } }}
         exit={{ opacity: 0, transition: { duration: 0.7 } }}
-        // id="homePage"
       >
-        <div id="home-page">
-          <h1>
-            <Link to={"/disease"}> Disease Page</Link>
-          </h1>
-
-          <h2>Mission Statement</h2>
+        <h1 id="title">
+          <Link id="link" to={"/disease"}>
+            Infectious Disease Risk Predictor
+          </Link>
+        </h1>
+        <div id="ms-container">
+          <h2 id="ms-header">Mission Statement</h2>
           <p id="mission-statement">
             {" "}
             This project aims to create a credible infectious disease predictor
@@ -73,7 +73,21 @@ export default function Home() {
             learning algorithms which allows our system to produce an up to date
             prediction of trends and risk level of the user given disease.
           </p>
-
+          <div class="custom-shape-divider-bottom-1679614101">
+            <svg
+              data-name="Layer 1"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 1200 120"
+              preserveAspectRatio="none"
+            >
+              <path
+                d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
+                className="shape-fill"
+              ></path>
+            </svg>
+          </div>
+        </div>
+        <div id="home-page">
           <h2>Our Team</h2>
           <div id="inFocusBio">
             <div id="inFocusBioInfo">
@@ -130,15 +144,16 @@ export default function Home() {
             </div>
           </div>
         </div>
+        <div id="dev-tools"></div>
+        <p id="credits">
+          For more information on the data used on this webpage, please visit
+          the <a href="https://www.who.int/"> WHO </a> and
+          <a href="https://covid.cdc.gov/covid-data-tracker/#datatracker-home">
+            CDC
+          </a>
+          websites
+        </p>
       </motion.div>
-      <motion.p id="credits">
-        For more information on the data used on this webpage, please visit the{" "}
-        <a href="https://www.who.int/"> WHO </a> and
-        <a href="https://covid.cdc.gov/covid-data-tracker/#datatracker-home">
-          CDC
-        </a>
-        websites
-      </motion.p>
     </>
   );
 }

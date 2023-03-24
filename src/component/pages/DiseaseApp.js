@@ -65,7 +65,9 @@ export default function DiseaseApp() {
 
   return (
     <>
-      <motion.div exit={{ y: window.innerWidth, transition: { duration: 1 } }}>
+      <motion.div
+      // exit={{ y: window.innerWidth, transition: { duration: 1 } }}
+      >
         <AppContext.Provider
           value={{
             choosenState,
