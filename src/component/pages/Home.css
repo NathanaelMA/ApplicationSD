@@ -19,7 +19,6 @@ background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(160,172,255,1) 32
     align-items: center;
     margin: 0 0 2em ;
     background-color: white;
-    color: black;
 }
 
 #title #link{
@@ -55,6 +54,10 @@ background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(160,172,255,1) 32
     align-items: center;
     background-color: beige;
     margin: 0 1.5em 1.5em 1.5em;
+}
+
+#home-page h2 {
+    color: rgb(208, 208, 208);
 }
 
 #mission-statement {

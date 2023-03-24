@@ -89,10 +89,10 @@ export default function TitleHeader() {
             <option value="Tuberculosis">Tuberculosis</option>
           </select>
         </span>
-        <div className="switch" data-is-on={isOn} onClick={toggleSwitch}>
+        {/* <div className="switch" data-is-on={isOn} onClick={toggleSwitch}>
           <motion.div className="handle" layout transition={spring} />
-        </div>
-        <p theme-value={theme}>{theme} Mode</p>
+        </div> */}
+        {/* <p theme-value={theme}>{theme} Mode</p> */}
       </div>
     </nav>
   );

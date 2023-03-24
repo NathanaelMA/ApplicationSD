@@ -44,9 +44,8 @@ export default function Home() {
   return (
     <>
       <motion.div
-        initial={{ y: "100%" }}
+        initial={{ y: "-100%" }}
         animate={{ y: "0%", opacity: 1, transition: { duration: 1.5 } }}
-        exit={{ opacity: 0, transition: { duration: 0.7 } }}
       >
         <h1 id="title">
           <Link id="link" to={"/disease"}>
@@ -73,7 +72,7 @@ export default function Home() {
             learning algorithms which allows our system to produce an up to date
             prediction of trends and risk level of the user given disease.
           </p>
-          <div class="custom-shape-divider-bottom-1679614101">
+          <div className="custom-shape-divider-bottom-1679614101">
             <svg
               data-name="Layer 1"
               xmlns="http://www.w3.org/2000/svg"

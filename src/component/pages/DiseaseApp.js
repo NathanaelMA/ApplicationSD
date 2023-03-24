@@ -6,7 +6,7 @@ import DataViewRight from "../diseaseData/DataViewRight";
 import Map from "../map/Map";
 import ColorLegend from "../map/ColorLegend";
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import Rank from "../rank/Rank";
 
 export const AppContext = React.createContext();
@@ -64,7 +64,7 @@ export default function DiseaseApp() {
   }, [compareStates, rankingPage]);
 
   return (
-    <>
+    <AnimatePresence>
       <motion.div
       // exit={{ y: window.innerWidth, transition: { duration: 1 } }}
       >
@@ -95,11 +95,11 @@ export default function DiseaseApp() {
           <div className="main-container" theme-value={theme}>
             <DataViewLeft />
             <Map />
-            <Rank />
             <DataViewRight />
+            <Rank />
           </div>
         </AppContext.Provider>
       </motion.div>
-    </>
+    </AnimatePresence>
   );
 }

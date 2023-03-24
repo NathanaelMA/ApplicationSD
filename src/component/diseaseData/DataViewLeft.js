@@ -155,7 +155,7 @@ export default function DataViewLeft() {
             theme-value={theme}
             layout
             initial={{ x: "-70%" }}
-            animate={{ x: "0%", transition: { duration: 1.8 } }}
+            animate={{ x: "-50%", transition: { duration: 2 } }}
             // exit={{ x: "-70%", transition: { duration: 1 } }}
             active-state={JSON.stringify(compareStates)}
           >
@@ -262,7 +262,6 @@ export default function DataViewLeft() {
                   ],
                 }}
               />
-              {console.log(scroll)}
               <h1> % of Population infected</h1>
               <h2>total confirmed cases</h2>
             </div>

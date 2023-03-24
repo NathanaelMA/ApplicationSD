@@ -23,8 +23,8 @@ p[theme-value='Dark'] {
 
 .data-section[theme-value='Light'] {
 
-    animation: slide 2s forwards;
-    animation-delay: 0s;
+    /* animation: slide 2s forwards;
+    animation-delay: 0s; */
     background: rgb(255,255,255);
    
     height: 40rem;
@@ -52,7 +52,6 @@ p[theme-value='Light'] {
 
 .data-section #left-display-state-data[scroll-value="false"] {
      width: 42em;
-    word-wrap: break-word;
-    white-space: pre-wrap;
+
 } 
 
