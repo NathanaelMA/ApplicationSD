@@ -116,8 +116,8 @@ export default function DataViewLeft() {
 
   //used for comparison view
   useEffect(() => {
-    if (diseaseType === "Covid" && !compareStates) setScroll("true");
-    else setScroll("false");
+    // if (diseaseType === "Covid" && !compareStates) setScroll("true");
+    // else setScroll("false");
 
     if (compareStates) {
       setChoosenState(null);

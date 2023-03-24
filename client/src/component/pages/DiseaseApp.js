@@ -8,6 +8,7 @@ import ColorLegend from "../map/ColorLegend";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Rank from "../rank/Rank";
+import Axios from "axios";
 
 export const AppContext = React.createContext();
 
