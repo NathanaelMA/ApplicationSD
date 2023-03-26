@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const mysql = require("mysql2");
 const cors = require("cors");
-let diseaseType = "";
+// let diseaseType = "";
 app.use(cors());
 app.use(express.json());
 
@@ -13,11 +13,14 @@ const db = mysql.createConnection({
   database: "testPerformance",
 });
 
-app.post("/post", (req, res) => {
-  diseaseType = req.body.diseaseType;
-});
+// app.post("/post", (req, res) => {
+//   diseaseType = req.body.diseaseType;
+//   res.send("diseaseType received");
+// });
 
 app.get("/get", (req, res) => {
+  console.log(req.query.diseaseType);
+  const diseaseType = req.query.diseaseType;
   db.query(
     "SELECT * FROM employee WHERE disease = ?",
     [diseaseType],
@@ -26,6 +29,7 @@ app.get("/get", (req, res) => {
         console.log(err);
       } else {
         res.send(result);
+        // console.log(diseaseType2);
       }
     }
   );

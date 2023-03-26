@@ -8,13 +8,6 @@ import { Link } from "react-router-dom";
 import Axios from "axios";
 import { useQuery } from "react-query";
 export default function TitleHeader() {
-  const getDiseaseData = () => {
-    Axios.get("http://127.0.0.1:3001/get").then((response) => {
-      console.log(response.data);
-      return response.data;
-    });
-  };
-
   const {
     choosenState,
     setChoosenState,
@@ -23,6 +16,7 @@ export default function TitleHeader() {
     choosenStateTitle,
     USMainMap,
     setUSMainMap,
+    diseaseType,
     setDiseaseType,
     compareStates,
     setCompareStates,
@@ -32,7 +26,18 @@ export default function TitleHeader() {
     setRankingPage,
   } = useContext(AppContext);
 
-  const { data } = useQuery("diseaseData", () => getDiseaseData());
+  async function getDiseaseData() {
+    await Axios.get(
+      "http://127.0.0.1:3001/get?diseaseType=" + diseaseType
+    ).then((response) => {
+      console.log(response.data);
+      return response.data;
+    });
+  }
+
+  const { data, isLoading, isError } = useQuery("diseaseData", () =>
+    getDiseaseData()
+  );
 
   const [isOn, setIsOn] = useState(false);
 
@@ -46,6 +51,13 @@ export default function TitleHeader() {
   //   stiffness: 700,
   //   damping: 30,
   // };
+
+  // async function sendRequest() {
+  //   await Axios.post("http://localhost:3001/post", {
+  //     diseaseType: diseaseType,
+  //     state: choosenStateName,
+  //   });
+  // }
 
   function handleMapView() {
     if (choosenState || compareStates || rankingPage) {
@@ -65,17 +77,17 @@ export default function TitleHeader() {
   function handleDiseaseSelection(e) {
     setDiseaseType(e.target.value);
     console.log(e.target.value);
-    Axios.post("http://localhost:3001/post", {
-      diseaseType: e.target.value,
-      state: choosenStateName,
-    });
+    // sendRequest();
     getDiseaseData();
   }
 
   function handleRanking() {
     setCompareStates(false);
     setRankingPage(true);
+    console.log(data);
   }
+
+  if (isLoading) return <div>Loading...</div>;
 
   return (
     <nav id="header-container" theme-value={theme}>
