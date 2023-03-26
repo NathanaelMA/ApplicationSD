@@ -6,7 +6,6 @@ import Rank from "../../images/rank.png";
 import { AppContext } from "../pages/DiseaseApp";
 import { Link } from "react-router-dom";
 import Axios from "axios";
-import { useQuery } from "react-query";
 export default function TitleHeader() {
   const {
     choosenState,
@@ -26,38 +25,18 @@ export default function TitleHeader() {
     setRankingPage,
   } = useContext(AppContext);
 
-  async function getDiseaseData() {
-    await Axios.get(
-      "http://127.0.0.1:3001/get?diseaseType=" + diseaseType
-    ).then((response) => {
-      console.log(response.data);
-      return response.data;
-    });
-  }
-
-  const { data, isLoading, isError } = useQuery("diseaseData", () =>
-    getDiseaseData()
-  );
-
   const [isOn, setIsOn] = useState(false);
 
-  const toggleSwitch = () => {
-    theme === "Dark" ? setTheme("Light") : setTheme("Dark");
-    setIsOn(!isOn);
-  };
+  // const toggleSwitch = () => {
+  //   theme === "Dark" ? setTheme("Light") : setTheme("Dark");
+  //   setIsOn(!isOn);
+  // };
 
   // const spring = {
   //   type: "spring",
   //   stiffness: 700,
   //   damping: 30,
   // };
-
-  // async function sendRequest() {
-  //   await Axios.post("http://localhost:3001/post", {
-  //     diseaseType: diseaseType,
-  //     state: choosenStateName,
-  //   });
-  // }
 
   function handleMapView() {
     if (choosenState || compareStates || rankingPage) {
@@ -76,18 +55,22 @@ export default function TitleHeader() {
   }
   function handleDiseaseSelection(e) {
     setDiseaseType(e.target.value);
-    console.log(e.target.value);
-    // sendRequest();
-    getDiseaseData();
+
+    // getDiseaseData();
+
+    Axios.get("http://127.0.0.1:3001/get?diseaseType=" + e.target.value).then(
+      (response) => {
+        console.log(response.data);
+        console.log(e.target.value);
+        return response.data;
+      }
+    );
   }
 
   function handleRanking() {
     setCompareStates(false);
     setRankingPage(true);
-    console.log(data);
   }
-
-  if (isLoading) return <div>Loading...</div>;
 
   return (
     <nav id="header-container" theme-value={theme}>
@@ -101,14 +84,12 @@ export default function TitleHeader() {
         <img className="logo" src={Maplogo} onClick={handleMapView}></img>
         <img className="logo" src={scalelogo} onClick={handleCompare}></img>
         <img className="logo" src={Rank} onClick={handleRanking}></img>
-        <button onClick={getDiseaseData}>get Disease</button>
         <span className="col-sm-2">
           <select
             id="diseases"
             theme-value={theme}
             onChange={handleDiseaseSelection}
           >
-            {/* <option value="">Choose Disease Type</option> */}
             <option value="Covid">Covid</option>
             <option value="Measles">Measles</option>
             <option value="Malaria">Malaria</option>

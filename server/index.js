@@ -10,7 +10,7 @@ const db = mysql.createConnection({
   user: "root",
   host: "localhost",
   password: "helloWORLD019283",
-  database: "testPerformance",
+  database: "sddata",
 });
 
 // app.post("/post", (req, res) => {
@@ -22,7 +22,7 @@ app.get("/get", (req, res) => {
   console.log(req.query.diseaseType);
   const diseaseType = req.query.diseaseType;
   db.query(
-    "SELECT * FROM employee WHERE disease = ?",
+    "SELECT * FROM wondertables WHERE disease = ?",
     [diseaseType],
     (err, result) => {
       if (err) {
