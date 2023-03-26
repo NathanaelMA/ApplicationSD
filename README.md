@@ -1,14 +1,13 @@
-install libraries
+# install libraries
 
-d3 library
+### d3 library
 
 npm install d3 --save
 
-framer-motion lbrary
+### framer-motion lbrary
 
 npm install framer-motion
 
-
-Chart JS
+### Chart JS
 
 npm install --save chart.js react-chartjs-2
