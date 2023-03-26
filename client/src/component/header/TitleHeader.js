@@ -6,10 +6,12 @@ import Rank from "../../images/rank.png";
 import { AppContext } from "../pages/DiseaseApp";
 import { Link } from "react-router-dom";
 import Axios from "axios";
+import { useQuery } from "react-query";
 export default function TitleHeader() {
   const getDiseaseData = () => {
     Axios.get("http://127.0.0.1:3001/get").then((response) => {
       console.log(response.data);
+      return response.data;
     });
   };
 
@@ -29,6 +31,8 @@ export default function TitleHeader() {
     rankingPage,
     setRankingPage,
   } = useContext(AppContext);
+
+  const { data } = useQuery("diseaseData", () => getDiseaseData());
 
   const [isOn, setIsOn] = useState(false);
 
