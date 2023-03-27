@@ -2,26 +2,13 @@ import React, { useContext, useState, useEffect } from "react";
 import "./DataViewLeft.css";
 import { AppContext } from "../pages/DiseaseApp";
 import { motion, AnimatePresence } from "framer-motion";
-//all states data for january
-import Folder from "../../InfectiousDiseaseDataSets-main/Diseases2022Data/CovidData/month01.csv";
-import Papa from "papaparse";
 import { Line } from "react-chartjs-2";
-import { csv } from "d3";
 import ChartDisplay from "../chart/ChartDisplay";
+import Axios from "axios";
 export default function DataViewLeft() {
-  const {
-    rankingPage,
-    choosenState,
-    choosenStateName,
-    setChoosenStateName,
-    setChoosenState,
-    diseaseType,
-    compareStates,
-    theme,
-  } = useContext(AppContext);
-  const [displayData, setDisplayData] = useState([]);
+  const { rankingPage, choosenState, diseaseType, compareStates, theme } =
+    useContext(AppContext);
   const [dropDownState, setDropDownState] = useState(null);
-  const [CSVData, setCSVData] = useState(null);
   const [date, setDate] = useState([]);
   const [deaths, setDeaths] = useState([]);
   const [cases, setCases] = useState([]);
@@ -84,71 +71,47 @@ export default function DataViewLeft() {
 
   //used for state selected from main map view
   function chooseStateData(e) {
-    let stateName = e.target.selectedOptions[0].text;
-    setDropDownState(stateName);
-
-    setDisplayData([]);
-    setDate([]);
-    setDeaths([]);
-    setCases([]);
-    if (CSVData) {
-      for (let j = 0; j < CSVData.length; j++) {
-        if (CSVData[j].state === stateName) {
-          setDate((prevData) => [...prevData, CSVData[j].date + " "]);
-          setDeaths((prevData) => [...prevData, CSVData[j].deaths + " "]);
-          setCases((prevData) => [...prevData, CSVData[j].cases + " "]);
-          setDisplayData((prevData) => [...prevData, CSVData[j].deaths + " "]);
-        }
-      }
-    }
+    setDropDownState(e.target.selectedOptions[0].text);
   }
-
-  // using d3 parse the csv file with the name folder and return the data
-  useEffect(() => {
-    const row = (d) => {
-      d.deaths = +d.deaths;
-      d.cases = +d.cases;
-      return d;
-    };
-
-    csv(Folder, row).then((data) => {
-      setCSVData(data);
-    });
-  }, []);
 
   //used for comparison view
   useEffect(() => {
-    // if (diseaseType === "Covid" && !compareStates) setScroll("true");
-    // else setScroll("false");
+    let serverStateName;
 
-    if (compareStates) {
-      setChoosenState(null);
-      setDeaths([]);
-      setCases([]);
-      setDate([]);
-      setDisplayData([]);
-    }
+    if (choosenState || compareStates) {
+      serverStateName = compareStates
+        ? dropDownState
+        : states.find((state) => state[1] === choosenState.id)[0];
 
-    if (choosenState) {
-      let displayStateData = states.find(
-        (state) => state[1] === choosenState.id
-      );
-      console.log(displayStateData[0]);
-      setChoosenStateName(displayStateData[0]);
+      // setChoosenStateName(serverStateName);
       setDate([]);
       setDeaths([]);
       setCases([]);
-      if (CSVData) {
-        for (let j = 0; j < CSVData.length; j++) {
-          if (CSVData[j].state === displayStateData[0]) {
-            setDate((prevData) => [...prevData, CSVData[j].date + " "]);
-            setDeaths((prevData) => [...prevData, CSVData[j].deaths + " "]);
-            setCases((prevData) => [...prevData, CSVData[j].cases + " "]);
+
+      Axios.get(
+        "http://127.0.0.1:3001/get?diseaseType=" +
+          diseaseType +
+          "&choosenState=" +
+          serverStateName
+      ).then((response) => {
+        console.log(response.data);
+
+        for (let j = 0; j < response.data.length; j++) {
+          if (response.data[j].state === serverStateName) {
+            setDate((prevData) => [...prevData, response.data[j].date + " "]);
+            // setDeaths((prevData) => [
+            //   ...prevData,
+            //   response.data[j].deaths + " ",
+            // ]);
+            setCases((prevData) => [
+              ...prevData,
+              response.data[j].current_week + " ",
+            ]);
           }
         }
-      }
-    }
-  }, [choosenState, compareStates, diseaseType]);
+      });
+    } else setDropDownState(null);
+  }, [choosenState, compareStates, diseaseType, dropDownState]);
 
   return (
     <>
@@ -173,7 +136,9 @@ export default function DataViewLeft() {
                     className="form-control"
                     id="state"
                     name="state"
-                    onChange={chooseStateData}
+                    onChange={(e) =>
+                      setDropDownState(e.target.selectedOptions[0].text)
+                    }
                   >
                     <option value="">Choose State</option>
                     <option value="AK">Alaska</option>

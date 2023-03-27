@@ -58,13 +58,13 @@ export default function TitleHeader() {
 
     // getDiseaseData();
 
-    Axios.get("http://127.0.0.1:3001/get?diseaseType=" + e.target.value).then(
-      (response) => {
-        console.log(response.data);
-        console.log(e.target.value);
-        return response.data;
-      }
-    );
+    // Axios.get("http://127.0.0.1:3001/get?diseaseType=" + e.target.value+).then(
+    //   (response) => {
+    //     console.log(response.data);
+    //     console.log(e.target.value);
+    //     return response.data;
+    //   }
+    // );
   }
 
   function handleRanking() {
