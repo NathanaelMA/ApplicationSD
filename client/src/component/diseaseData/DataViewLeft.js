@@ -69,21 +69,19 @@ export default function DataViewLeft() {
     ["Wyoming", "WY"],
   ];
 
-  //used for state selected from main map view
-  function chooseStateData(e) {
-    setDropDownState(e.target.selectedOptions[0].text);
-  }
-
   //used for comparison view
   useEffect(() => {
     let serverStateName;
 
     if (choosenState || compareStates) {
+      diseaseType !== "Covid" || compareStates
+        ? setScroll("false")
+        : setScroll("true");
+
       serverStateName = compareStates
         ? dropDownState
         : states.find((state) => state[1] === choosenState.id)[0];
 
-      // setChoosenStateName(serverStateName);
       setDate([]);
       setDeaths([]);
       setCases([]);
