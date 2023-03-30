@@ -7,35 +7,43 @@ import Art1 from "../../images/art1.jpeg";
 import Art2 from "../../images/art2.jpeg";
 import Art3 from "../../images/art3.jpeg";
 import Art4 from "../../images/art4.jpeg";
-import Me from "../../images/me.txt";
-import Axios from "axios";
+import Nate from "../../Bio/Nate.txt";
+import Zavier from "../../Bio/Zavier.txt";
+import Connor from "../../Bio/Connor.txt";
+import Danny from "../../Bio/Danny.txt";
+import Sun from "../../Bio/Sun.txt";
 
 export default function Home() {
   const [person1, setPerson1] = React.useState({
     pic: Art1,
-    name: "blue and purple and orange art",
+    name: "Zavier Romano",
+    bio: Zavier,
   });
   const [person2, setPerson2] = React.useState({
     pic: Art2,
-    name: "blue and pink art",
+    name: "Danny DeJesus",
+    bio: Danny,
   });
   const [person3, setPerson3] = React.useState({
     pic: Art3,
-    name: "art museum",
+    name: "Connor Van Etten",
+    bio: Connor,
   });
   const [person4, setPerson4] = React.useState({
     pic: Art4,
-    name: "tree",
+    name: "Nathanael Ahiagbedey",
+    bio: Nate,
   });
   const [focusedPerson, setFocusedPerson] = React.useState({
     pic: logo,
-    name: "pic of scale",
+    name: "Dr. Sunnie Sun Chung",
+    bio: Sun,
   });
   const [bioInfo, setBioInfo] = React.useState("");
   const [bioName, setBioName] = React.useState(focusedPerson.name);
 
   useEffect(() => {
-    fetch(Me).then((response) => {
+    fetch(focusedPerson.bio).then((response) => {
       response.text().then((text) => {
         setBioInfo(text);
       });
@@ -88,7 +96,7 @@ export default function Home() {
           </div>
         </div>
         <div id="home-page">
-          <h2>Our Team</h2>
+          <h2 id="our-team">Our Team</h2>
           <div id="inFocusBio">
             <div id="inFocusBioInfo">
               <h2>{bioName}</h2>
@@ -144,7 +152,20 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div id="dev-tools"></div>
+        <div id="dev-tools-container">
+          <h2 id="dev-tools-title">Dev Tools</h2>
+          {/* <svg
+            data-name="Layer 1"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 1200 120"
+            preserveAspectRatio="none"
+          >
+            <path
+              d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
+              className="shape-fill"
+            ></path>
+          </svg> */}
+        </div>
         <p id="credits">
           For more information on the data used on this webpage, please visit
           the <a href="https://www.who.int/"> WHO </a> and

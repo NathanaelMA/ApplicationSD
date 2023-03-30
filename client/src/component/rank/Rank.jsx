@@ -11,7 +11,7 @@ export default function Rank() {
       <motion.div
         layout
         initial={{ y: "-100%" }}
-        animate={{ y: "0", transition: { duration: 2 } }}
+        animate={{ y: "0", transition: { duration: 0.7 } }}
         // exit={{ opacity: 0 }}
       >
         <div id="case-charts">

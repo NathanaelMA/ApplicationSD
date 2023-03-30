@@ -9,13 +9,7 @@ import Axios from "axios";
 export default function TitleHeader() {
   const {
     choosenState,
-    setChoosenState,
-    choosenStateName,
-    setChoosenStateName,
-    choosenStateTitle,
-    USMainMap,
     setUSMainMap,
-    diseaseType,
     setDiseaseType,
     compareStates,
     setCompareStates,
@@ -55,16 +49,6 @@ export default function TitleHeader() {
   }
   function handleDiseaseSelection(e) {
     setDiseaseType(e.target.value);
-
-    // getDiseaseData();
-
-    Axios.get("http://127.0.0.1:3001/get?diseaseType=" + e.target.value).then(
-      (response) => {
-        console.log(response.data);
-        console.log(e.target.value);
-        return response.data;
-      }
-    );
   }
 
   function handleRanking() {

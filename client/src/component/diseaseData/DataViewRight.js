@@ -7,6 +7,7 @@ import Folder from "../../InfectiousDiseaseDataSets-main/Diseases2022Data/CovidD
 import { csv } from "d3";
 import { Line } from "react-chartjs-2";
 import ChartDisplay from "../chart/ChartDisplay";
+import Axios from "axios";
 
 export default function DataViewRight() {
   const { choosenState, diseaseType, compareStates, theme } =
@@ -17,52 +18,48 @@ export default function DataViewRight() {
   const [date, setDate] = useState([]);
   const [deaths, setDeaths] = useState([]);
   const [cases, setCases] = useState([]);
+  const [serverData, setServerData] = useState([]);
 
   function chooseStateData(e) {
     let stateName = e.target.selectedOptions[0].text;
     setDropDownState(stateName);
-
-    setDisplayData([]);
-    setDate([]);
-    setDeaths([]);
-    setCases([]);
-    if (CSVData) {
-      for (let j = 0; j < CSVData.length; j++) {
-        if (CSVData[j].state === stateName) {
-          setDate((prevData) => [...prevData, CSVData[j].date + " "]);
-          setDeaths((prevData) => [...prevData, CSVData[j].deaths + " "]);
-          setDisplayData((prevData) => [...prevData, CSVData[j].deaths + " "]);
-          setCases((prevData) => [...prevData, CSVData[j].cases + " "]);
-        }
-      }
-    }
   }
 
   //new
   useEffect(() => {
-    // if (diseaseType === "Covid" && !compareStates) setScroll("true");
-    // else setScroll("false");
-
+    console.log(dropDownState);
     setDeaths([]);
     setCases([]);
     setDate([]);
     setDisplayData([]);
-  }, [choosenState, compareStates]);
+
+    if (compareStates) {
+      Axios.get(
+        "http://127.0.0.1:3001/get?diseaseType=" +
+          diseaseType +
+          "&choosenState=" +
+          dropDownState
+      ).then((response) => {
+        setServerData(response.data);
+
+        for (let j = 0; j < response.data.length; j++) {
+          if (response.data[j].state === dropDownState) {
+            setDate((prevData) => [...prevData, response.data[j].date + " "]);
+            // setDeaths((prevData) => [
+            //   ...prevData,
+            //   response.data[j].deaths + " ",
+            // ]);
+            setCases((prevData) => [
+              ...prevData,
+              response.data[j].current_week + " ",
+            ]);
+          }
+        }
+      });
+    } else setDropDownState(null);
+  }, [compareStates, dropDownState, diseaseType]);
 
   //end
-
-  // using d3 parse the csv file with the name folder and return the data
-  useEffect(() => {
-    const row = (d) => {
-      d.deaths = +d.deaths;
-      d.cases = +d.cases;
-      return d;
-    };
-
-    csv(Folder, row).then((data) => {
-      setCSVData(data);
-    });
-  }, []);
 
   return (
     <>
