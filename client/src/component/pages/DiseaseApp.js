@@ -8,13 +8,8 @@ import ColorLegend from "../map/ColorLegend";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Rank from "../rank/Rank";
-import { QueryClient, QueryClientProvider } from "react-query";
-import { ReactQueryDevtools } from "react-query/devtools";
 
 export const AppContext = React.createContext();
-
-const queryClient = new QueryClient();
-
 export default function DiseaseApp() {
   const [choosenState, setChoosenState] = useState(null);
   const [choosenStateTitle, setChoosenStateTitle] = useState(null);
@@ -97,9 +92,7 @@ export default function DiseaseApp() {
             setRankingPage,
           }}
         >
-          <QueryClientProvider client={queryClient}>
-            <TitleHeader />
-          </QueryClientProvider>
+          <TitleHeader />
 
           <div className="main-container" theme-value={theme}>
             <DataViewLeft />
