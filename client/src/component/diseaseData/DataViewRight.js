@@ -2,9 +2,6 @@ import React, { useContext, useState, useEffect } from "react";
 import "./DataViewRight.css";
 import { AppContext } from "../pages/DiseaseApp";
 import { motion, AnimatePresence } from "framer-motion";
-//all states data for january
-import Folder from "../../InfectiousDiseaseDataSets-main/Diseases2022Data/CovidData/month01.csv";
-import { csv } from "d3";
 import { Line } from "react-chartjs-2";
 import ChartDisplay from "../chart/ChartDisplay";
 import Axios from "axios";

@@ -5,7 +5,7 @@ import { AppContext } from "../pages/DiseaseApp";
 import { Bar, Line, PolarArea } from "react-chartjs-2";
 
 export default function Rank() {
-  const { rankingPage, setRankingPage, diseaseType } = useContext(AppContext);
+  const { rankingPage, diseaseType } = useContext(AppContext);
   return (
     rankingPage && (
       <motion.div

@@ -28,4 +28,6 @@ npm install express
 
 npm install mysql2
 
-testing
+### mysql connection
+
+In the server folder, the index.js file is the main file. In this file, you need to change the connection to your database.
