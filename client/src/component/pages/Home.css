@@ -1,0 +1,169 @@
+h1 {
+color: black;
+}
+
+#home-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgb(255,255,255);
+background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(160,172,255,1) 32%, rgba(55,79,255,1) 70%);
+    margin: -.1em 1.5em 1.5em 1.5em;
+}
+
+#inFocusBio h2 {
+    color: rgb(208, 208, 208);
+}
+
+
+#title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 0 2em ;
+    background-color: white;
+}
+
+#title #link{
+    color: black;
+}
+
+#ms-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    margin: 1.5em 1.5em 0 1.5em ;
+}
+
+#ms-container p {
+    width: 70%;
+    font-weight: 700;
+    margin-bottom: 3em;
+}
+
+#ms-header {
+    /* display: flex; */
+    position: fixed;
+    transform: rotate(90deg);
+    top: 8em;
+    left:55em
+
+}
+
+#our-team {
+    position: fixed;
+    transform: rotate(-90deg);
+    top: 30em;
+    left: 5em;
+    color: rgb(35, 14, 14);
+}
+
+
+#mission-statement {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2em;
+    background-color: white;
+}
+
+#inFocusBio{
+    display: flex;
+}
+
+#inFocusBio img {
+    width: 15rem;
+    height: 15rem;
+    margin: 0 12em 0 2em;
+}
+
+#inFocusBio p {
+    width: 70%;
+}
+
+#inFocusBioInfo{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 0 0 2em;
+}
+
+
+#teamImages {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 7em 2em 1em 2em;
+}
+
+#teamImages img {
+    width: 15rem;
+    height: 12rem;
+    border: 1px black solid;
+    border-radius: 50%;
+    margin: 0 2em;
+    cursor: pointer;
+}
+
+#teamImages img:hover {
+    border: 1px black solid;
+    border-radius: 50%;
+    margin: 0 2em;
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+#teamImages h3 {
+    margin: 0;
+    text-align: center;
+}
+
+#credits {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(0, 0, 0);
+    color: white;
+    /* margin: 0 1.5em 1.5em 1.5em; */
+    margin: 0 2em 1.5em 2em;
+}
+
+#credits a {
+    margin: 0 5px 0 5px;
+    color: azure;
+}
+
+.custom-shape-divider-bottom-1679614101 {
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    transform: rotate(180deg);
+}
+
+.custom-shape-divider-bottom-1679614101 svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 150px;
+    transform: rotateY(180deg);
+}
+
+.custom-shape-divider-bottom-1679614101 .shape-fill {
+    fill:rgba(55,79,255,1);
+}
+
+#dev-tools-container {
+    height: 50em;
+    background: rgb(255,255,255);
+    background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 58%, rgba(0,0,0,1) 95%);margin: 0 2em
+}
+
+#dev-tools-title {
+    position: fixed;
+    transform: rotate(90deg);
+    top: 60em;
+    left: 55em;
+;
+}

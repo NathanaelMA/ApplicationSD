@@ -4,11 +4,12 @@ import { AppContext } from "../pages/DiseaseApp";
 import { motion, AnimatePresence } from "framer-motion";
 //all states data for january
 import Folder from "../../InfectiousDiseaseDataSets-main/Diseases2022Data/CovidData/month01.csv";
-import Papa from "papaparse";
-import { Line } from "react-chartjs-2";
 import { csv } from "d3";
+import { Line } from "react-chartjs-2";
 import ChartDisplay from "../chart/ChartDisplay";
-export default function DataViewLeft() {
+import Axios from "axios";
+
+export default function DataViewRight() {
   const { choosenState, diseaseType, compareStates, theme } =
     useContext(AppContext);
   const [displayData, setDisplayData] = useState([]);
@@ -16,132 +17,61 @@ export default function DataViewLeft() {
   const [CSVData, setCSVData] = useState(null);
   const [date, setDate] = useState([]);
   const [deaths, setDeaths] = useState([]);
-
-  const states = [
-    ["Alabama", "AL"],
-    ["Alaska", "AK"],
-    ["American Samoa", "AS"],
-    ["Arizona", "AZ"],
-    ["Arkansas", "AR"],
-    ["Armed Forces Americas", "AA"],
-    ["Armed Forces Europe", "AE"],
-    ["Armed Forces Pacific", "AP"],
-    ["California", "CA"],
-    ["Colorado", "CO"],
-    ["Connecticut", "CT"],
-    ["Delaware", "DE"],
-    ["District Of Columbia", "DC"],
-    ["Florida", "FL"],
-    ["Georgia", "GA"],
-    ["Guam", "GU"],
-    ["Hawaii", "HI"],
-    ["Idaho", "ID"],
-    ["Illinois", "IL"],
-    ["Indiana", "IN"],
-    ["Iowa", "IA"],
-    ["Kansas", "KS"],
-    ["Kentucky", "KY"],
-    ["Louisiana", "LA"],
-    ["Maine", "ME"],
-    ["Marshall Islands", "MH"],
-    ["Maryland", "MD"],
-    ["Massachusetts", "MA"],
-    ["Michigan", "MI"],
-    ["Minnesota", "MN"],
-    ["Mississippi", "MS"],
-    ["Missouri", "MO"],
-    ["Montana", "MT"],
-    ["Nebraska", "NE"],
-    ["Nevada", "NV"],
-    ["New Hampshire", "NH"],
-    ["New Jersey", "NJ"],
-    ["New Mexico", "NM"],
-    ["New York", "NY"],
-    ["North Carolina", "NC"],
-    ["North Dakota", "ND"],
-    ["Northern Mariana Islands", "NP"],
-    ["Ohio", "OH"],
-    ["Oklahoma", "OK"],
-    ["Oregon", "OR"],
-    ["Pennsylvania", "PA"],
-    ["Puerto Rico", "PR"],
-    ["Rhode Island", "RI"],
-    ["South Carolina", "SC"],
-    ["South Dakota", "SD"],
-    ["Tennessee", "TN"],
-    ["Texas", "TX"],
-    ["US Virgin Islands", "VI"],
-    ["Utah", "UT"],
-    ["Vermont", "VT"],
-    ["Virginia", "VA"],
-    ["Washington", "WA"],
-    ["West Virginia", "WV"],
-    ["Wisconsin", "WI"],
-    ["Wyoming", "WY"],
-  ];
+  const [cases, setCases] = useState([]);
+  const [serverData, setServerData] = useState([]);
 
   function chooseStateData(e) {
-    //setDisplayData(e.target.value);
     let stateName = e.target.selectedOptions[0].text;
     setDropDownState(stateName);
-
-    setDisplayData([]);
-    setDate([]);
-    setDeaths([]);
-    if (CSVData) {
-      for (let j = 0; j < CSVData.length; j++) {
-        if (CSVData[j].state === stateName) {
-          setDate((prevData) => [...prevData, CSVData[j].date + " "]);
-          setDeaths((prevData) => [...prevData, CSVData[j].deaths + " "]);
-          setDisplayData((prevData) => [...prevData, CSVData[j].deaths + " "]);
-        }
-      }
-    }
   }
 
-  // using d3 parse the csv file with the name folder and return the data
+  //new
   useEffect(() => {
-    const row = (d) => {
-      d.deaths = +d.deaths;
-      return d;
-    };
+    console.log(dropDownState);
+    setDeaths([]);
+    setCases([]);
+    setDate([]);
+    setDisplayData([]);
 
-    csv(Folder, row).then((data) => {
-      setCSVData(data);
-    });
-  }, []);
+    if (compareStates) {
+      Axios.get(
+        "http://127.0.0.1:3001/get?diseaseType=" +
+          diseaseType +
+          "&choosenState=" +
+          dropDownState
+      ).then((response) => {
+        setServerData(response.data);
 
-  useEffect(() => {
-    if (choosenState) {
-      let displayStateData = states.find(
-        (state) => state[1] === choosenState.id
-      );
-      console.log(displayStateData[0]);
-      console.log(choosenState.id);
-      setDate([]);
-      setDeaths([]);
-      if (CSVData) {
-        for (let j = 0; j < CSVData.length; j++) {
-          if (CSVData[j].state === displayStateData[0]) {
-            setDate((prevData) => [...prevData, CSVData[j].date + " "]);
-            setDeaths((prevData) => [...prevData, CSVData[j].deaths + " "]);
+        for (let j = 0; j < response.data.length; j++) {
+          if (response.data[j].state === dropDownState) {
+            setDate((prevData) => [...prevData, response.data[j].date + " "]);
+            // setDeaths((prevData) => [
+            //   ...prevData,
+            //   response.data[j].deaths + " ",
+            // ]);
+            setCases((prevData) => [
+              ...prevData,
+              response.data[j].current_week + " ",
+            ]);
           }
         }
-      }
-    }
-  }, [choosenState]);
+      });
+    } else setDropDownState(null);
+  }, [compareStates, dropDownState, diseaseType]);
+
+  //end
 
   return (
     <>
       <AnimatePresence>
-        {(compareStates || choosenState) && (
+        {compareStates && (
           <motion.div
             className="data-section"
             theme-value={theme}
             layout
-            initial={{ width: "0%" }}
-            animate={{ width: "50%", transition: { duration: 2 } }}
-            exit={{ width: "10%", transition: { duration: 2 } }}
+            initial={{ x: "70%" }}
+            animate={{ x: "27%", transition: { duration: 1.8 } }}
+            // exit={{ x: "70%", transition: { duration: 1 } }}
             active-state={JSON.stringify(compareStates)}
           >
             {compareStates && (
@@ -213,14 +143,22 @@ export default function DataViewLeft() {
                 </div>
               </div>
             )}
-            <motion.div
-              id="display-state-data"
-              theme-value={theme}
-              layout
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1, transition: { delay: 2 } }}
-              exit={{ width: "10%", transition: { duration: 2 } }}
-            >
+            <div id="right-display-state-data">
+              {diseaseType == "Covid" ? (
+                <Line
+                  datasetIdKey="id"
+                  data={{
+                    labels: [...date],
+                    datasets: [
+                      {
+                        id: 1,
+                        label: diseaseType,
+                        data: [...deaths],
+                      },
+                    ],
+                  }}
+                />
+              ) : null}
               <Line
                 datasetIdKey="id"
                 data={{
@@ -228,13 +166,16 @@ export default function DataViewLeft() {
                   datasets: [
                     {
                       id: 1,
-                      label: diseaseType,
-                      data: [...deaths],
+                      label: diseaseType + " Cases",
+                      data: [...cases],
                     },
                   ],
                 }}
               />
-            </motion.div>
+
+              <h1> % of Population infected</h1>
+              <h2>total confirmed cases</h2>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

@@ -2,49 +2,58 @@ import React, { useContext, useState } from "react";
 import "./TitleHeader.css";
 import Maplogo from "../../images/NAMap.png";
 import scalelogo from "../../images/scale.png";
+import Rank from "../../images/rank.png";
 import { AppContext } from "../pages/DiseaseApp";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import Axios from "axios";
 export default function TitleHeader() {
   const {
     choosenState,
-    choosenStateTitle,
-    USMainMap,
     setUSMainMap,
     setDiseaseType,
     compareStates,
     setCompareStates,
     theme,
     setTheme,
+    rankingPage,
+    setRankingPage,
   } = useContext(AppContext);
 
   const [isOn, setIsOn] = useState(false);
 
-  const toggleSwitch = () => {
-    theme === "Dark" ? setTheme("Light") : setTheme("Dark");
-    setIsOn(!isOn);
-  };
+  // const toggleSwitch = () => {
+  //   theme === "Dark" ? setTheme("Light") : setTheme("Dark");
+  //   setIsOn(!isOn);
+  // };
 
-  const spring = {
-    type: "spring",
-    stiffness: 700,
-    damping: 30,
-  };
+  // const spring = {
+  //   type: "spring",
+  //   stiffness: 700,
+  //   damping: 30,
+  // };
 
   function handleMapView() {
-    if (choosenState || compareStates) {
+    if (choosenState || compareStates || rankingPage) {
       setUSMainMap(true);
       setCompareStates(false);
-    } else setUSMainMap(false);
+      setRankingPage(false);
+    } else {
+      setUSMainMap(false);
+    }
   }
 
   function handleCompare() {
     setCompareStates(true);
     setUSMainMap(false);
+    setRankingPage(false);
   }
   function handleDiseaseSelection(e) {
-    console.log(e.target.value);
     setDiseaseType(e.target.value);
+  }
+
+  function handleRanking() {
+    setCompareStates(false);
+    setRankingPage(true);
   }
 
   return (
@@ -58,26 +67,26 @@ export default function TitleHeader() {
       <div id="nav-items" theme-value={theme}>
         <img className="logo" src={Maplogo} onClick={handleMapView}></img>
         <img className="logo" src={scalelogo} onClick={handleCompare}></img>
+        <img className="logo" src={Rank} onClick={handleRanking}></img>
         <span className="col-sm-2">
           <select
             id="diseases"
             theme-value={theme}
             onChange={handleDiseaseSelection}
           >
-            <option value="">Choose Disease Type</option>
             <option value="Covid">Covid</option>
             <option value="Measles">Measles</option>
             <option value="Malaria">Malaria</option>
             <option value="Mumps">Mumps</option>
-            <option value="Pneumoccal Diseases">Pneumoccal Diseases</option>
-            <option value="Syphilis">Syphilis</option>
+            <option value="Pneumococcal disease">Pneumococcal Diseases</option>
+            <option value="CSyphilis">Syphilis</option>
             <option value="Tuberculosis">Tuberculosis</option>
           </select>
         </span>
-        <div className="switch" data-is-on={isOn} onClick={toggleSwitch}>
+        {/* <div className="switch" data-is-on={isOn} onClick={toggleSwitch}>
           <motion.div className="handle" layout transition={spring} />
-        </div>
-        <p theme-value={theme}>{theme} Mode</p>
+        </div> */}
+        {/* <p theme-value={theme}>{theme} Mode</p> */}
       </div>
     </nav>
   );

@@ -1,64 +1,127 @@
 import React, { useContext, useState, useEffect } from "react";
-import "./DataViewRight.css";
+import "./DataViewLeft.css";
 import { AppContext } from "../pages/DiseaseApp";
 import { motion, AnimatePresence } from "framer-motion";
-//all states data for january
-import Folder from "../../InfectiousDiseaseDataSets-main/Diseases2022Data/CovidData/month01.csv";
-import Papa from "papaparse";
-import { csv } from "d3";
 import { Line } from "react-chartjs-2";
 import ChartDisplay from "../chart/ChartDisplay";
-
-export default function DataViewRight() {
-  const { choosenState, diseaseType, compareStates, theme } =
+import Axios from "axios";
+export default function DataViewLeft() {
+  const { rankingPage, choosenState, diseaseType, compareStates, theme } =
     useContext(AppContext);
-  const [displayData, setDisplayData] = useState([]);
   const [dropDownState, setDropDownState] = useState(null);
-  const [CSVData, setCSVData] = useState(null);
   const [date, setDate] = useState([]);
   const [deaths, setDeaths] = useState([]);
+  const [cases, setCases] = useState([]);
+  const [scroll, setScroll] = useState("true");
 
-  function chooseStateData(e) {
-    let stateName = e.target.selectedOptions[0].text;
-    setDropDownState(stateName);
+  const states = [
+    ["Alabama", "AL"],
+    ["Alaska", "AK"],
+    ["Arizona", "AZ"],
+    ["Arkansas", "AR"],
+    ["California", "CA"],
+    ["Colorado", "CO"],
+    ["Connecticut", "CT"],
+    ["Delaware", "DE"],
+    ["Florida", "FL"],
+    ["Georgia", "GA"],
+    ["Guam", "GU"],
+    ["Hawaii", "HI"],
+    ["Idaho", "ID"],
+    ["Illinois", "IL"],
+    ["Indiana", "IN"],
+    ["Iowa", "IA"],
+    ["Kansas", "KS"],
+    ["Kentucky", "KY"],
+    ["Louisiana", "LA"],
+    ["Maine", "ME"],
+    ["Maryland", "MD"],
+    ["Massachusetts", "MA"],
+    ["Michigan", "MI"],
+    ["Minnesota", "MN"],
+    ["Mississippi", "MS"],
+    ["Missouri", "MO"],
+    ["Montana", "MT"],
+    ["Nebraska", "NE"],
+    ["Nevada", "NV"],
+    ["New Hampshire", "NH"],
+    ["New Jersey", "NJ"],
+    ["New Mexico", "NM"],
+    ["New York", "NY"],
+    ["North Carolina", "NC"],
+    ["North Dakota", "ND"],
+    ["Ohio", "OH"],
+    ["Oklahoma", "OK"],
+    ["Oregon", "OR"],
+    ["Pennsylvania", "PA"],
+    ["Puerto Rico", "PR"],
+    ["Rhode Island", "RI"],
+    ["South Carolina", "SC"],
+    ["South Dakota", "SD"],
+    ["Tennessee", "TN"],
+    ["Texas", "TX"],
+    ["Utah", "UT"],
+    ["Vermont", "VT"],
+    ["Virginia", "VA"],
+    ["Washington", "WA"],
+    ["West Virginia", "WV"],
+    ["Wisconsin", "WI"],
+    ["Wyoming", "WY"],
+  ];
 
-    setDisplayData([]);
-    setDate([]);
-    setDeaths([]);
-    if (CSVData) {
-      for (let j = 0; j < CSVData.length; j++) {
-        if (CSVData[j].state === stateName) {
-          setDate((prevData) => [...prevData, CSVData[j].date + " "]);
-          setDeaths((prevData) => [...prevData, CSVData[j].deaths + " "]);
-          setDisplayData((prevData) => [...prevData, CSVData[j].deaths + " "]);
-        }
-      }
-    }
-  }
-
-  // using d3 parse the csv file with the name folder and return the data
+  //used for comparison view
   useEffect(() => {
-    const row = (d) => {
-      d.deaths = +d.deaths;
-      return d;
-    };
+    let serverStateName;
 
-    csv(Folder, row).then((data) => {
-      setCSVData(data);
-    });
-  }, []);
+    if (choosenState || compareStates) {
+      diseaseType !== "Covid" || compareStates
+        ? setScroll("false")
+        : setScroll("true");
+
+      serverStateName = compareStates
+        ? dropDownState
+        : states.find((state) => state[1] === choosenState.id)[0];
+
+      setDate([]);
+      setDeaths([]);
+      setCases([]);
+
+      Axios.get(
+        "http://127.0.0.1:3001/get?diseaseType=" +
+          diseaseType +
+          "&choosenState=" +
+          serverStateName
+      ).then((response) => {
+        console.log(response.data);
+
+        for (let j = 0; j < response.data.length; j++) {
+          if (response.data[j].state === serverStateName) {
+            setDate((prevData) => [...prevData, response.data[j].date + " "]);
+            // setDeaths((prevData) => [
+            //   ...prevData,
+            //   response.data[j].deaths + " ",
+            // ]);
+            setCases((prevData) => [
+              ...prevData,
+              response.data[j].current_week + " ",
+            ]);
+          }
+        }
+      });
+    } else setDropDownState(null);
+  }, [choosenState, compareStates, diseaseType, dropDownState]);
 
   return (
     <>
       <AnimatePresence>
-        {compareStates && (
+        {(compareStates || choosenState) && !rankingPage && (
           <motion.div
             className="data-section"
             theme-value={theme}
             layout
-            initial={{ width: "0%" }}
-            animate={{ width: "50%", transition: { duration: 2 } }}
-            exit={{ width: "10%", transition: { duration: 2 } }}
+            initial={{ x: "-70%" }}
+            animate={{ x: "0%", transition: { duration: 2 } }}
+            // exit={{ x: "-70%", transition: { duration: 1 } }}
             active-state={JSON.stringify(compareStates)}
           >
             {compareStates && (
@@ -71,7 +134,9 @@ export default function DataViewRight() {
                     className="form-control"
                     id="state"
                     name="state"
-                    onChange={chooseStateData}
+                    onChange={(e) =>
+                      setDropDownState(e.target.selectedOptions[0].text)
+                    }
                   >
                     <option value="">Choose State</option>
                     <option value="AK">Alaska</option>
@@ -130,7 +195,27 @@ export default function DataViewRight() {
                 </div>
               </div>
             )}
-            <div id="display-state-data">
+            <div
+              id="left-display-state-data"
+              theme-value={theme}
+              scroll-value={scroll}
+            >
+              {diseaseType === "Covid" ? (
+                <Line
+                  datasetIdKey="id"
+                  data={{
+                    labels: [...date],
+                    datasets: [
+                      {
+                        id: 1,
+                        label: diseaseType + " Deaths",
+                        data: [...deaths],
+                      },
+                    ],
+                  }}
+                />
+              ) : null}
+
               <Line
                 datasetIdKey="id"
                 data={{
@@ -138,12 +223,14 @@ export default function DataViewRight() {
                   datasets: [
                     {
                       id: 1,
-                      label: diseaseType,
-                      data: [...deaths],
+                      label: diseaseType + " Cases",
+                      data: [...cases],
                     },
                   ],
                 }}
               />
+              <h1> % of Population infected</h1>
+              <h2>total confirmed cases</h2>
             </div>
           </motion.div>
         )}

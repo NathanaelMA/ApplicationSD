@@ -14,12 +14,13 @@ export default function Map() {
     setUSMainMap,
     compareStates,
     theme,
+    rankingPage,
   } = useContext(AppContext);
 
   useEffect(() => {
     if (choosenState && !USMainMap) {
       let width = 487,
-        height = 455;
+        height = 360;
 
       const zoom = d3.zoom().scaleExtent([1, 3]).on("zoom", zoomed);
       d3.select(choosenState).style("fill", "red");
@@ -34,7 +35,8 @@ export default function Map() {
 
       svg
         .transition()
-        .duration(200)
+        .duration(300)
+        .delay(800)
         .call(
           zoom.transform,
           d3.zoomIdentity
@@ -52,35 +54,25 @@ export default function Map() {
         d3.select("g").attr("stroke-width", 1 / transform.k);
       }
     } else {
+      d3.select(choosenState).style("fill", "red");
       setChoosenState(null);
       setUSMainMap(false);
-
-      const svg = d3.select("svg").attr("viewBox", [-20, 3, 600, 280]);
+      const svg = d3.select("svg").attr("viewBox", [-20, 3, 700, 280]);
       svg.on(".zoom", null);
       d3.select("g").attr("transform", "translate(0,0) scale(1.0)");
     }
-  }, [choosenState, USMainMap, compareStates]);
+  }, [choosenState, USMainMap, compareStates, rankingPage]);
 
   return (
     <AnimatePresence>
-      {" "}
-      {compareStates ? (
-        <motion.div
-          layout
-          theme-value={theme}
-          initial={{ width: "-20%" }}
-          animate={{ width: "20%" }}
-          transition={{ delay: 1 }}
-          id="state-space"
-        ></motion.div>
-      ) : (
+      {compareStates || rankingPage ? null : (
         <motion.div
           layout
           theme-value={theme}
           key="USmap"
-          initial={{ x: "100%", opacity: 0 }}
-          animate={{ x: "0%", opacity: 1, transition: { duration: 3 } }}
-          exit={{ opacity: 0, transition: { duration: 1 } }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1, transition: { duration: 1.2 } }}
+          // exit={{ opacity: 0, transition: { duration: 1 } }}
           id="map-svg"
         >
           <SvgUsMap />

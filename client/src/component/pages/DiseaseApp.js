@@ -6,19 +6,21 @@ import DataViewRight from "../diseaseData/DataViewRight";
 import Map from "../map/Map";
 import ColorLegend from "../map/ColorLegend";
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import Rank from "../rank/Rank";
 
 export const AppContext = React.createContext();
-
 export default function DiseaseApp() {
   const [choosenState, setChoosenState] = useState(null);
   const [choosenStateTitle, setChoosenStateTitle] = useState(null);
   const [USMainMap, setUSMainMap] = useState(true);
-  const [diseaseType, setDiseaseType] = useState("");
-  const [compareStates, setCompareStates] = useState(null);
+  const [diseaseType, setDiseaseType] = useState("Covid");
+  const [compareStates, setCompareStates] = useState(false);
   const [theme, setTheme] = useState("Light");
   const [date, setDate] = useState([]);
   const [deaths, setDeaths] = useState([]);
+  const [rankingPage, setRankingPage] = useState(false);
+  const [choosenStateName, setChoosenStateName] = useState("");
 
   const ChoosenStatePicker = (currState) => {
     setChoosenState(currState);
@@ -59,15 +61,19 @@ export default function DiseaseApp() {
         });
       });
     }
-  }, [compareStates]);
+  }, [compareStates, rankingPage]);
 
   return (
-    <>
-      <motion.div exit={{ y: window.innerWidth, transition: { duration: 1 } }}>
+    <AnimatePresence>
+      <motion.div
+      // exit={{ y: window.innerWidth, transition: { duration: 1 } }}
+      >
         <AppContext.Provider
           value={{
             choosenState,
             setChoosenState,
+            choosenStateName,
+            setChoosenStateName,
             choosenStateTitle,
             setChoosenStateTitle,
             USMainMap,
@@ -82,19 +88,20 @@ export default function DiseaseApp() {
             setDate,
             deaths,
             setDeaths,
+            rankingPage,
+            setRankingPage,
           }}
         >
           <TitleHeader />
 
           <div className="main-container" theme-value={theme}>
             <DataViewLeft />
-
             <Map />
-
             <DataViewRight />
+            <Rank />
           </div>
         </AppContext.Provider>
       </motion.div>
-    </>
+    </AnimatePresence>
   );
 }

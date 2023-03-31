@@ -40,9 +40,8 @@
 
 #header-container h1[theme-value='Light'] {
     color: black;
-    border-radius: 20%;
     padding: .5em;
-    border: 2px black solid;
+
 }
 
 #diseases[theme-value='Light'] {
