@@ -25,6 +25,9 @@ jobs:
         run: |
           cd client
           npm install
+          npm install d3 --save
+          pm install framer-motion
+          npm install --save chart.js react-chartjs-2
           npm run build --if-present
           npm run test --if-present
 
