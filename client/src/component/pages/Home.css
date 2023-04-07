@@ -155,9 +155,36 @@ background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(160,172,255,1) 32
 }
 
 #dev-tools-container {
-    height: 50em;
+    height: 60em;
     background: rgb(255,255,255);
-    background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 58%, rgba(0,0,0,1) 95%);margin: 0 2em
+    background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 90%, rgba(0,0,0,1) 97%);
+    margin: 0 2em;
+    padding: 0 7.5em;
+
+}
+
+#dev-tools-container img {
+    width: 15rem;
+    height: 15rem;
+    /* margin: 0 12em 0 2em; */
+}
+
+#dev-tools-container #client {
+    display: flex;
+    justify-content: space-around;
+    margin: 2em 0;
+}
+
+#dev-tools-container #server  {
+    display: flex;
+    justify-content: space-around;
+    margin: 2em 0;
+}
+
+#dev-tools-container #database-cloud {
+    display: flex;
+    justify-content: space-around;
+    margin: 2em 0;
 }
 
 #dev-tools-title {

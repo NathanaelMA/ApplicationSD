@@ -64,44 +64,44 @@ export default function DiseaseApp() {
   }, [compareStates, rankingPage]);
 
   return (
-    <AnimatePresence>
-      <motion.div
-      // exit={{ y: window.innerWidth, transition: { duration: 1 } }}
-      >
-        <AppContext.Provider
-          value={{
-            choosenState,
-            setChoosenState,
-            choosenStateName,
-            setChoosenStateName,
-            choosenStateTitle,
-            setChoosenStateTitle,
-            USMainMap,
-            setUSMainMap,
-            diseaseType,
-            setDiseaseType,
-            compareStates,
-            setCompareStates,
-            theme,
-            setTheme,
-            date,
-            setDate,
-            deaths,
-            setDeaths,
-            rankingPage,
-            setRankingPage,
-          }}
-        >
-          <TitleHeader />
+    // <AnimatePresence>
+    //   <motion.div
+    //   exit={{ y: window.innerWidth, transition: { duration: 1 } }}
+    //   >
+    <AppContext.Provider
+      value={{
+        choosenState,
+        setChoosenState,
+        choosenStateName,
+        setChoosenStateName,
+        choosenStateTitle,
+        setChoosenStateTitle,
+        USMainMap,
+        setUSMainMap,
+        diseaseType,
+        setDiseaseType,
+        compareStates,
+        setCompareStates,
+        theme,
+        setTheme,
+        date,
+        setDate,
+        deaths,
+        setDeaths,
+        rankingPage,
+        setRankingPage,
+      }}
+    >
+      <TitleHeader />
 
-          <div className="main-container" theme-value={theme}>
-            <DataViewLeft />
-            <Map />
-            <DataViewRight />
-            <Rank />
-          </div>
-        </AppContext.Provider>
-      </motion.div>
-    </AnimatePresence>
+      <div className="main-container" theme-value={theme}>
+        <DataViewLeft />
+        <Map />
+        <DataViewRight />
+        <Rank />
+      </div>
+    </AppContext.Provider>
+    //   </motion.div>
+    // </AnimatePresence>
   );
 }
