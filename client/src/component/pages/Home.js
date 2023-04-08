@@ -6,6 +6,7 @@ import NMAImg from "../../images/NMA.jpg";
 import CVEImg from "../../images/CVE.jpg";
 import SSCImg from "../../images/SSC.png";
 import Art1 from "../../images/art1.jpeg";
+import ZRImg from "../../images/ZR.jpg";
 import Art2 from "../../images/art2.jpeg";
 import Nate from "../../Bio/Nate.txt";
 import Zavier from "../../Bio/Zavier.txt";
@@ -24,7 +25,7 @@ import NodeJSImg from "../../images/nodeJS.png";
 
 export default function Home() {
   const [person1, setPerson1] = React.useState({
-    pic: Art1,
+    pic: ZRImg,
     name: "Zavier Romano",
     bio: Zavier,
   });
