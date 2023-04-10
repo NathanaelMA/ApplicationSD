@@ -6,7 +6,7 @@ import NMAImg from "../../images/NMA.jpg";
 import CVEImg from "../../images/CVE.jpg";
 import SSCImg from "../../images/SSC.png";
 import Art1 from "../../images/art1.jpeg";
-import ZRImg from "../../images/ZR.jpg";
+import ZRImg from "../../images/ZR.png";
 import Art2 from "../../images/art2.jpeg";
 import Nate from "../../Bio/Nate.txt";
 import Zavier from "../../Bio/Zavier.txt";

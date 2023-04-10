@@ -5,8 +5,14 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Line } from "react-chartjs-2";
 import Axios from "axios";
 export default function ChoosenStateView() {
-  const { rankingPage, choosenState, diseaseType, compareStates, theme } =
-    useContext(AppContext);
+  const {
+    rankingPage,
+    choosenState,
+    setChoosenState,
+    diseaseType,
+    compareStates,
+    theme,
+  } = useContext(AppContext);
   const [dropDownState, setDropDownState] = useState(null);
   const [date, setDate] = useState([]);
   const [deaths, setDeaths] = useState([]);
@@ -71,6 +77,8 @@ export default function ChoosenStateView() {
   //used for comparison view
   useEffect(() => {
     let serverStateName;
+
+    compareStates ? setChoosenState(null) : setChoosenState(choosenState);
 
     if (choosenState) {
       diseaseType === "Covid" ? setScroll("true") : setScroll("false");
