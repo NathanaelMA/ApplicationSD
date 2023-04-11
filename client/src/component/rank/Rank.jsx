@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Rank.css";
 import { motion } from "framer-motion";
 import { AppContext } from "../pages/DiseaseApp";
@@ -6,12 +6,19 @@ import { Bar, Line, PolarArea } from "react-chartjs-2";
 
 export default function Rank() {
   const { rankingPage, diseaseType } = useContext(AppContext);
+  const [openView, setOpenView] = useState();
+
+  useEffect(() => {
+    console.log("Ranking Page: ", rankingPage);
+    rankingPage ? setOpenView(true) : setOpenView(false);
+  }, [rankingPage]);
+
   return (
-    rankingPage && (
+    openView && (
       <motion.div
         layout
-        initial={{ y: "-100%" }}
-        animate={{ y: "0", transition: { duration: 0.7 } }}
+        // initial={{ y: "-100%" }}
+        // animate={{ y: "0", transition: { duration: 0.7 } }}
         // exit={{ opacity: 0 }}
       >
         <div id="case-charts">
