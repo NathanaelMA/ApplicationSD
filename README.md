@@ -22,6 +22,12 @@ npm install d3 --save
 npm install framer-motion
 ```
 
+### Axios
+
+```bash
+npm install axios
+```
+
 ### Chart JS library
 
 ```bash
