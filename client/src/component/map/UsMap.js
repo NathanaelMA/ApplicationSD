@@ -154,7 +154,7 @@ const SvgUsMap = (props) => (
             fillOpacity: 1,
           }}
         />
-        <path
+        {/* <path
           fill="#88a4bc"
           stroke="#fff"
           d="m805.95 253.62 1.67-2.296-2.724-1.553-1.204 1.479 1.245.349.934.894.079 1.128Z"
@@ -171,7 +171,7 @@ const SvgUsMap = (props) => (
             strokeLinejoin: "round",
             fillOpacity: 1,
           }}
-        />
+        /> */}
         <path
           fill="#88a4bc"
           stroke="#fff"
@@ -1246,7 +1246,7 @@ const SvgUsMap = (props) => (
             {"MD"}
           </tspan>
         </text>
-        <rect
+        {/* <rect
           x={408.008}
           y={147.309}
           width={45}
@@ -1266,8 +1266,8 @@ const SvgUsMap = (props) => (
             strokeLinejoin: "round",
             fillOpacity: 1,
           }}
-        />
-        <text
+        /> */}
+        {/* <text
           x={430.508}
           y={161.684}
           textAnchor="middle"
@@ -1295,7 +1295,7 @@ const SvgUsMap = (props) => (
           >
             {"DC"}
           </tspan>
-        </text>
+        </text> */}
         <rect
           x={431.384}
           y={89.356}

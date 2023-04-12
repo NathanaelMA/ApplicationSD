@@ -47,7 +47,7 @@ p[theme-value='Light'] {
 .data-section #left-display-state-data[scroll-value="true"] {
     height: 35rem;
     overflow-y: scroll;
-     width: 44em;
+     width: 46em;
 } 
 
 .data-section #left-display-state-data[scroll-value="false"] {
