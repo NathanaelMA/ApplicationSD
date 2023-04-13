@@ -1,8 +1,8 @@
 import "./DiseaseApp.css";
 import React from "react";
 import TitleHeader from "../header/TitleHeader";
-import DataViewLeft from "../diseaseData/DataViewLeft";
-import DataViewRight from "../diseaseData/DataViewRight";
+import ComparisonLeft from "../diseaseData/ComparisonLeft";
+import ComparisonRight from "../diseaseData/ComparisonRight";
 import Map from "../map/Map";
 import ColorLegend from "../map/ColorLegend";
 import { useEffect, useState } from "react";
@@ -94,10 +94,10 @@ export default function DiseaseApp() {
           <TitleHeader />
 
           <div className="main-container" theme-value={theme}>
-            <DataViewLeft />
+            <ComparisonLeft />
             <ChoosenStateView />
             <Map />
-            <DataViewRight />
+            <ComparisonRight />
             <Rank />
           </div>
         </AppContext.Provider>

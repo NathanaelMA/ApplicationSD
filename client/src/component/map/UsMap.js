@@ -1246,6 +1246,8 @@ const SvgUsMap = (props) => (
             {"MD"}
           </tspan>
         </text>
+
+        {/* DC SVG label  */}
         {/* <rect
           x={408.008}
           y={147.309}

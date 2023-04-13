@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useMemo } from "react";
 import "./Rank.css";
 import { motion } from "framer-motion";
 import { AppContext } from "../pages/DiseaseApp";

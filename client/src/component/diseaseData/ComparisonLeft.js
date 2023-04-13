@@ -1,38 +1,95 @@
 import React, { useContext, useState, useEffect } from "react";
-import "./DataViewRight.css";
+import "./ComparisonLeft.css";
 import { AppContext } from "../pages/DiseaseApp";
 import { motion, AnimatePresence } from "framer-motion";
 import { Line } from "react-chartjs-2";
-// import ChartDisplay from "../chart/ChartDisplay";
+import ChartDisplay from "../chart/ChartDisplay";
 import Axios from "axios";
-
-export default function DataViewRight() {
-  const { diseaseType, compareStates, theme } = useContext(AppContext);
+export default function ComparisonLeft() {
+  const { rankingPage, choosenState, diseaseType, compareStates, theme } =
+    useContext(AppContext);
   const [dropDownState, setDropDownState] = useState(null);
   const [date, setDate] = useState([]);
   const [deaths, setDeaths] = useState([]);
   const [cases, setCases] = useState([]);
+  // const [scroll, setScroll] = useState("true");
 
-  function chooseStateData(e) {
-    let stateName = e.target.selectedOptions[0].text;
-    setDropDownState(stateName);
-  }
+  const states = [
+    ["Alabama", "AL"],
+    ["Alaska", "AK"],
+    ["Arizona", "AZ"],
+    ["Arkansas", "AR"],
+    ["California", "CA"],
+    ["Colorado", "CO"],
+    ["Connecticut", "CT"],
+    ["Delaware", "DE"],
+    ["Florida", "FL"],
+    ["Georgia", "GA"],
+    ["Guam", "GU"],
+    ["Hawaii", "HI"],
+    ["Idaho", "ID"],
+    ["Illinois", "IL"],
+    ["Indiana", "IN"],
+    ["Iowa", "IA"],
+    ["Kansas", "KS"],
+    ["Kentucky", "KY"],
+    ["Louisiana", "LA"],
+    ["Maine", "ME"],
+    ["Maryland", "MD"],
+    ["Massachusetts", "MA"],
+    ["Michigan", "MI"],
+    ["Minnesota", "MN"],
+    ["Mississippi", "MS"],
+    ["Missouri", "MO"],
+    ["Montana", "MT"],
+    ["Nebraska", "NE"],
+    ["Nevada", "NV"],
+    ["New Hampshire", "NH"],
+    ["New Jersey", "NJ"],
+    ["New Mexico", "NM"],
+    ["New York", "NY"],
+    ["North Carolina", "NC"],
+    ["North Dakota", "ND"],
+    ["Ohio", "OH"],
+    ["Oklahoma", "OK"],
+    ["Oregon", "OR"],
+    ["Pennsylvania", "PA"],
+    ["Puerto Rico", "PR"],
+    ["Rhode Island", "RI"],
+    ["South Carolina", "SC"],
+    ["South Dakota", "SD"],
+    ["Tennessee", "TN"],
+    ["Texas", "TX"],
+    ["Utah", "UT"],
+    ["Vermont", "VT"],
+    ["Virginia", "VA"],
+    ["Washington", "WA"],
+    ["West Virginia", "WV"],
+    ["Wisconsin", "WI"],
+    ["Wyoming", "WY"],
+  ];
 
+  //used for comparison view
   useEffect(() => {
-    console.log(dropDownState);
-    setDeaths([]);
-    setCases([]);
-    setDate([]);
+    let serverStateName;
 
     if (compareStates) {
+      serverStateName = dropDownState;
+
+      setDate([]);
+      setDeaths([]);
+      setCases([]);
+
       Axios.get(
         "http://localhost:3001/get?diseaseType=" +
           diseaseType +
           "&choosenState=" +
-          dropDownState
+          serverStateName
       ).then((response) => {
+        console.log(response.data);
+
         for (let j = 0; j < response.data.length; j++) {
-          if (response.data[j].state === dropDownState) {
+          if (response.data[j].state === serverStateName) {
             setDate((prevData) => [...prevData, response.data[j].date + " "]);
             // setDeaths((prevData) => [
             //   ...prevData,
@@ -46,19 +103,19 @@ export default function DataViewRight() {
         }
       });
     } else setDropDownState(null);
-  }, [compareStates, dropDownState, diseaseType]);
+  }, [choosenState, compareStates, diseaseType, dropDownState]);
 
   return (
     <>
       <AnimatePresence>
-        {compareStates && (
+        {compareStates && !rankingPage && (
           <motion.div
             className="data-section"
             theme-value={theme}
             layout
-            initial={{ x: "70%" }}
-            animate={{ x: "27%", transition: { duration: 1.8 } }}
-            // exit={{ x: "70%", transition: { duration: 1 } }}
+            initial={{ x: "-70%" }}
+            animate={{ x: "0%", transition: { duration: 2 } }}
+            // exit={{ x: "-70%", transition: { duration: 1 } }}
             active-state={JSON.stringify(compareStates)}
           >
             <div className="form-group">
@@ -70,7 +127,9 @@ export default function DataViewRight() {
                   className="form-control"
                   id="state"
                   name="state"
-                  onChange={chooseStateData}
+                  onChange={(e) =>
+                    setDropDownState(e.target.selectedOptions[0].text)
+                  }
                 >
                   <option value="">Choose State</option>
                   <option value="AK">Alaska</option>
@@ -128,8 +187,12 @@ export default function DataViewRight() {
                 </select>
               </div>
             </div>
-            <div id="right-display-state-data">
-              {diseaseType == "Covid" ? (
+            <div
+              id="left-display-state-data"
+              theme-value={theme}
+              // scroll-value={scroll}
+            >
+              {diseaseType === "Covid" ? (
                 <Line
                   datasetIdKey="id"
                   data={{
@@ -137,13 +200,14 @@ export default function DataViewRight() {
                     datasets: [
                       {
                         id: 1,
-                        label: diseaseType,
+                        label: diseaseType + " Deaths",
                         data: [...deaths],
                       },
                     ],
                   }}
                 />
               ) : null}
+
               <Line
                 datasetIdKey="id"
                 data={{
@@ -157,7 +221,6 @@ export default function DataViewRight() {
                   ],
                 }}
               />
-
               <h1> % of Population infected</h1>
               <h2>total confirmed cases</h2>
             </div>
