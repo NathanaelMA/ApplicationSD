@@ -12,12 +12,12 @@ p[theme-value='Dark'] {
     color: white;
 }
 
-.data-section[active-state='true'][theme-value='Dark']  {
+/* .data-section[active-state='true'][theme-value='Dark']  {
 
     background: rgb(255,255,255);
      background: linear-gradient(0deg, rgba(255,255,255,1) 8%, rgba(82,81,81,1) 20%, rgba(0,0,0,1) 45%);   
     height: 40rem;
-}
+} */
 
 /* light mode */
 
@@ -27,7 +27,8 @@ p[theme-value='Dark'] {
     animation-delay: 0s; */
     background: rgb(255,255,255);
    
-    height: 40rem;
+    /* height: 40rem; */
+    height: auto;
 }
 
 
@@ -44,14 +45,15 @@ p[theme-value='Light'] {
 
 }
 
-/* .data-section #left-display-state-data[scroll-value="true"] {
-    height: 35rem;
-    overflow-y: scroll;
-     width: 44em;
-}  */
-
 .data-section #left-display-state-data {
      width: 42em;
 
 } 
+
+@media (max-width: 768px) {
+    .data-section #left-display-state-data {
+         width: 100%;
+    } 
+    
+}
 

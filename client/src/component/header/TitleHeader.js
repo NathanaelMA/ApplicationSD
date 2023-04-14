@@ -68,7 +68,7 @@ export default function TitleHeader() {
         <img className="logo" src={Maplogo} onClick={handleMapView}></img>
         <img className="logo" src={scalelogo} onClick={handleCompare}></img>
         <img className="logo" src={Rank} onClick={handleRanking}></img>
-        <span className="col-sm-2">
+        <span>
           <select
             id="diseases"
             theme-value={theme}

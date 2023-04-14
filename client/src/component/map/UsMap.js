@@ -2,7 +2,7 @@ import * as React from "react";
 import "./UsMap.css";
 //svg file for US Map
 const SvgUsMap = (props) => (
-  <div className="svg-container">
+  <div id="svg-container">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       style={{

@@ -57,8 +57,7 @@ export default function ComparisonRight() {
             theme-value={theme}
             layout
             initial={{ x: "70%" }}
-            animate={{ x: "27%", transition: { duration: 1.8 } }}
-            // exit={{ x: "70%", transition: { duration: 1 } }}
+            animate={{ x: "27%", transition: { duration: 2 } }}
             active-state={JSON.stringify(compareStates)}
           >
             <div className="form-group">
@@ -129,7 +128,7 @@ export default function ComparisonRight() {
               </div>
             </div>
             <div id="right-display-state-data">
-              {diseaseType == "Covid" ? (
+              {diseaseType === "Covid" ? (
                 <Line
                   datasetIdKey="id"
                   data={{
@@ -137,7 +136,7 @@ export default function ComparisonRight() {
                     datasets: [
                       {
                         id: 1,
-                        label: diseaseType,
+                        label: diseaseType + " Deaths",
                         data: [...deaths],
                       },
                     ],
