@@ -39,6 +39,10 @@ export default function DiseaseApp() {
       document.getElementsByClassName("usMap_svg__sm_label ")
     );
 
+    console.log("states and titles: " + states_and_titles);
+    console.log("states: " + states);
+    console.log("state titles: " + stateTitles);
+
     states_and_titles.map((SaT) => {
       SaT.addEventListener("click", function () {
         const state = states.find((stateElem) => stateElem.id === SaT.id);

@@ -20,7 +20,7 @@ p[theme-value='Dark'] {
 
 .data-section[theme-value='Light'] {
     background: rgb(255,255,255);
-    width: auto;
+    /* width: auto; */
     height: 40rem;
 }
 
@@ -40,12 +40,11 @@ p[theme-value='Light'] {
 .data-section #left-display-state-data[scroll-value="true"] {
     height: 43rem;
     overflow-y: scroll;
-    width: auto;
+    width: 42em;
 } 
 
 .data-section #left-display-state-data[scroll-value="false"] {
      width: 42em;
-
 } 
 
 

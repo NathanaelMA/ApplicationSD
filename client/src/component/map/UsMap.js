@@ -2,7 +2,7 @@ import * as React from "react";
 import "./UsMap.css";
 //svg file for US Map
 const SvgUsMap = (props) => (
-  <div id="svg-container">
+  <div>
     <svg
       xmlns="http://www.w3.org/2000/svg"
       style={{
@@ -10,6 +10,7 @@ const SvgUsMap = (props) => (
         position: "relative",
       }}
       viewBox="-20 3 600 280"
+      id="svg2"
       preserveAspectRatio="xMinYMin"
       {...props}
     >

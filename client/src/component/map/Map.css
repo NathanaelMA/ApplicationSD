@@ -1,16 +1,5 @@
 #map-svg{
-    flex: 1 1 auto; 
-    /* margin-left: 50px; */
+    flex: 1 1 auto;  
+    width: 1500em;
 }
 
-
-#svg-container {
- 
-}
-
-@media (max-width: 768px) {
-    
-    .data-section #right-display-state-data {
-         width: 100%;
-    } 
-}
