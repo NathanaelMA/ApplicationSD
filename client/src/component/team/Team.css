@@ -1,0 +1,115 @@
+h1 {
+    color: black;
+    }
+    
+    #home-page {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+       background-color: #f6f6f6;
+    }
+    
+    #inFocusBio h2 {
+        color: rgb(208, 208, 208);
+    }
+    
+  
+
+    
+    #our-team {
+        color: rgb(35, 14, 14);
+    }
+    
+    
+    #inFocusBio{
+        display: flex;
+    }
+    
+    #inFocusBio img {
+        width: 15rem;
+        height: 15rem;
+        margin: 0 0 0 2em;
+    }
+    
+    #inFocusBio p {
+        width: 70%;
+    }
+    
+    #inFocusBioInfo{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 0 0 0 2em;
+    }
+    
+    
+    #teamImages {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin: 7em 2em 1em 2em;
+    }
+    
+    #teamImages img {
+        width: 15rem;
+        height: 12rem;
+        border: 1px black solid;
+        border-radius: 50%;
+        margin: 0 2em;
+        cursor: pointer;
+    }
+    
+    #teamImages img:hover {
+        border: 1px black solid;
+        border-radius: 50%;
+        margin: 0 2em;
+        cursor: pointer;
+        transform: scale(1.1);
+    }
+    
+    #teamImages h3 {
+        margin: 0;
+        text-align: center;
+    }
+    
+    #credits {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: black;
+    }
+    
+    #credits a {
+        margin: 0 .25em 0 .25em;
+        color: black;
+    }
+    
+    #dev-tools-container {
+        height: auto;
+        background: rgb(255,255,255);
+        background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 92%, rgba(0,0,0,1) 99%);
+    }
+    
+    #dev-tools-container img {
+        width: 15rem;
+        height: 15rem;
+    }
+    
+    #dev-tools-container #client {
+        display: flex;
+        justify-content: space-around;
+        margin: 2em 0;
+    }
+    
+    #dev-tools-container #server  {
+        display: flex;
+        justify-content: space-around;
+        margin: 2em 0;
+    }
+    
+    #dev-tools-container #database-cloud {
+        display: flex;
+        justify-content: space-around;
+        margin-bottom:  4em ;
+    }

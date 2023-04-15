@@ -16,8 +16,38 @@ app.get("/get", (req, res) => {
   const diseaseType = req.query.diseaseType;
   const choosenStateFullName = req.query.choosenState;
   db.query(
-    "SELECT * FROM wondertables WHERE disease = ? and state = ?",
+    "SELECT * FROM weekly_data WHERE disease_name = ? and state = ?",
     [diseaseType, choosenStateFullName],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
+
+app.get("/getTopStates", (req, res) => {
+  const diseaseType = req.query.diseaseType;
+  db.query(
+    "SELECT * FROM totalcases WHERE disease_name = ?",
+    [diseaseType],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
+
+app.get("/getTotals", (req, res) => {
+  const diseaseType = req.query.diseaseType;
+  db.query(
+    "SELECT * FROM diseasetotals WHERE disease_name = ?",
+    [diseaseType],
     (err, result) => {
       if (err) {
         console.log(err);

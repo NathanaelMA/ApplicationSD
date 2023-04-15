@@ -57,36 +57,67 @@ export default function TitleHeader() {
   }
 
   return (
-    <nav id="header-container" theme-value={theme}>
-      <Link to={"/"}>
-        <header id="home" theme-value={theme}>
-          Home
-        </header>
-      </Link>
-      <h1 theme-value={theme}>Infectious Disease Risk Predictor </h1>
-      <div id="nav-items" theme-value={theme}>
-        <img className="logo" src={Maplogo} onClick={handleMapView}></img>
-        <img className="logo" src={scalelogo} onClick={handleCompare}></img>
-        <img className="logo" src={Rank} onClick={handleRanking}></img>
-        <span>
-          <select
-            id="diseases"
-            theme-value={theme}
-            onChange={handleDiseaseSelection}
+    <nav id="menu" className="navbar navbar-default navbar-fixed-top">
+      <div className="container">
+        <div className="navbar-header">
+          <button
+            type="button"
+            className="navbar-toggle collapsed"
+            data-toggle="collapse"
+            data-target="#bs-example-navbar-collapse-1"
           >
-            <option value="Covid">Covid</option>
-            <option value="Measles">Measles</option>
-            <option value="Malaria">Malaria</option>
-            <option value="Mumps">Mumps</option>
-            <option value="Pneumococcal disease">Pneumococcal Diseases</option>
-            <option value="CSyphilis">Syphilis</option>
-            <option value="Tuberculosis">Tuberculosis</option>
-          </select>
-        </span>
-        {/* <div className="switch" data-is-on={isOn} onClick={toggleSwitch}>
-          <motion.div className="handle" layout transition={spring} />
-        </div> */}
-        {/* <p theme-value={theme}>{theme} Mode</p> */}
+            {" "}
+            <span className="sr-only">Toggle navigation</span>{" "}
+            <span className="icon-bar"></span>{" "}
+            <span className="icon-bar"></span>{" "}
+            <span className="icon-bar"></span>{" "}
+          </button>
+          <a className="navbar-brand page-scroll">
+            Infectious Disease Risk Predictor
+          </a>{" "}
+        </div>
+
+        <div
+          className="collapse navbar-collapse"
+          id="bs-example-navbar-collapse-1"
+        >
+          <ul className="nav navbar-nav navbar-right">
+            <li>
+              <a className="page-scroll" onClick={handleRanking}>
+                Nation
+              </a>
+            </li>
+            <li>
+              <a className="page-scroll" onClick={handleMapView}>
+                Map
+              </a>
+            </li>
+            <li>
+              <a className="page-scroll" onClick={handleCompare}>
+                Compare
+              </a>
+            </li>
+
+            <span>
+              <select
+                id="diseases"
+                className="page-scroll"
+                theme-value={theme}
+                onChange={handleDiseaseSelection}
+              >
+                <option value="Covid">Covid</option>
+                <option value="Measles">Measles</option>
+                <option value="Malaria">Malaria</option>
+                <option value="Mumps">Mumps</option>
+                <option value="Pneumococcal disease">
+                  Pneumococcal Diseases
+                </option>
+                <option value="CSyphilis">Syphilis</option>
+                <option value="Tuberculosis">Tuberculosis</option>
+              </select>
+            </span>
+          </ul>
+        </div>
       </div>
     </nav>
   );

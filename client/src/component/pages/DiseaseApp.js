@@ -9,18 +9,19 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Rank from "../rank/Rank";
 import ChoosenStateView from "../diseaseData/ChoosenStateView";
+import Team from "../team/Team";
 
 export const AppContext = React.createContext();
 export default function DiseaseApp() {
   const [choosenState, setChoosenState] = useState(null);
   const [choosenStateTitle, setChoosenStateTitle] = useState(null);
-  const [USMainMap, setUSMainMap] = useState(true);
+  const [USMainMap, setUSMainMap] = useState(false);
   const [diseaseType, setDiseaseType] = useState("Covid");
   const [compareStates, setCompareStates] = useState(false);
   const [theme, setTheme] = useState("Light");
   const [date, setDate] = useState([]);
   const [deaths, setDeaths] = useState([]);
-  const [rankingPage, setRankingPage] = useState(false);
+  const [rankingPage, setRankingPage] = useState(true);
   const [choosenStateName, setChoosenStateName] = useState("");
 
   const ChoosenStatePicker = (currState) => {
@@ -38,10 +39,6 @@ export default function DiseaseApp() {
     const stateTitles = Array.from(
       document.getElementsByClassName("usMap_svg__sm_label ")
     );
-
-    console.log("states and titles: " + states_and_titles);
-    console.log("states: " + states);
-    console.log("state titles: " + stateTitles);
 
     states_and_titles.map((SaT) => {
       SaT.addEventListener("click", function () {
@@ -69,43 +66,40 @@ export default function DiseaseApp() {
   }, [compareStates, rankingPage]);
 
   return (
-    <AnimatePresence>
-      <motion.div exit={{ y: window.innerWidth, transition: { duration: 1 } }}>
-        <AppContext.Provider
-          value={{
-            choosenState,
-            setChoosenState,
-            choosenStateName,
-            setChoosenStateName,
-            choosenStateTitle,
-            setChoosenStateTitle,
-            USMainMap,
-            setUSMainMap,
-            diseaseType,
-            setDiseaseType,
-            compareStates,
-            setCompareStates,
-            theme,
-            setTheme,
-            date,
-            setDate,
-            deaths,
-            setDeaths,
-            rankingPage,
-            setRankingPage,
-          }}
-        >
-          <TitleHeader />
+    <AppContext.Provider
+      value={{
+        choosenState,
+        setChoosenState,
+        choosenStateName,
+        setChoosenStateName,
+        choosenStateTitle,
+        setChoosenStateTitle,
+        USMainMap,
+        setUSMainMap,
+        diseaseType,
+        setDiseaseType,
+        compareStates,
+        setCompareStates,
+        theme,
+        setTheme,
+        date,
+        setDate,
+        deaths,
+        setDeaths,
+        rankingPage,
+        setRankingPage,
+      }}
+    >
+      <TitleHeader />
 
-          <div className="main-container" theme-value={theme}>
-            <ComparisonLeft />
-            <ChoosenStateView />
-            <Map />
-            <ComparisonRight />
-            <Rank />
-          </div>
-        </AppContext.Provider>
-      </motion.div>
-    </AnimatePresence>
+      <div className="container" id="main-container" theme-value={theme}>
+        <ComparisonLeft />
+        <ChoosenStateView />
+        <Map />
+        <ComparisonRight />
+        <Rank />
+      </div>
+      <Team />
+    </AppContext.Provider>
   );
 }

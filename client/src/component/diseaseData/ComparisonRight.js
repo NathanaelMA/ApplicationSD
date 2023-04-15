@@ -3,7 +3,6 @@ import "./ComparisonRight.css";
 import { AppContext } from "../pages/DiseaseApp";
 import { motion, AnimatePresence } from "framer-motion";
 import { Line } from "react-chartjs-2";
-// import ChartDisplay from "../chart/ChartDisplay";
 import Axios from "axios";
 
 export default function ComparisonRight() {
@@ -33,14 +32,14 @@ export default function ComparisonRight() {
       ).then((response) => {
         for (let j = 0; j < response.data.length; j++) {
           if (response.data[j].state === dropDownState) {
-            setDate((prevData) => [...prevData, response.data[j].date + " "]);
+            setDate((prevData) => [...prevData, response.data[j].week + " "]);
             // setDeaths((prevData) => [
             //   ...prevData,
             //   response.data[j].deaths + " ",
             // ]);
             setCases((prevData) => [
               ...prevData,
-              response.data[j].current_week + " ",
+              response.data[j].disease_cases + " ",
             ]);
           }
         }
@@ -57,7 +56,7 @@ export default function ComparisonRight() {
             theme-value={theme}
             layout
             initial={{ x: "70%" }}
-            animate={{ x: "27%", transition: { duration: 2 } }}
+            animate={{ x: "0%", transition: { duration: 2 } }}
             active-state={JSON.stringify(compareStates)}
           >
             <div className="form-group">
@@ -141,6 +140,22 @@ export default function ComparisonRight() {
                       },
                     ],
                   }}
+                  options={{
+                    scales: {
+                      x: {
+                        title: {
+                          display: true,
+                          text: "Week",
+                        },
+                      },
+                      y: {
+                        title: {
+                          display: true,
+                          text: "Deaths",
+                        },
+                      },
+                    },
+                  }}
                 />
               ) : null}
               <Line
@@ -154,6 +169,22 @@ export default function ComparisonRight() {
                       data: [...cases],
                     },
                   ],
+                }}
+                options={{
+                  scales: {
+                    x: {
+                      title: {
+                        display: true,
+                        text: "Week",
+                      },
+                    },
+                    y: {
+                      title: {
+                        display: true,
+                        text: "Cases",
+                      },
+                    },
+                  },
                 }}
               />
 
