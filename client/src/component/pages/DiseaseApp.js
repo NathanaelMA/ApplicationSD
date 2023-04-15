@@ -92,7 +92,7 @@ export default function DiseaseApp() {
     >
       <TitleHeader />
 
-      <div className="main-container" theme-value={theme}>
+      <div className="container" id="main-container" theme-value={theme}>
         <ComparisonLeft />
         <ChoosenStateView />
         <Map />

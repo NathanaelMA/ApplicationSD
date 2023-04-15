@@ -62,20 +62,14 @@ export default function Team() {
 
   return (
     <>
-      <div id="home-page">
-        <h2>Our Team</h2>
-
-        <div className="col-md-8 col-md-offset-2 section-title">
-          <h2>Meet the Team</h2>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit duis sed
-            dapibus leonec.
-          </p>
+      <div className="container" id="home-page">
+        <div className="col-md section-title">
+          <h2>Our Team</h2>
         </div>
         <div id="inFocusBio">
           <div id="inFocusBioInfo">
             <h2>{bioName}</h2>
-            <p>{bioInfo}</p>
+            {/* <p>{bioInfo}</p> */}
           </div>
           <img src={focusedPerson.pic} alt=""></img>
         </div>
@@ -131,8 +125,10 @@ export default function Team() {
           </div>
         </div>
       </div>
-      <div id="dev-tools-container">
-        <h2 id="dev-tools-title">Dev Tools</h2>
+      <div className="container" id="dev-tools-container">
+        <div className="text-center section-title">
+          <h2>Dev Tools</h2>
+        </div>
         <div id="client">
           <img src={ReactImg} alt=""></img>
           <img src={CSSImg} alt=""></img>
@@ -149,14 +145,16 @@ export default function Team() {
           <img src={AzureImg} alt=""></img>
         </div>
       </div>
-      <p id="credits">
-        For more information on the data used on this webpage, please visit the{" "}
-        <a href="https://www.who.int/"> WHO </a> and
-        <a href="https://covid.cdc.gov/covid-data-tracker/#datatracker-home">
-          CDC
-        </a>
-        websites
-      </p>
+      <div className="container">
+        <p id="credits">
+          For more information on the data used on this webpage, please visit
+          the <a href="https://www.who.int/"> WHO </a> and
+          <a href="https://covid.cdc.gov/covid-data-tracker/#datatracker-home">
+            CDC
+          </a>
+          websites
+        </p>
+      </div>
     </>
   );
 }

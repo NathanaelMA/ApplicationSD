@@ -1,21 +1,11 @@
 import React, { useEffect, useState, useContext } from "react";
 import Axios from "axios";
 import { AppContext } from "../pages/DiseaseApp";
+import "./StateRanking.css";
 export default function StateRanking() {
-  const {
-    rankingPage,
-    choosenState,
-    setChoosenState,
-    diseaseType,
-    compareStates,
-    theme,
-  } = useContext(AppContext);
-  const [dropDownState, setDropDownState] = useState(null);
-  const [date, setDate] = useState([]);
+  const { diseaseType } = useContext(AppContext);
   const [states, setStates] = useState([]);
-  const [deaths, setDeaths] = useState([]);
   const [cases, setCases] = useState([]);
-  const [scroll, setScroll] = useState("true");
 
   useEffect(() => {
     setStates([]);
@@ -24,8 +14,6 @@ export default function StateRanking() {
     Axios.get(
       "http://127.0.0.1:3001/getTopStates?diseaseType=" + diseaseType
     ).then((response) => {
-      // console.log(response.data);
-
       for (let j = 0; j < response.data.length; j++) {
         setStates((prevData) => [...prevData, response.data[j].state + " "]);
         setCases((prevData) => [
@@ -38,20 +26,11 @@ export default function StateRanking() {
 
   return (
     <>
-      {/* <div>
-        <h1>{diseaseType} </h1>
-        {states.map((state, index) => {
-          return (
-            <div key={index}>
-              <p>{state}</p>
-              <p>{cases[index]}</p>
-            </div>
-          );
-        })}
-      </div> */}
-
       <table className="table">
-        <caption> {diseaseType}</caption>
+        <caption className="text-center font-weight-bold" id="table-caption">
+          {" "}
+          {diseaseType}
+        </caption>
         <thead>
           <tr>
             <th scope="col">Current Rank</th>

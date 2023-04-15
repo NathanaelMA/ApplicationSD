@@ -72,7 +72,7 @@ export default function TitleHeader() {
             <span className="icon-bar"></span>{" "}
             <span className="icon-bar"></span>{" "}
           </button>
-          <a className="navbar-brand page-scroll" href="#page-top">
+          <a className="navbar-brand page-scroll">
             Infectious Disease Risk Predictor
           </a>{" "}
         </div>
@@ -83,25 +83,17 @@ export default function TitleHeader() {
         >
           <ul className="nav navbar-nav navbar-right">
             <li>
-              <a
-                href="#features"
-                className="page-scroll"
-                onClick={handleRanking}
-              >
+              <a className="page-scroll" onClick={handleRanking}>
                 Nation
               </a>
             </li>
             <li>
-              <a href="#about" className="page-scroll" onClick={handleMapView}>
+              <a className="page-scroll" onClick={handleMapView}>
                 Map
               </a>
             </li>
             <li>
-              <a
-                href="#services"
-                className="page-scroll"
-                onClick={handleCompare}
-              >
+              <a className="page-scroll" onClick={handleCompare}>
                 Compare
               </a>
             </li>
@@ -109,6 +101,7 @@ export default function TitleHeader() {
             <span>
               <select
                 id="diseases"
+                className="page-scroll"
                 theme-value={theme}
                 onChange={handleDiseaseSelection}
               >

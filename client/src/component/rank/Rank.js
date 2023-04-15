@@ -5,10 +5,32 @@ import { AppContext } from "../pages/DiseaseApp";
 import { Line, PolarArea } from "react-chartjs-2";
 import StateRanking from "./StateRanking";
 import "chart.js/auto";
+import Axios from "axios";
 
 export default function Rank() {
   const { rankingPage, diseaseType } = useContext(AppContext);
   const [openView, setOpenView] = useState();
+  const [states, setStates] = useState([]);
+  const [weeks, setWeeks] = useState([]);
+  const [cases, setCases] = useState([]);
+
+  useEffect(() => {
+    setCases([]);
+    setWeeks([]);
+
+    Axios.get(
+      "http://127.0.0.1:3001/getTotals?diseaseType=" + diseaseType
+    ).then((response) => {
+      console.log(response.data);
+      for (let j = 0; j < response.data.length; j++) {
+        setWeeks((prevData) => [...prevData, response.data[j].week + " "]);
+        setCases((prevData) => [
+          ...prevData,
+          response.data[j].total_cases + " ",
+        ]);
+      }
+    });
+  }, [diseaseType]);
 
   useEffect(() => {
     rankingPage ? setOpenView(true) : setOpenView(false);
@@ -18,8 +40,8 @@ export default function Rank() {
     openView && (
       <motion.div
         layout
-        initial={{ y: "-100%" }}
-        animate={{ y: "0", transition: { duration: 0.7 } }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1, transition: { duration: 0.7 } }}
       >
         <div id="case-charts">
           <PolarArea
@@ -72,23 +94,46 @@ export default function Rank() {
                 labels: ["January", "February", "March", "April"],
                 datasets: [
                   {
-                    label: diseaseType + "Cases",
+                    label: diseaseType + " Cases",
                     data: [15, 25, 10, 25],
                     backgroundColor: "rgb(255, 99, 132)",
                     borderColor: "rgb(154, 16, 235)",
                     order: 2,
                   },
                   {
-                    label: diseaseType + "Deaths",
+                    label: diseaseType + " Deaths",
                     data: [5, 2, 10, 15],
+                    backgroundColor: "rgb(25, 235, 132)",
+                    borderColor: "rgb(25, 235, 132)",
+                    order: 2,
+                  },
+                ],
+              }}
+              options={{
+                scales: {
+                  x: {
+                    title: {
+                      display: true,
+                      text: "Months",
+                    },
+                  },
+                },
+              }}
+            />
+          ) : (
+            <Line
+              data={{
+                labels: [...weeks],
+                datasets: [
+                  {
+                    label: diseaseType + " Cases",
+                    data: [...cases],
                     backgroundColor: "rgb(255, 99, 132)",
                     borderColor: "rgb(154, 16, 235)",
                     order: 2,
                   },
                 ],
               }}
-              // height={400}
-              // width={600}
               options={{
                 scales: {
                   x: {
@@ -99,33 +144,6 @@ export default function Rank() {
                   },
                 },
               }}
-            />
-          ) : (
-            <Line
-              data={{
-                labels: ["January", "February", "March", "April"],
-                datasets: [
-                  {
-                    label: diseaseType + "Cases",
-                    data: [15, 25, 10, 25],
-                    backgroundColor: "rgb(255, 99, 132)",
-                    borderColor: "rgb(154, 16, 235)",
-                    order: 2,
-                  },
-                ],
-              }}
-              // height={400}
-              // width={600}
-              // options={{
-              //   scales: {
-              //     x: {
-              //       stacked: true,
-              //     },
-              //     y: {
-              //       beginAtZero: true,
-              //     },
-              //   },
-              // }}
             />
           )}
         </div>

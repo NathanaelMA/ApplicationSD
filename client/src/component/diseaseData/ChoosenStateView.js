@@ -146,6 +146,22 @@ export default function ChoosenStateView() {
                       },
                     ],
                   }}
+                  options={{
+                    scales: {
+                      x: {
+                        title: {
+                          display: true,
+                          text: "Week",
+                        },
+                      },
+                      y: {
+                        title: {
+                          display: true,
+                          text: "Deaths",
+                        },
+                      },
+                    },
+                  }}
                 />
               ) : null}
 
@@ -160,6 +176,22 @@ export default function ChoosenStateView() {
                       data: [...cases],
                     },
                   ],
+                }}
+                options={{
+                  scales: {
+                    x: {
+                      title: {
+                        display: true,
+                        text: "Week",
+                      },
+                    },
+                    y: {
+                      title: {
+                        display: true,
+                        text: "Cases",
+                      },
+                    },
+                  },
                 }}
               />
               <h1> % of Population infected</h1>

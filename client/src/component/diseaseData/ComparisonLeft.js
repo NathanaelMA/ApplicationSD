@@ -11,7 +11,6 @@ export default function ComparisonLeft() {
   const [date, setDate] = useState([]);
   const [deaths, setDeaths] = useState([]);
   const [cases, setCases] = useState([]);
-  // const [scroll, setScroll] = useState("true");
 
   const states = [
     ["Alabama", "AL"],
@@ -89,14 +88,14 @@ export default function ComparisonLeft() {
 
         for (let j = 0; j < response.data.length; j++) {
           if (response.data[j].state === serverStateName) {
-            setDate((prevData) => [...prevData, response.data[j].date + " "]);
+            setDate((prevData) => [...prevData, response.data[j].week + " "]);
             // setDeaths((prevData) => [
             //   ...prevData,
             //   response.data[j].deaths + " ",
             // ]);
             setCases((prevData) => [
               ...prevData,
-              response.data[j].current_week + " ",
+              response.data[j].disease_cases + " ",
             ]);
           }
         }
@@ -204,6 +203,22 @@ export default function ComparisonLeft() {
                       },
                     ],
                   }}
+                  options={{
+                    scales: {
+                      x: {
+                        title: {
+                          display: true,
+                          text: "Week",
+                        },
+                      },
+                      y: {
+                        title: {
+                          display: true,
+                          text: "Deaths",
+                        },
+                      },
+                    },
+                  }}
                 />
               ) : null}
 
@@ -218,6 +233,22 @@ export default function ComparisonLeft() {
                       data: [...cases],
                     },
                   ],
+                }}
+                options={{
+                  scales: {
+                    x: {
+                      title: {
+                        display: true,
+                        text: "Week",
+                      },
+                    },
+                    y: {
+                      title: {
+                        display: true,
+                        text: "Cases",
+                      },
+                    },
+                  },
                 }}
               />
               <h1> % of Population infected</h1>
