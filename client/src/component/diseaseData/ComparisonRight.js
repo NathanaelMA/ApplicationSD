@@ -3,7 +3,6 @@ import "./ComparisonRight.css";
 import { AppContext } from "../pages/DiseaseApp";
 import { motion, AnimatePresence } from "framer-motion";
 import { Line } from "react-chartjs-2";
-// import ChartDisplay from "../chart/ChartDisplay";
 import Axios from "axios";
 
 export default function ComparisonRight() {

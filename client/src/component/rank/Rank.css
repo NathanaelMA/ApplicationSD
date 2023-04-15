@@ -6,21 +6,16 @@
 #ranking-bottom-half {
     display: flex;
     height: 38em;
-
+    
 }
 
 #disease-name {
     width: 5em;
 }
 
-#confirmed-cases{
-    padding:  0 5em 0 0;
-    display: flex;
-    flex-direction: column;
-    margin: 15em 15em 10em 5em;
-}
-
-#covid-deaths{
-    padding:  0 5em 0 0;
-    margin: 0em 15em 10em 5em;
+#cases-chart{
+    margin: 0 auto;
+    width: auto;
+    height: 40em;
+    
 }

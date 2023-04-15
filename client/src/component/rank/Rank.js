@@ -2,14 +2,15 @@ import React, { useContext, useEffect, useState, useMemo } from "react";
 import "./Rank.css";
 import { motion } from "framer-motion";
 import { AppContext } from "../pages/DiseaseApp";
-import { Bar, Line, PolarArea } from "react-chartjs-2";
+import { Line, PolarArea } from "react-chartjs-2";
+import StateRanking from "./StateRanking";
+import "chart.js/auto";
 
 export default function Rank() {
   const { rankingPage, diseaseType } = useContext(AppContext);
   const [openView, setOpenView] = useState();
 
   useEffect(() => {
-    console.log("Ranking Page: ", rankingPage);
     rankingPage ? setOpenView(true) : setOpenView(false);
   }, [rankingPage]);
 
@@ -61,93 +62,33 @@ export default function Rank() {
             height={400}
             width={600}
           />
-
-          <Bar
-            data={{
-              labels: ["January", "February", "March", "April"],
-              datasets: [
-                {
-                  label: "State 1",
-                  data: [15, 25, 10, 25],
-                  backgroundColor: "rgb(255, 99, 132)",
-                  borderColor: "rgb(154, 16, 235)",
-                  order: 2,
-                },
-                {
-                  label: "State 2",
-                  data: [10, 20, 30, 50],
-                  backgroundColor: "rgb(54, 162, 235)",
-                  borderColor: "rgb(54, 162, 235)",
-                  order: 1,
-                },
-                {
-                  label: "State 3",
-                  data: [5, 7, 15, 25],
-                  backgroundColor: "rgb(254, 162, 235)",
-                  borderColor: "rgb(54, 162, 235)",
-                  order: 0,
-                },
-              ],
-            }}
-            height={400}
-            width={600}
-            options={{
-              scales: {
-                x: {
-                  stacked: true,
-                },
-                y: {
-                  beginAtZero: true,
-                },
-              },
-            }}
-          />
+          <StateRanking />
         </div>
 
-        <div id="ranking-bottom-half">
-          <div id="totals">
-            <h1 id="disease-name"> {diseaseType} </h1>
-            <div id="confirmed-cases">
-              <h2> 102,544,598</h2>
-              <p> confirmed cases </p>
-            </div>
-            {diseaseType === "Covid" ? (
-              <div id="covid-deaths">
-                <h2> 1,114,970</h2>
-                <p> deaths </p>
-              </div>
-            ) : null}
-          </div>
+        <div id="cases-chart">
           {diseaseType === "Covid" ? (
-            <Bar
+            <Line
               data={{
                 labels: ["January", "February", "March", "April"],
                 datasets: [
                   {
-                    label: "State 1",
+                    label: diseaseType + "Cases",
                     data: [15, 25, 10, 25],
                     backgroundColor: "rgb(255, 99, 132)",
                     borderColor: "rgb(154, 16, 235)",
                     order: 2,
                   },
                   {
-                    label: "State 2",
-                    data: [10, 20, 30, 50],
-                    backgroundColor: "rgb(54, 162, 235)",
-                    borderColor: "rgb(54, 162, 235)",
-                    order: 1,
-                  },
-                  {
-                    label: "State 3",
-                    data: [5, 7, 15, 25],
-                    backgroundColor: "rgb(254, 162, 235)",
-                    borderColor: "rgb(54, 162, 235)",
-                    order: 0,
+                    label: diseaseType + "Deaths",
+                    data: [5, 2, 10, 15],
+                    backgroundColor: "rgb(255, 99, 132)",
+                    borderColor: "rgb(154, 16, 235)",
+                    order: 2,
                   },
                 ],
               }}
-              height={400}
-              width={600}
+              // height={400}
+              // width={600}
               options={{
                 scales: {
                   x: {
@@ -165,7 +106,7 @@ export default function Rank() {
                 labels: ["January", "February", "March", "April"],
                 datasets: [
                   {
-                    label: "State 1",
+                    label: diseaseType + "Cases",
                     data: [15, 25, 10, 25],
                     backgroundColor: "rgb(255, 99, 132)",
                     borderColor: "rgb(154, 16, 235)",
@@ -173,18 +114,18 @@ export default function Rank() {
                   },
                 ],
               }}
-              height={400}
-              width={600}
-              options={{
-                scales: {
-                  x: {
-                    stacked: true,
-                  },
-                  y: {
-                    beginAtZero: true,
-                  },
-                },
-              }}
+              // height={400}
+              // width={600}
+              // options={{
+              //   scales: {
+              //     x: {
+              //       stacked: true,
+              //     },
+              //     y: {
+              //       beginAtZero: true,
+              //     },
+              //   },
+              // }}
             />
           )}
         </div>

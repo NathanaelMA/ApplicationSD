@@ -74,7 +74,6 @@ export default function ChoosenStateView() {
     ["Wyoming", "WY"],
   ];
 
-  //used for comparison view
   useEffect(() => {
     let serverStateName;
 
@@ -101,14 +100,14 @@ export default function ChoosenStateView() {
 
         for (let j = 0; j < response.data.length; j++) {
           if (response.data[j].state === serverStateName) {
-            setDate((prevData) => [...prevData, response.data[j].date + " "]);
+            setDate((prevData) => [...prevData, response.data[j].week + " "]);
             // setDeaths((prevData) => [
             //   ...prevData,
             //   response.data[j].deaths + " ",
             // ]);
             setCases((prevData) => [
               ...prevData,
-              response.data[j].current_week + " ",
+              response.data[j].disease_cases + " ",
             ]);
           }
         }

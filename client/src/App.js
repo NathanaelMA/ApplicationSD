@@ -1,13 +1,10 @@
 import React from "react";
-import { BrowserRouter as Router } from "react-router-dom";
-import AnimatedRoutes from "./component/Routes/AnimatedRoutes";
+import DiseaseApp from "./component/pages/DiseaseApp";
 
 export default function App() {
   return (
     <>
-      <Router>
-        <AnimatedRoutes />
-      </Router>
+      <DiseaseApp />
     </>
   );
 }
