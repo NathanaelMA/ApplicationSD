@@ -18,17 +18,17 @@ export default function Nation() {
     setCases([]);
     setWeeks([]);
 
-    Axios.get(
-      "http://127.0.0.1:3001/getTotals?diseaseType=" + diseaseType
-    ).then((response) => {
-      for (let j = 0; j < response.data.length; j++) {
-        setWeeks((prevData) => [...prevData, response.data[j].week + " "]);
-        setCases((prevData) => [
-          ...prevData,
-          response.data[j].total_cases + " ",
-        ]);
-      }
-    });
+    // Axios.get(
+    //   "http://127.0.0.1:3001/getTotals?diseaseType=" + diseaseType
+    // ).then((response) => {
+    //   for (let j = 0; j < response.data.length; j++) {
+    //     setWeeks((prevData) => [...prevData, response.data[j].week + " "]);
+    //     setCases((prevData) => [
+    //       ...prevData,
+    //       response.data[j].total_cases + " ",
+    //     ]);
+    //   }
+    // });
   }, [diseaseType]);
 
   useEffect(() => {
@@ -94,14 +94,14 @@ export default function Nation() {
                 datasets: [
                   {
                     label: diseaseType + " Cases",
-                    data: [15, 25, 10, 25],
+                    data: [10, 25, 40, 60],
                     backgroundColor: "rgb(255, 99, 132)",
                     borderColor: "rgb(154, 16, 235)",
                     order: 2,
                   },
                   {
                     label: diseaseType + " Deaths",
-                    data: [5, 2, 10, 15],
+                    data: [null, null, 10, 15],
                     backgroundColor: "rgb(25, 235, 132)",
                     borderColor: "rgb(25, 235, 132)",
                     order: 2,
@@ -115,6 +115,9 @@ export default function Nation() {
                       display: true,
                       text: "Months",
                     },
+                  },
+                  y: {
+                    beginAtZero: true,
                   },
                 },
               }}
@@ -136,10 +139,10 @@ export default function Nation() {
               options={{
                 scales: {
                   x: {
-                    stacked: true,
-                  },
-                  y: {
-                    beginAtZero: true,
+                    title: {
+                      display: true,
+                      text: "weeks",
+                    },
                   },
                 },
               }}

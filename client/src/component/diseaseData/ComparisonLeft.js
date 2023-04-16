@@ -93,10 +93,12 @@ export default function ComparisonLeft() {
         for (let j = 0; j < response.data.length; j++) {
           if (response.data[j].state === serverStateName) {
             setDate((prevData) => [...prevData, response.data[j].week + " "]);
-            // setDeaths((prevData) => [
-            //   ...prevData,
-            //   response.data[j].deaths + " ",
-            // ]);
+            diseaseType === "Covid"
+              ? setDeaths((prevData) => [
+                  ...prevData,
+                  response.data[j].disease_deaths + " ",
+                ])
+              : setDeaths([]);
             setCases((prevData) => [
               ...prevData,
               response.data[j].disease_cases + " ",
@@ -110,7 +112,6 @@ export default function ComparisonLeft() {
   return (
     <>
       <AnimatePresence>
-        {compareStates}
         {compareStates && (
           <motion.div
             className="data-section"

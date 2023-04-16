@@ -32,10 +32,12 @@ export default function ComparisonRight() {
         for (let j = 0; j < response.data.length; j++) {
           if (response.data[j].state === dropDownState) {
             setDate((prevData) => [...prevData, response.data[j].week + " "]);
-            // setDeaths((prevData) => [
-            //   ...prevData,
-            //   response.data[j].deaths + " ",
-            // ]);
+            diseaseType === "Covid"
+              ? setDeaths((prevData) => [
+                  ...prevData,
+                  response.data[j].disease_deaths + " ",
+                ])
+              : setDeaths([]);
             setCases((prevData) => [
               ...prevData,
               response.data[j].disease_cases + " ",
@@ -49,7 +51,6 @@ export default function ComparisonRight() {
   return (
     <>
       <AnimatePresence>
-        {compareStates}
         {compareStates && (
           <motion.div
             className="data-section"

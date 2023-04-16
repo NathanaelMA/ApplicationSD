@@ -80,10 +80,6 @@ export default function TitleHeader() {
             Infectious Disease Risk Predictor
           </a>
         </div>
-        {console.log("main map " + USMainMap)}
-        {console.log("choosen state " + choosenState)}
-        {console.log("compare state " + compareStates)}
-        {console.log("ranking page " + rankingPage)}
         <div
           className="collapse navbar-collapse"
           id="bs-example-navbar-collapse-1"

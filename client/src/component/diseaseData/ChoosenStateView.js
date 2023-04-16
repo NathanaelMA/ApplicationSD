@@ -100,10 +100,12 @@ export default function ChoosenStateView() {
         for (let j = 0; j < response.data.length; j++) {
           if (response.data[j].state === serverStateName) {
             setDate((prevData) => [...prevData, response.data[j].week + " "]);
-            // setDeaths((prevData) => [
-            //   ...prevData,
-            //   response.data[j].deaths + " ",
-            // ]);
+            diseaseType === "Covid"
+              ? setDeaths((prevData) => [
+                  ...prevData,
+                  response.data[j].disease_deaths + " ",
+                ])
+              : setDeaths([]);
             setCases((prevData) => [
               ...prevData,
               response.data[j].disease_cases + " ",
@@ -124,7 +126,6 @@ export default function ChoosenStateView() {
             layout
             initial={{ x: "-70%" }}
             animate={{ x: "0%", transition: { duration: 2 } }}
-            // exit={{ x: "-70%", transition: { duration: 1 } }}
             active-state={JSON.stringify(compareStates)}
           >
             <div
