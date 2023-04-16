@@ -95,8 +95,9 @@ export default function DiseaseApp() {
 
       <div className="container" id="main-container" theme-value={theme}>
         <ComparisonLeft />
-        <Nation />
+
         <ComparisonRight />
+        <Nation />
         <ChoosenStateView />
         <Map />
       </div>

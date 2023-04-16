@@ -18,10 +18,4 @@ p {
 
 } 
 
-@media (max-width: 768px) {
-    .data-section #left-display-state-data {
-         width: 100%;
-    } 
-    
-}
 
