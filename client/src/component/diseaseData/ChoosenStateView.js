@@ -8,6 +8,7 @@ export default function ChoosenStateView() {
   const {
     rankingPage,
     choosenState,
+    USMainMap,
     setChoosenState,
     diseaseType,
     compareStates,
@@ -116,7 +117,7 @@ export default function ChoosenStateView() {
   return (
     <>
       <AnimatePresence>
-        {choosenState && !rankingPage && (
+        {choosenState && USMainMap && (
           <motion.div
             className="data-section"
             theme-value={theme}

@@ -7,9 +7,10 @@ import Map from "../map/Map";
 import ColorLegend from "../map/ColorLegend";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import Rank from "../rank/Rank";
+import Rank from "../rank/Nation";
 import ChoosenStateView from "../diseaseData/ChoosenStateView";
 import Team from "../team/Team";
+import Nation from "../rank/Nation";
 
 export const AppContext = React.createContext();
 export default function DiseaseApp() {
@@ -94,10 +95,10 @@ export default function DiseaseApp() {
 
       <div className="container" id="main-container" theme-value={theme}>
         <ComparisonLeft />
+        <Nation />
+        <ComparisonRight />
         <ChoosenStateView />
         <Map />
-        <Rank />
-        <ComparisonRight />
       </div>
       <Team />
     </AppContext.Provider>

@@ -8,7 +8,6 @@ export default function StateRanking() {
   const [cases, setCases] = useState([]);
 
   useEffect(() => {
-    // console.log("runnning");
     Axios.get(
       "http://127.0.0.1:3001/getTopStates?diseaseType=" + diseaseType
     ).then((response) => {

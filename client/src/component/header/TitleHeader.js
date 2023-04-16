@@ -9,6 +9,7 @@ import Axios from "axios";
 export default function TitleHeader() {
   const {
     choosenState,
+    USMainMap,
     setUSMainMap,
     setDiseaseType,
     compareStates,
@@ -70,7 +71,6 @@ export default function TitleHeader() {
             data-toggle="collapse"
             data-target="#bs-example-navbar-collapse-1"
           >
-            {" "}
             <span className="sr-only">Toggle navigation</span>{" "}
             <span className="icon-bar"></span>{" "}
             <span className="icon-bar"></span>{" "}
@@ -78,9 +78,12 @@ export default function TitleHeader() {
           </button>
           <a className="navbar-brand page-scroll">
             Infectious Disease Risk Predictor
-          </a>{" "}
+          </a>
         </div>
-
+        {console.log("main map " + USMainMap)}
+        {console.log("choosen state " + choosenState)}
+        {console.log("compare state " + compareStates)}
+        {console.log("ranking page " + rankingPage)}
         <div
           className="collapse navbar-collapse"
           id="bs-example-navbar-collapse-1"

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState, useMemo } from "react";
-import "./Rank.css";
+import "./Nation.css";
 import { motion } from "framer-motion";
 import { AppContext } from "../pages/DiseaseApp";
 import { Line, PolarArea } from "react-chartjs-2";
@@ -7,7 +7,7 @@ import StateRanking from "./StateRanking";
 import "chart.js/auto";
 import Axios from "axios";
 
-export default function Rank() {
+export default function Nation() {
   const { rankingPage, diseaseType } = useContext(AppContext);
   const [openView, setOpenView] = useState();
   const [states, setStates] = useState([]);

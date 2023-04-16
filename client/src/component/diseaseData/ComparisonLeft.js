@@ -77,8 +77,6 @@ export default function ComparisonLeft() {
   useEffect(() => {
     let serverStateName;
 
-    rankingPage ? setCompareStates(false) : setCompareStates(true);
-
     if (compareStates) {
       serverStateName = dropDownState;
 
@@ -112,6 +110,7 @@ export default function ComparisonLeft() {
   return (
     <>
       <AnimatePresence>
+        {compareStates}
         {compareStates && (
           <motion.div
             className="data-section"
@@ -119,7 +118,6 @@ export default function ComparisonLeft() {
             layout
             initial={{ x: "-70%" }}
             animate={{ x: "0%", transition: { duration: 2 } }}
-            // exit={{ x: "-70%", transition: { duration: 1 } }}
             active-state={JSON.stringify(compareStates)}
           >
             <div className="form-group">

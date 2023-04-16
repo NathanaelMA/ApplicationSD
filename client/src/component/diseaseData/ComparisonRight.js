@@ -49,6 +49,7 @@ export default function ComparisonRight() {
   return (
     <>
       <AnimatePresence>
+        {compareStates}
         {compareStates && (
           <motion.div
             className="data-section"
