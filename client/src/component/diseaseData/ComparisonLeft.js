@@ -5,8 +5,14 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Line } from "react-chartjs-2";
 import Axios from "axios";
 export default function ComparisonLeft() {
-  const { rankingPage, choosenState, diseaseType, compareStates, theme } =
-    useContext(AppContext);
+  const {
+    rankingPage,
+    choosenState,
+    setCompareStates,
+    diseaseType,
+    compareStates,
+    theme,
+  } = useContext(AppContext);
   const [dropDownState, setDropDownState] = useState(null);
   const [date, setDate] = useState([]);
   const [deaths, setDeaths] = useState([]);
@@ -71,6 +77,8 @@ export default function ComparisonLeft() {
   useEffect(() => {
     let serverStateName;
 
+    rankingPage ? setCompareStates(false) : setCompareStates(true);
+
     if (compareStates) {
       serverStateName = dropDownState;
 
@@ -84,8 +92,6 @@ export default function ComparisonLeft() {
           "&choosenState=" +
           serverStateName
       ).then((response) => {
-        console.log(response.data);
-
         for (let j = 0; j < response.data.length; j++) {
           if (response.data[j].state === serverStateName) {
             setDate((prevData) => [...prevData, response.data[j].week + " "]);
@@ -101,12 +107,12 @@ export default function ComparisonLeft() {
         }
       });
     } else setDropDownState(null);
-  }, [choosenState, compareStates, diseaseType, dropDownState]);
+  }, [diseaseType, dropDownState, compareStates]);
 
   return (
     <>
       <AnimatePresence>
-        {compareStates && !rankingPage && (
+        {compareStates && (
           <motion.div
             className="data-section"
             theme-value={theme}

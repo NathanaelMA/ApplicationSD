@@ -18,7 +18,6 @@ export default function ComparisonRight() {
   }
 
   useEffect(() => {
-    console.log(dropDownState);
     setDeaths([]);
     setCases([]);
     setDate([]);
@@ -45,7 +44,7 @@ export default function ComparisonRight() {
         }
       });
     } else setDropDownState(null);
-  }, [compareStates, dropDownState, diseaseType]);
+  }, [dropDownState, diseaseType, compareStates]);
 
   return (
     <>

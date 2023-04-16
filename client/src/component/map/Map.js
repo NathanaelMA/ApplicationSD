@@ -18,7 +18,7 @@ export default function Map() {
   } = useContext(AppContext);
 
   useEffect(() => {
-    if (choosenState && !USMainMap) {
+    if (choosenState && USMainMap) {
       let width = 487,
         height = 360;
       d3.selectAll("path").style("fill", "#88a4bc");
@@ -57,16 +57,15 @@ export default function Map() {
     } else {
       d3.selectAll("path").style("fill", "#88a4bc");
       setChoosenState(null);
-      setUSMainMap(false);
       const svg = d3.select("svg").attr("viewBox", [-20, 3, 700, 280]);
       svg.on(".zoom", null);
       d3.select("g").attr("transform", "translate(0,0) scale(1.0)");
     }
-  }, [choosenState, USMainMap, compareStates, rankingPage]);
+  }, [choosenState, USMainMap]);
 
   return (
     <AnimatePresence>
-      {compareStates || rankingPage ? null : (
+      {USMainMap ? (
         <motion.div
           layout
           theme-value={theme}
@@ -77,7 +76,7 @@ export default function Map() {
         >
           <SvgUsMap />
         </motion.div>
-      )}
+      ) : null}
     </AnimatePresence>
   );
 }

@@ -33,13 +33,16 @@ export default function TitleHeader() {
   // };
 
   function handleMapView() {
-    if (choosenState || compareStates || rankingPage) {
-      setUSMainMap(true);
-      setCompareStates(false);
-      setRankingPage(false);
-    } else {
-      setUSMainMap(false);
-    }
+    setUSMainMap(true);
+    setCompareStates(false);
+    setRankingPage(false);
+    // if (choosenState || compareStates || rankingPage) {
+    //   setUSMainMap(true);
+    //   setCompareStates(false);
+    //   setRankingPage(false);
+    // } else {
+    //   setUSMainMap(false);
+    // }
   }
 
   function handleCompare() {
@@ -53,6 +56,7 @@ export default function TitleHeader() {
 
   function handleRanking() {
     setCompareStates(false);
+    setUSMainMap(false);
     setRankingPage(true);
   }
 

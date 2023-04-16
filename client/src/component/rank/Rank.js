@@ -21,7 +21,6 @@ export default function Rank() {
     Axios.get(
       "http://127.0.0.1:3001/getTotals?diseaseType=" + diseaseType
     ).then((response) => {
-      console.log(response.data);
       for (let j = 0; j < response.data.length; j++) {
         setWeeks((prevData) => [...prevData, response.data[j].week + " "]);
         setCases((prevData) => [

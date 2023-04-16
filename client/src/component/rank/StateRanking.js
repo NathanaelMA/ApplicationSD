@@ -8,12 +8,13 @@ export default function StateRanking() {
   const [cases, setCases] = useState([]);
 
   useEffect(() => {
-    setStates([]);
-    setCases([]);
-
+    // console.log("runnning");
     Axios.get(
       "http://127.0.0.1:3001/getTopStates?diseaseType=" + diseaseType
     ).then((response) => {
+      // console.log(response.data);
+      setStates([]);
+      setCases([]);
       for (let j = 0; j < response.data.length; j++) {
         setStates((prevData) => [...prevData, response.data[j].state + " "]);
         setCases((prevData) => [
@@ -28,7 +29,6 @@ export default function StateRanking() {
     <>
       <table className="table">
         <caption className="text-center font-weight-bold" id="table-caption">
-          {" "}
           {diseaseType}
         </caption>
         <thead>

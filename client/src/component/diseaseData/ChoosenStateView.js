@@ -96,8 +96,6 @@ export default function ChoosenStateView() {
           "&choosenState=" +
           serverStateName
       ).then((response) => {
-        console.log(response.data);
-
         for (let j = 0; j < response.data.length; j++) {
           if (response.data[j].state === serverStateName) {
             setDate((prevData) => [...prevData, response.data[j].week + " "]);

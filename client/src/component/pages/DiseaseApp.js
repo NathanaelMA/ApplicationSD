@@ -96,8 +96,8 @@ export default function DiseaseApp() {
         <ComparisonLeft />
         <ChoosenStateView />
         <Map />
-        <ComparisonRight />
         <Rank />
+        <ComparisonRight />
       </div>
       <Team />
     </AppContext.Provider>
