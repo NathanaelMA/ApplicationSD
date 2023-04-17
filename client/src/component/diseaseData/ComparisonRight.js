@@ -11,6 +11,7 @@ export default function ComparisonRight() {
   const [date, setDate] = useState([]);
   const [deaths, setDeaths] = useState([]);
   const [cases, setCases] = useState([]);
+  const [year, setYear] = useState([]);
 
   function chooseStateData(e) {
     let stateName = e.target.selectedOptions[0].text;
@@ -27,7 +28,9 @@ export default function ComparisonRight() {
         "http://localhost:3001/get?diseaseType=" +
           diseaseType +
           "&choosenState=" +
-          dropDownState
+          dropDownState +
+          "&year=" +
+          year
       ).then((response) => {
         for (let j = 0; j < response.data.length; j++) {
           if (response.data[j].state === dropDownState) {
@@ -46,7 +49,7 @@ export default function ComparisonRight() {
         }
       });
     } else setDropDownState(null);
-  }, [dropDownState, diseaseType, compareStates]);
+  }, [dropDownState, diseaseType, compareStates, year]);
 
   return (
     <>
@@ -60,10 +63,7 @@ export default function ComparisonRight() {
             animate={{ x: "0%", transition: { duration: 2 } }}
             active-state={JSON.stringify(compareStates)}
           >
-            <div className="form-group">
-              <label htmlFor="state" className="col-sm-4 control-label">
-                <p theme-value={theme}> Pick a State to view Data </p>
-              </label>
+            <div id="right-comparison-dropdowns">
               <div className="col-sm-5">
                 <select
                   className="form-control"
@@ -126,39 +126,24 @@ export default function ComparisonRight() {
                   <option value="WY">Wyoming</option>
                 </select>
               </div>
+
+              <div className="col-sm-5">
+                <select
+                  className="form-control"
+                  id="year"
+                  name="year"
+                  onChange={(e) => setYear(e.target.selectedOptions[0].text)}
+                >
+                  <option value="">Choose Year</option>
+                  <option value="">2020</option>
+                  <option value="AK">2021</option>
+                  <option value="AL">2022</option>
+                  <option value="AR">2023</option>
+                </select>
+              </div>
             </div>
+
             <div id="right-display-state-data">
-              {diseaseType === "Covid" ? (
-                <Line
-                  datasetIdKey="id"
-                  data={{
-                    labels: [...date],
-                    datasets: [
-                      {
-                        id: 1,
-                        label: diseaseType + " Deaths",
-                        data: [...deaths],
-                      },
-                    ],
-                  }}
-                  options={{
-                    scales: {
-                      x: {
-                        title: {
-                          display: true,
-                          text: "Week",
-                        },
-                      },
-                      y: {
-                        title: {
-                          display: true,
-                          text: "Deaths",
-                        },
-                      },
-                    },
-                  }}
-                />
-              ) : null}
               <Line
                 datasetIdKey="id"
                 data={{
@@ -166,7 +151,37 @@ export default function ComparisonRight() {
                   datasets: [
                     {
                       id: 1,
-                      label: diseaseType + " Cases",
+                      label: diseaseType + " total per year (non-growing)",
+                      data: [...deaths],
+                    },
+                  ],
+                }}
+                options={{
+                  scales: {
+                    x: {
+                      title: {
+                        display: true,
+                        text: "Week",
+                      },
+                    },
+                    y: {
+                      title: {
+                        display: true,
+                        text: "Deaths",
+                      },
+                    },
+                  },
+                }}
+              />
+
+              <Line
+                datasetIdKey="id"
+                data={{
+                  labels: [...date],
+                  datasets: [
+                    {
+                      id: 1,
+                      label: diseaseType + " growing",
                       data: [...cases],
                     },
                   ],
@@ -188,9 +203,6 @@ export default function ComparisonRight() {
                   },
                 }}
               />
-
-              <h1> % of Population infected</h1>
-              <h2>total confirmed cases</h2>
             </div>
           </motion.div>
         )}

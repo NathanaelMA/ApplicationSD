@@ -28,9 +28,7 @@ export default function Nation() {
       setCases([]);
       for (let j = 0; j < response.data.length; j++) {
         response.data[j].disease === "covid" &&
-          console.log(response.data[j].year);
-
-        response.data[j].disease === "covid" &&
+          response.data[j].disease === "covid" &&
           response.data[j].year === 2022 &&
           setCovidTotals(response.data[j].CasesInYear);
 
@@ -62,7 +60,6 @@ export default function Nation() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1, transition: { duration: 0.7 } }}
       >
-        {console.log(covidTotals)}
         <div id="case-charts">
           <PolarArea
             data={{
@@ -79,7 +76,7 @@ export default function Nation() {
                 {
                   label: "Cases",
                   data: [
-                    54213,
+                    54512,
                     measlesTotals,
                     malariaTotals,
                     mumpsTotals,

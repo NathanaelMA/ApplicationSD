@@ -21,3 +21,9 @@ p {
 .data-section #right-display-state-data {
     width: 42em;
 } 
+
+
+#right-comparison-dropdowns{
+    display: flex;
+    justify-content: space-around;
+}

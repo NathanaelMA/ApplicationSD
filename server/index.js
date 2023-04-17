@@ -29,7 +29,6 @@ app.get("/get", (req, res) => {
 });
 
 app.get("/getYearlyTotal", (req, res) => {
-  // const diseaseType = req.query.diseaseType;
   db.query("SELECT * FROM disease_yearly_totals", (err, result) => {
     if (err) {
       console.log(err);
@@ -39,20 +38,20 @@ app.get("/getYearlyTotal", (req, res) => {
   });
 });
 
-// app.get("/getTopStates", (req, res) => {
-//   const diseaseType = req.query.diseaseType;
-//   db.query(
-//     "SELECT * FROM totalcases WHERE disease_name = ?",
-//     [diseaseType],
-//     (err, result) => {
-//       if (err) {
-//         console.log(err);
-//       } else {
-//         res.send(result);
-//       }
-//     }
-//   );
-// });
+app.get("/getTopStates", (req, res) => {
+  const diseaseType = req.query.diseaseType;
+  db.query(
+    "SELECT * FROM topStates WHERE disease = ?",
+    [diseaseType],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
 
 // app.get("/getTotals", (req, res) => {
 //   const diseaseType = req.query.diseaseType;

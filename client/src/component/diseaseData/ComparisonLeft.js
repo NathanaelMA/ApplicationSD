@@ -14,6 +14,7 @@ export default function ComparisonLeft() {
     theme,
   } = useContext(AppContext);
   const [dropDownState, setDropDownState] = useState(null);
+  const [year, setYear] = useState(2023);
   const [date, setDate] = useState([]);
   const [deaths, setDeaths] = useState([]);
   const [cases, setCases] = useState([]);
@@ -121,10 +122,7 @@ export default function ComparisonLeft() {
             animate={{ x: "0%", transition: { duration: 2 } }}
             active-state={JSON.stringify(compareStates)}
           >
-            <div className="form-group">
-              <label htmlFor="state" className="col-sm-4 control-label">
-                <p theme-value={theme}> Pick a State to view Data </p>
-              </label>
+            <div id="left-comparison-dropdowns">
               <div className="col-sm-5">
                 <select
                   className="form-control"
@@ -189,43 +187,57 @@ export default function ComparisonLeft() {
                   <option value="WY">Wyoming</option>
                 </select>
               </div>
+
+              <div className="col-sm-5">
+                <select
+                  className="form-control"
+                  id="year"
+                  name="year"
+                  onChange={(e) => setYear(e.target.selectedOptions[0].text)}
+                >
+                  <option value="">Choose Year</option>
+                  <option value="">2020</option>
+                  <option value="AK">2021</option>
+                  <option value="AL">2022</option>
+                  <option value="AR">2023</option>
+                </select>
+              </div>
             </div>
+
             <div
               id="left-display-state-data"
               theme-value={theme}
               // scroll-value={scroll}
             >
-              {diseaseType === "Covid" ? (
-                <Line
-                  datasetIdKey="id"
-                  data={{
-                    labels: [...date],
-                    datasets: [
-                      {
-                        id: 1,
-                        label: diseaseType + " Deaths",
-                        data: [...deaths],
-                      },
-                    ],
-                  }}
-                  options={{
-                    scales: {
-                      x: {
-                        title: {
-                          display: true,
-                          text: "Week",
-                        },
-                      },
-                      y: {
-                        title: {
-                          display: true,
-                          text: "Deaths",
-                        },
+              <Line
+                datasetIdKey="id"
+                data={{
+                  labels: [...date],
+                  datasets: [
+                    {
+                      id: 1,
+                      label: diseaseType + " total per year (non growing)",
+                      data: [...deaths],
+                    },
+                  ],
+                }}
+                options={{
+                  scales: {
+                    x: {
+                      title: {
+                        display: true,
+                        text: "Week",
                       },
                     },
-                  }}
-                />
-              ) : null}
+                    y: {
+                      title: {
+                        display: true,
+                        text: "Cases",
+                      },
+                    },
+                  },
+                }}
+              />
 
               <Line
                 datasetIdKey="id"
@@ -234,7 +246,7 @@ export default function ComparisonLeft() {
                   datasets: [
                     {
                       id: 1,
-                      label: diseaseType + " Cases",
+                      label: diseaseType + " growing",
                       data: [...cases],
                     },
                   ],
@@ -256,8 +268,6 @@ export default function ComparisonLeft() {
                   },
                 }}
               />
-              <h1> % of Population infected</h1>
-              <h2>total confirmed cases</h2>
             </div>
           </motion.div>
         )}
