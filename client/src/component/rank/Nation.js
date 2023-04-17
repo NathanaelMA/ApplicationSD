@@ -13,35 +13,56 @@ export default function Nation() {
   const [states, setStates] = useState([]);
   const [weeks, setWeeks] = useState([]);
   const [cases, setCases] = useState([]);
+  const [covidTotals, setCovidTotals] = useState([]);
+  const [measlesTotals, setMeaslesTotals] = useState([]);
+  const [malariaTotals, setMalariaTotals] = useState([]);
+  const [mumpsTotals, setMumpsTotals] = useState([]);
+  const [pneumoccalTotals, setPneumoccalTotals] = useState([]);
+  const [syphilisTotals, setSyphilisTotals] = useState([]);
+  const [tuberculosisTotals, setTuberculosisTotals] = useState([]);
 
   useEffect(() => {
-    setCases([]);
-    setWeeks([]);
+    Axios.get(
+      "http://127.0.0.1:3001/getYearlyTotal?diseaseType=" + diseaseType
+    ).then((response) => {
+      setCases([]);
+      for (let j = 0; j < response.data.length; j++) {
+        response.data[j].disease === "covid" &&
+          console.log(response.data[j].year);
 
-    // Axios.get(
-    //   "http://127.0.0.1:3001/getTotals?diseaseType=" + diseaseType
-    // ).then((response) => {
-    //   for (let j = 0; j < response.data.length; j++) {
-    //     setWeeks((prevData) => [...prevData, response.data[j].week + " "]);
-    //     setCases((prevData) => [
-    //       ...prevData,
-    //       response.data[j].total_cases + " ",
-    //     ]);
-    //   }
-    // });
-  }, [diseaseType]);
+        response.data[j].disease === "covid" &&
+          response.data[j].year === 2022 &&
+          setCovidTotals(response.data[j].CasesInYear);
 
-  useEffect(() => {
-    rankingPage ? setOpenView(true) : setOpenView(false);
-  }, [rankingPage]);
+        response.data[j].disease === "Measles" &&
+          setMeaslesTotals(response.data[j].CasesInYear);
+
+        response.data[j].disease === "Malaria" &&
+          setMalariaTotals(response.data[j].CasesInYear);
+
+        response.data[j].disease === "Mumps" &&
+          setMumpsTotals(response.data[j].CasesInYear);
+
+        response.data[j].disease === "Pneumococcal disease" &&
+          setPneumoccalTotals(response.data[j].CasesInYear);
+
+        response.data[j].disease === "CSyphilis" &&
+          setSyphilisTotals(response.data[j].CasesInYear);
+
+        response.data[j].disease === "Tuberculosis" &&
+          setTuberculosisTotals(response.data[j].CasesInYear);
+      }
+    });
+  }, []);
 
   return (
-    openView && (
+    rankingPage && (
       <motion.div
         layout
         initial={{ opacity: 0 }}
         animate={{ opacity: 1, transition: { duration: 0.7 } }}
       >
+        {console.log(covidTotals)}
         <div id="case-charts">
           <PolarArea
             data={{
@@ -57,7 +78,15 @@ export default function Nation() {
               datasets: [
                 {
                   label: "Cases",
-                  data: [12, 19, 7, 5, 10, 15, 4],
+                  data: [
+                    54213,
+                    measlesTotals,
+                    malariaTotals,
+                    mumpsTotals,
+                    pneumoccalTotals,
+                    syphilisTotals,
+                    tuberculosisTotals,
+                  ],
                   backgroundColor: [
                     "rgba(255, 99, 132, 0.2)",
                     "rgba(54, 162, 235, 0.2)",

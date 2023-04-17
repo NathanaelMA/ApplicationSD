@@ -28,6 +28,17 @@ app.get("/get", (req, res) => {
   );
 });
 
+app.get("/getYearlyTotal", (req, res) => {
+  // const diseaseType = req.query.diseaseType;
+  db.query("SELECT * FROM disease_yearly_totals", (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
+
 // app.get("/getTopStates", (req, res) => {
 //   const diseaseType = req.query.diseaseType;
 //   db.query(
