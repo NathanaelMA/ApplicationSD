@@ -13,42 +13,45 @@ export default function Nation() {
   const [states, setStates] = useState([]);
   const [weeks, setWeeks] = useState([]);
   const [cases, setCases] = useState([]);
-  const [covidTotals, setCovidTotals] = useState([]);
-  const [measlesTotals, setMeaslesTotals] = useState([]);
-  const [malariaTotals, setMalariaTotals] = useState([]);
-  const [mumpsTotals, setMumpsTotals] = useState([]);
-  const [pneumoccalTotals, setPneumoccalTotals] = useState([]);
-  const [syphilisTotals, setSyphilisTotals] = useState([]);
-  const [tuberculosisTotals, setTuberculosisTotals] = useState([]);
+  const [covidTotals, setCovidTotals] = useState(0);
+  const [campylobacteriosisTotals, setCampylobacteriosisTotals] = useState(0);
+  const [chlamydiaTotals, setChlamydiaTotals] = useState(0);
+  const [gonorrheaTotals, setGonorrheaTotals] = useState(0);
+  const [malariaTotals, setMalariaTotals] = useState(0);
+  const [pneumoccalTotals, setPneumoccalTotals] = useState(0);
+  const [syphilisTotals, setSyphilisTotals] = useState(0);
+  const [tuberculosisTotals, setTuberculosisTotals] = useState(0);
 
   useEffect(() => {
     Axios.get(
-      "http://127.0.0.1:3001/getYearlyTotal?diseaseType=" + diseaseType
+      "http://127.0.0.1:3001/getCurrentWeekTotal?diseaseType=" + diseaseType
     ).then((response) => {
+      console.log(response.data);
       setCases([]);
       for (let j = 0; j < response.data.length; j++) {
         response.data[j].disease === "covid" &&
-          response.data[j].disease === "covid" &&
-          response.data[j].year === 2022 &&
-          setCovidTotals(response.data[j].CasesInYear);
+          setCovidTotals(response.data[j].CasesInWeek);
 
-        response.data[j].disease === "Measles" &&
-          setMeaslesTotals(response.data[j].CasesInYear);
+        response.data[j].disease === "campylobacteriosis" &&
+          setCampylobacteriosisTotals(response.data[j].CasesInWeek);
 
-        response.data[j].disease === "Malaria" &&
-          setMalariaTotals(response.data[j].CasesInYear);
+        response.data[j].disease === "chlamydia" &&
+          setChlamydiaTotals(response.data[j].CasesInWeek);
 
-        response.data[j].disease === "Mumps" &&
-          setMumpsTotals(response.data[j].CasesInYear);
+        response.data[j].disease === "gonorrhea" &&
+          setGonorrheaTotals(response.data[j].CasesInWeek);
 
-        response.data[j].disease === "Pneumococcal disease" &&
-          setPneumoccalTotals(response.data[j].CasesInYear);
+        response.data[j].disease === "malaria" &&
+          setMalariaTotals(response.data[j].CasesInWeek);
 
-        response.data[j].disease === "CSyphilis" &&
-          setSyphilisTotals(response.data[j].CasesInYear);
+        response.data[j].disease === "pneumococcal" &&
+          setPneumoccalTotals(response.data[j].CasesInWeek);
 
-        response.data[j].disease === "Tuberculosis" &&
-          setTuberculosisTotals(response.data[j].CasesInYear);
+        response.data[j].disease === "syphilis" &&
+          setSyphilisTotals(response.data[j].CasesInWeek);
+
+        response.data[j].disease === "tuberculosis" &&
+          setTuberculosisTotals(response.data[j].CasesInWeek);
       }
     });
   }, []);
@@ -65,10 +68,11 @@ export default function Nation() {
             data={{
               labels: [
                 "Covid",
-                "Measles",
+                "Gonorrhea",
                 "Malaria",
-                "Mumps",
-                "Pneumoccal Diseases",
+                "Campylobacteriosis",
+                "Chlamydia",
+                "Pneumococcal",
                 "Syphilis",
                 "Tuberculosis",
               ],
@@ -76,10 +80,11 @@ export default function Nation() {
                 {
                   label: "Cases",
                   data: [
-                    54512,
-                    measlesTotals,
+                    covidTotals,
+                    gonorrheaTotals,
                     malariaTotals,
-                    mumpsTotals,
+                    campylobacteriosisTotals,
+                    chlamydiaTotals,
                     pneumoccalTotals,
                     syphilisTotals,
                     tuberculosisTotals,
@@ -109,71 +114,45 @@ export default function Nation() {
             height={400}
             width={600}
           />
+
           <StateRanking />
         </div>
 
         <div id="cases-chart">
-          {diseaseType === "Covid" ? (
-            <Line
-              data={{
-                labels: ["January", "February", "March", "April"],
-                datasets: [
-                  {
-                    label: diseaseType + " Cases",
-                    data: [10, 25, 40, 60],
-                    backgroundColor: "rgb(255, 99, 132)",
-                    borderColor: "rgb(154, 16, 235)",
-                    order: 2,
-                  },
-                  {
-                    label: diseaseType + " Deaths",
-                    data: [null, null, 10, 15],
-                    backgroundColor: "rgb(25, 235, 132)",
-                    borderColor: "rgb(25, 235, 132)",
-                    order: 2,
-                  },
-                ],
-              }}
-              options={{
-                scales: {
-                  x: {
-                    title: {
-                      display: true,
-                      text: "Months",
-                    },
-                  },
-                  y: {
-                    beginAtZero: true,
+          <Line
+            data={{
+              labels: ["January", "February", "March", "April"],
+              datasets: [
+                {
+                  label: diseaseType + " Cases",
+                  data: [10, 25, 40, 60],
+                  backgroundColor: "rgb(255, 99, 132)",
+                  borderColor: "rgb(154, 16, 235)",
+                  order: 2,
+                },
+                {
+                  label: diseaseType + " Predictions",
+                  data: [null, null, 10, 15],
+                  backgroundColor: "rgb(25, 235, 132)",
+                  borderColor: "rgb(25, 235, 132)",
+                  order: 2,
+                },
+              ],
+            }}
+            options={{
+              scales: {
+                x: {
+                  title: {
+                    display: true,
+                    text: "Months",
                   },
                 },
-              }}
-            />
-          ) : (
-            <Line
-              data={{
-                labels: [...weeks],
-                datasets: [
-                  {
-                    label: diseaseType + " Cases",
-                    data: [...cases],
-                    backgroundColor: "rgb(255, 99, 132)",
-                    borderColor: "rgb(154, 16, 235)",
-                    order: 2,
-                  },
-                ],
-              }}
-              options={{
-                scales: {
-                  x: {
-                    title: {
-                      display: true,
-                      text: "weeks",
-                    },
-                  },
+                y: {
+                  beginAtZero: true,
                 },
-              }}
-            />
-          )}
+              },
+            }}
+          />
         </div>
       </motion.div>
     )

@@ -35,4 +35,9 @@ a {
     text-decoration: none;
 }
 
+.page-scroll:hover {
+    color: black;
+    cursor: pointer;
+}
+
 

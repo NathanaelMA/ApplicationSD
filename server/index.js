@@ -12,12 +12,44 @@ const db = mysql.createConnection({
   database: "sddata",
 });
 
-app.get("/get", (req, res) => {
+app.get("/getTotalNonGrowing", (req, res) => {
   const diseaseType = req.query.diseaseType;
   const choosenStateFullName = req.query.choosenState;
+  const year = req.query.year;
   db.query(
-    "SELECT * FROM weekly_data WHERE disease_name = ? and state = ?",
-    [diseaseType, choosenStateFullName],
+    "SELECT * FROM weekly_data WHERE disease_name = ? and state = ? and year = ?",
+    [diseaseType, choosenStateFullName, year],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
+
+app.get("/getIncrementingTotal", (req, res) => {
+  const diseaseType = req.query.diseaseType;
+  const choosenStateFullName = req.query.choosenState;
+  const year = req.query.year;
+  db.query(
+    "SELECT * FROM weekly_data WHERE disease_name = ? and state = ? and year = ?",
+    [diseaseType, choosenStateFullName, year],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
+
+app.get("/getCurrentWeekTotal", (req, res) => {
+  const diseaseType = req.query.diseaseType;
+  db.query(
+    "SELECT * FROM disease_weekly_totals WHERE year = 2023 and week = 12",
     (err, result) => {
       if (err) {
         console.log(err);
@@ -41,7 +73,7 @@ app.get("/getYearlyTotal", (req, res) => {
 app.get("/getTopStates", (req, res) => {
   const diseaseType = req.query.diseaseType;
   db.query(
-    "SELECT * FROM topStates WHERE disease = ?",
+    "SELECT * FROM highest_weekly_data WHERE disease_name = ? and year = 2023 and week = 12",
     [diseaseType],
     (err, result) => {
       if (err) {

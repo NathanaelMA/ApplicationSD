@@ -14,10 +14,11 @@ export default function ComparisonLeft() {
     theme,
   } = useContext(AppContext);
   const [dropDownState, setDropDownState] = useState(null);
-  const [year, setYear] = useState(2023);
+  const [year, setYear] = useState(null);
   const [date, setDate] = useState([]);
-  const [deaths, setDeaths] = useState([]);
+
   const [cases, setCases] = useState([]);
+  const [incrementingCases, setIncrementingCases] = useState([]);
 
   const states = [
     ["Alabama", "AL"],
@@ -74,7 +75,6 @@ export default function ComparisonLeft() {
     ["Wyoming", "WY"],
   ];
 
-  //used for comparison view
   useEffect(() => {
     let serverStateName;
 
@@ -82,37 +82,78 @@ export default function ComparisonLeft() {
       serverStateName = dropDownState;
 
       setDate([]);
-      setDeaths([]);
       setCases([]);
 
-      Axios.get(
-        "http://localhost:3001/get?diseaseType=" +
-          diseaseType +
-          "&choosenState=" +
-          serverStateName
-      ).then((response) => {
-        for (let j = 0; j < response.data.length; j++) {
-          if (response.data[j].state === serverStateName) {
-            setDate((prevData) => [...prevData, response.data[j].week + " "]);
-            diseaseType === "Covid"
-              ? setDeaths((prevData) => [
-                  ...prevData,
-                  response.data[j].disease_deaths + " ",
-                ])
-              : setDeaths([]);
-            setCases((prevData) => [
-              ...prevData,
-              response.data[j].disease_cases + " ",
-            ]);
+      // weekly total
+      diseaseType &&
+        serverStateName &&
+        year &&
+        Axios.get(
+          "http://localhost:3001/getTotalNonGrowing?diseaseType=" +
+            diseaseType +
+            "&choosenState=" +
+            serverStateName +
+            "&year=" +
+            year
+        ).then((response) => {
+          for (let j = 0; j < response.data.length; j++) {
+            if (response.data[j].state === serverStateName) {
+              setDate((prevData) => [...prevData, response.data[j].week + " "]);
+              // diseaseType === "Covid"
+              //   ? setDeaths((prevData) => [
+              //       ...prevData,
+              //       response.data[j].disease_deaths + " ",
+              //     ])
+              //   : setDeaths([]);
+              setCases((prevData) => [
+                ...prevData,
+                response.data[j].disease_cases + " ",
+              ]);
+            }
           }
-        }
-      });
+        });
+
+      //incrementing total
+      diseaseType &&
+        serverStateName &&
+        year &&
+        Axios.get(
+          "http://localhost:3001/getIncrementingTotal?diseaseType=" +
+            diseaseType +
+            "&choosenState=" +
+            serverStateName +
+            "&year=" +
+            year
+        ).then((response) => {
+          setIncrementingCases([]);
+          setDate([]);
+          for (let j = 0; j < response.data.length; j++) {
+            // console.log(response.data);
+            if (response.data[j].state === serverStateName) {
+              setDate((prevData) => [...prevData, response.data[j].week + " "]);
+              // diseaseType === "Covid"
+              //   ? setDeaths((prevData) => [
+              //       ...prevData,
+              //       response.data[j].disease_deaths + " ",
+              //     ])
+              //   : setDeaths([]);
+              setIncrementingCases((prevData) => [
+                ...prevData,
+                prevData.length === 0
+                  ? 0
+                  : prevData[prevData.length - 1] +
+                    response.data[j].disease_cases,
+              ]);
+            }
+          }
+        });
     } else setDropDownState(null);
-  }, [diseaseType, dropDownState, compareStates]);
+  }, [diseaseType, dropDownState, compareStates, year]);
 
   return (
     <>
       <AnimatePresence>
+        {console.log(incrementingCases)}
         {compareStates && (
           <motion.div
             className="data-section"
@@ -217,7 +258,7 @@ export default function ComparisonLeft() {
                     {
                       id: 1,
                       label: diseaseType + " total per year (non growing)",
-                      data: [...deaths],
+                      data: [...cases],
                     },
                   ],
                 }}
@@ -247,7 +288,7 @@ export default function ComparisonLeft() {
                     {
                       id: 1,
                       label: diseaseType + " growing",
-                      data: [...cases],
+                      data: [...incrementingCases],
                     },
                   ],
                 }}

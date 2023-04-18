@@ -108,15 +108,14 @@ export default function TitleHeader() {
                 theme-value={theme}
                 onChange={handleDiseaseSelection}
               >
-                <option value="Covid">Covid</option>
-                <option value="Measles">Measles</option>
-                <option value="Malaria">Malaria</option>
-                <option value="Mumps">Mumps</option>
-                <option value="Pneumococcal disease">
-                  Pneumococcal Diseases
-                </option>
-                <option value="CSyphilis">Syphilis</option>
-                <option value="Tuberculosis">Tuberculosis</option>
+                <option value="covid">Covid</option>
+                <option value="campylobacteriosis">Campylobacteriosis</option>
+                <option value="chlamydia">Chlamydia</option>
+                <option value="gonorrhea">gonorrhea</option>
+                <option value="malaria">Malaria</option>
+                <option value="pneumococcal">Pneumococcal Diseases</option>
+                <option value="syphilis">Syphilis</option>
+                <option value="tuberculosis">Tuberculosis</option>
               </select>
             </span>
           </ul>

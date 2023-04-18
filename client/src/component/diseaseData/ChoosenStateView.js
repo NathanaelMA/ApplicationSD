@@ -19,6 +19,7 @@ export default function ChoosenStateView() {
   const [deaths, setDeaths] = useState([]);
   const [cases, setCases] = useState([]);
   const [scroll, setScroll] = useState("true");
+  const [year, setYear] = useState(null);
 
   const states = [
     ["Alabama", "AL"],
@@ -81,7 +82,7 @@ export default function ChoosenStateView() {
     compareStates ? setChoosenState(null) : setChoosenState(choosenState);
 
     if (choosenState) {
-      diseaseType === "Covid" ? setScroll("true") : setScroll("false");
+      diseaseType === "covid" ? setScroll("true") : setScroll("false");
 
       serverStateName = compareStates
         ? dropDownState
@@ -90,31 +91,35 @@ export default function ChoosenStateView() {
       setDate([]);
       setDeaths([]);
       setCases([]);
-
-      Axios.get(
-        "http://127.0.0.1:3001/get?diseaseType=" +
-          diseaseType +
-          "&choosenState=" +
-          serverStateName
-      ).then((response) => {
-        for (let j = 0; j < response.data.length; j++) {
-          if (response.data[j].state === serverStateName) {
-            setDate((prevData) => [...prevData, response.data[j].week + " "]);
-            diseaseType === "Covid"
-              ? setDeaths((prevData) => [
-                  ...prevData,
-                  response.data[j].disease_deaths + " ",
-                ])
-              : setDeaths([]);
-            setCases((prevData) => [
-              ...prevData,
-              response.data[j].disease_cases + " ",
-            ]);
+      diseaseType &&
+        serverStateName &&
+        year &&
+        Axios.get(
+          "http://localhost:3001/getTotalNonGrowing?diseaseType=" +
+            diseaseType +
+            "&choosenState=" +
+            serverStateName +
+            "&year=" +
+            year
+        ).then((response) => {
+          for (let j = 0; j < response.data.length; j++) {
+            if (response.data[j].state === serverStateName) {
+              setDate((prevData) => [...prevData, response.data[j].week + " "]);
+              // diseaseType === "Covid"
+              //   ? setDeaths((prevData) => [
+              //       ...prevData,
+              //       response.data[j].disease_deaths + " ",
+              //     ])
+              //   : setDeaths([]);
+              setCases((prevData) => [
+                ...prevData,
+                response.data[j].disease_cases + " ",
+              ]);
+            }
           }
-        }
-      });
+        });
     } else setDropDownState(null);
-  }, [choosenState, compareStates, diseaseType, dropDownState]);
+  }, [choosenState, compareStates, diseaseType, year]);
 
   return (
     <>
@@ -128,43 +133,27 @@ export default function ChoosenStateView() {
             animate={{ x: "0%", transition: { duration: 2 } }}
             active-state={JSON.stringify(compareStates)}
           >
+            <div id="year-selector">
+              <div className="col-sm-5">
+                <select
+                  className="form-control"
+                  id="year"
+                  name="year"
+                  onChange={(e) => setYear(e.target.selectedOptions[0].text)}
+                >
+                  <option value="">Choose Year</option>
+                  <option value="2020">2020</option>
+                  <option value="2021">2021</option>
+                  <option value="2022">2022</option>
+                  <option value="2023">2023</option>
+                </select>
+              </div>
+            </div>
             <div
               id="left-display-state-data"
               theme-value={theme}
               scroll-value={scroll}
             >
-              {diseaseType === "Covid" ? (
-                <Line
-                  datasetIdKey="id"
-                  data={{
-                    labels: [...date],
-                    datasets: [
-                      {
-                        id: 1,
-                        label: diseaseType + " Deaths",
-                        data: [...deaths],
-                      },
-                    ],
-                  }}
-                  options={{
-                    scales: {
-                      x: {
-                        title: {
-                          display: true,
-                          text: "Week",
-                        },
-                      },
-                      y: {
-                        title: {
-                          display: true,
-                          text: "Deaths",
-                        },
-                      },
-                    },
-                  }}
-                />
-              ) : null}
-
               <Line
                 datasetIdKey="id"
                 data={{

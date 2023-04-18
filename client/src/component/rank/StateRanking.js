@@ -9,16 +9,18 @@ export default function StateRanking() {
 
   useEffect(() => {
     Axios.get(
-      "http://127.0.0.1:3001/getTopStates?diseaseType=" + diseaseType
+      "http://127.0.0.1:3001/getTopStates?diseaseType=" +
+        diseaseType.toLowerCase()
     ).then((response) => {
-      // console.log(response.data);
+      console.log(response.data);
       setStates([]);
       setCases([]);
+      response.data.sort((a, b) => b.disease_cases - a.disease_cases);
       for (let j = 0; j < response.data.length; j++) {
         setStates((prevData) => [...prevData, response.data[j].state + " "]);
         setCases((prevData) => [
           ...prevData,
-          response.data[j].total_cases + " ",
+          response.data[j].disease_cases + " ",
         ]);
       }
     });
@@ -38,6 +40,7 @@ export default function StateRanking() {
           </tr>
         </thead>
         <tbody>
+          {}
           {states.map((state, index) => {
             return (
               <tr key={index}>
