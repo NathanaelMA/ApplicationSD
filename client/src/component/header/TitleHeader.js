@@ -9,6 +9,7 @@ import Axios from "axios";
 export default function TitleHeader() {
   const {
     choosenState,
+    setChoosenState,
     USMainMap,
     setUSMainMap,
     setDiseaseType,
@@ -20,30 +21,17 @@ export default function TitleHeader() {
     setRankingPage,
   } = useContext(AppContext);
 
-  const [isOn, setIsOn] = useState(false);
-
-  // const toggleSwitch = () => {
-  //   theme === "Dark" ? setTheme("Light") : setTheme("Dark");
-  //   setIsOn(!isOn);
-  // };
-
-  // const spring = {
-  //   type: "spring",
-  //   stiffness: 700,
-  //   damping: 30,
-  // };
-
   function handleMapView() {
     setUSMainMap(true);
     setCompareStates(false);
     setRankingPage(false);
-    // if (choosenState || compareStates || rankingPage) {
-    //   setUSMainMap(true);
-    //   setCompareStates(false);
-    //   setRankingPage(false);
-    // } else {
-    //   setUSMainMap(false);
-    // }
+  }
+
+  function handleHome() {
+    setChoosenState(null);
+    setUSMainMap(true);
+    setRankingPage(true);
+    setCompareStates(false);
   }
 
   function handleCompare() {
@@ -85,14 +73,14 @@ export default function TitleHeader() {
           id="bs-example-navbar-collapse-1"
         >
           <ul className="nav navbar-nav navbar-right">
-            <li>
+            {/* <li>
               <a className="page-scroll" onClick={handleRanking}>
                 Nation
               </a>
-            </li>
+            </li> */}
             <li>
-              <a className="page-scroll" onClick={handleMapView}>
-                Map
+              <a className="page-scroll" onClick={handleHome}>
+                Home
               </a>
             </li>
             <li>

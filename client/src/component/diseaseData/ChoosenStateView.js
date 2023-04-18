@@ -129,8 +129,8 @@ export default function ChoosenStateView() {
             className="data-section"
             theme-value={theme}
             layout
-            initial={{ x: "-70%" }}
-            animate={{ x: "0%", transition: { duration: 2 } }}
+            // initial={{ x: "-70%" }}
+            // animate={{ x: "0%", transition: { duration: 2 } }}
             active-state={JSON.stringify(compareStates)}
           >
             <div id="year-selector">
@@ -183,8 +183,8 @@ export default function ChoosenStateView() {
                   },
                 }}
               />
-              <h1> % of Population infected</h1>
-              <h2>total confirmed cases</h2>
+              {/* <h1> % of Population infected</h1>
+              <h2>total confirmed cases</h2> */}
             </div>
           </motion.div>
         )}

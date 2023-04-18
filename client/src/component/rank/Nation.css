@@ -6,16 +6,23 @@
 #ranking-bottom-half {
     display: flex;
     height: 38em;
-    
 }
 
 #disease-name {
     width: 5em;
 }
 
-#cases-chart{
-    /* margin: 0 auto;
-    width: auto; */
-    height: 40em;
-    
+#piechart-topstates[stack-display="true"] {
+    width: 80em;    
+    /* background-color: red; */
+}
+
+#piechart-topstates[stack-display="false"] {
+    width: 20em;
+    /* background-color: aqua; */
+}
+
+
+#map-nation[stack-display="false"] {
+    display: flex;
 }

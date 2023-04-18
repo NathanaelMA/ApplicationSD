@@ -32,21 +32,21 @@ export default function Map() {
       let y0 = choosenStateTitle.getBBox().y;
       let x1 = choosenStateTitle.getBBox().width + x0;
       let y1 = choosenStateTitle.getBBox().height + y0;
-      svg.call(zoom);
+      // svg.call(zoom);
 
-      svg
-        .transition()
-        .duration(300)
-        .delay(800)
-        .call(
-          zoom.transform,
-          d3.zoomIdentity
-            .translate(width / 2, height / 2)
-            .scale(
-              Math.min(3, 0.9 / Math.max((x1 - x0) / width, (y1 - y0) / height))
-            )
-            .translate(-(x0 + x1) / 2, -(y0 + y1) / 2)
-        );
+      // svg
+      //   .transition()
+      //   .duration(300)
+      //   .delay(800)
+      //   .call(
+      //     zoom.transform,
+      //     d3.zoomIdentity
+      //       .translate(width / 2, height / 2)
+      //       .scale(
+      //         Math.min(3, 0.9 / Math.max((x1 - x0) / width, (y1 - y0) / height))
+      //       )
+      //       .translate(-(x0 + x1) / 2, -(y0 + y1) / 2)
+      //   );
 
       function zoomed(event) {
         const { transform } = event;
@@ -70,8 +70,8 @@ export default function Map() {
           layout
           theme-value={theme}
           key="USmap"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1, transition: { duration: 1.2 } }}
+          // initial={{ opacity: 0 }}
+          // animate={{ opacity: 1, transition: { duration: 1.2 } }}
           id="map-svg"
         >
           <SvgUsMap />

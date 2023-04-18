@@ -259,6 +259,9 @@ export default function ComparisonLeft() {
                       id: 1,
                       label: diseaseType + " total per year (non growing)",
                       data: [...cases],
+                      fill: true,
+                      pointRadius: 0.5,
+                      lineTension: 0.5,
                     },
                   ],
                 }}
@@ -277,6 +280,7 @@ export default function ComparisonLeft() {
                       },
                     },
                   },
+                  bezierCurve: true,
                 }}
               />
 

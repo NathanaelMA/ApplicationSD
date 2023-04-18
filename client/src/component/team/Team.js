@@ -1,7 +1,5 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
 import "./Team.css";
-import { motion } from "framer-motion";
 import NMAImg from "../../images/NMA.jpg";
 import CVEImg from "../../images/CVE.jpg";
 import SSCImg from "../../images/SSC.png";

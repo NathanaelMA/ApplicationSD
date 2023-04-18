@@ -2,13 +2,13 @@ import React, { useContext, useEffect, useState, useMemo } from "react";
 import "./Nation.css";
 import { motion } from "framer-motion";
 import { AppContext } from "../pages/DiseaseApp";
-import { Line, PolarArea } from "react-chartjs-2";
+import { Doughnut, Line, PolarArea } from "react-chartjs-2";
 import StateRanking from "./StateRanking";
 import "chart.js/auto";
 import Axios from "axios";
 
 export default function Nation() {
-  const { rankingPage, diseaseType } = useContext(AppContext);
+  const { rankingPage, diseaseType, stackedDisplay } = useContext(AppContext);
   const [openView, setOpenView] = useState();
   const [states, setStates] = useState([]);
   const [weeks, setWeeks] = useState([]);
@@ -59,12 +59,74 @@ export default function Nation() {
   return (
     rankingPage && (
       <motion.div
+        id="piechart-topstates"
+        stack-display={stackedDisplay.toString()}
         layout
         initial={{ opacity: 0 }}
         animate={{ opacity: 1, transition: { duration: 0.7 } }}
       >
+        {console.log(stackedDisplay)}
         <div id="case-charts">
-          <PolarArea
+          <Doughnut
+            data={{
+              labels: [
+                "Covid",
+                "Gonorrhea",
+                "Malaria",
+                "Campylobacteriosis",
+                "Chlamydia",
+                "Pneumococcal",
+                "Syphilis",
+                "Tuberculosis",
+              ],
+              datasets: [
+                {
+                  label: "Cases",
+                  data: [
+                    covidTotals,
+                    gonorrheaTotals,
+                    malariaTotals,
+                    campylobacteriosisTotals,
+                    chlamydiaTotals,
+                    pneumoccalTotals,
+                    syphilisTotals,
+                    tuberculosisTotals,
+                  ],
+                  backgroundColor: [
+                    "rgba(255, 99, 132, 0.2)",
+                    "rgba(54, 162, 235, 0.2)",
+                    "rgba(255, 206, 86, 0.2)",
+                    "rgba(75, 192, 192, 0.2)",
+                    "rgba(153, 102, 255, 0.2)",
+                    "rgba(255, 159, 64, 0.2)",
+                    "rgba(255, 99, 132, 0.2)",
+                  ],
+                  borderColor: [
+                    "rgba(255, 99, 132, 1)",
+                    "rgba(54, 162, 235, 1)",
+                    "rgba(255, 206, 86, 1)",
+                    "rgba(75, 192, 192, 1)",
+                    "rgba(153, 102, 255, 1)",
+                    "rgba(255, 159, 64, 1)",
+                    "rgba(255, 99, 132, 1)",
+                  ],
+                  borderWidth: 1,
+                },
+              ],
+            }}
+            height={200}
+            width={400}
+            // options={{
+            //   maintainAspectRatio: false,
+            //   scales: {
+            //     y: {
+            //       beginAtZero: true,
+            //     },
+            //   },
+            // }}
+          />
+
+          {/* <PolarArea
             data={{
               labels: [
                 "Covid",
@@ -113,12 +175,12 @@ export default function Nation() {
             }}
             height={400}
             width={600}
-          />
+          /> */}
 
           <StateRanking />
         </div>
 
-        <div id="cases-chart">
+        {/* <div id="cases-chart">
           <Line
             data={{
               labels: ["January", "February", "March", "April"],
@@ -153,7 +215,7 @@ export default function Nation() {
               },
             }}
           />
-        </div>
+        </div> */}
       </motion.div>
     )
   );

@@ -3,3 +3,17 @@
     background: rgb(255,255,255);
     margin-top: 8em;
 }
+
+#map-nation[stack-display="true"] {
+    display: block;
+}
+
+#map-nation[stack-display="false"] {
+    display: flex;
+
+}
+
+
+#state-view {
+    display: flex;
+}
