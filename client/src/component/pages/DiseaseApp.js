@@ -6,17 +6,18 @@ import ComparisonRight from "../diseaseData/ComparisonRight";
 import Map from "../map/Map";
 import ColorLegend from "../map/ColorLegend";
 import { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+// import { AnimatePresence, motion } from "framer-motion";
 import Rank from "../rank/Nation";
 import ChoosenStateView from "../diseaseData/ChoosenStateView";
 import Team from "../team/Team";
 import Nation from "../rank/Nation";
+import Prediction from "../predictions/Prediction";
 
 export const AppContext = React.createContext();
 export default function DiseaseApp() {
   const [choosenState, setChoosenState] = useState(null);
   const [choosenStateTitle, setChoosenStateTitle] = useState(null);
-  const [USMainMap, setUSMainMap] = useState(false);
+  const [USMainMap, setUSMainMap] = useState(true);
   const [diseaseType, setDiseaseType] = useState("Covid");
   const [compareStates, setCompareStates] = useState(false);
   const [theme, setTheme] = useState("Light");
@@ -24,6 +25,44 @@ export default function DiseaseApp() {
   const [deaths, setDeaths] = useState([]);
   const [rankingPage, setRankingPage] = useState(true);
   const [choosenStateName, setChoosenStateName] = useState("");
+  const [stackedDisplay, setStackedDisplay] = useState(false);
+
+  //test
+
+  // useEffect(() => {
+  //   setDeaths([]);
+  //   setCases([]);
+  //   setDate([]);
+
+  //   if (compareStates) {
+  //     Axios.get(
+  //       "http://localhost:3001/get?diseaseType=" +
+  //         diseaseType +
+  //         "&choosenState=" +
+  //         dropDownState +
+  //         "&year=" +
+  //         year
+  //     ).then((response) => {
+  //       for (let j = 0; j < response.data.length; j++) {
+  //         if (response.data[j].state === dropDownState) {
+  //           setDate((prevData) => [...prevData, response.data[j].week + " "]);
+  //           diseaseType === "Covid"
+  //             ? setDeaths((prevData) => [
+  //                 ...prevData,
+  //                 response.data[j].disease_deaths + " ",
+  //               ])
+  //             : setDeaths([]);
+  //           setCases((prevData) => [
+  //             ...prevData,
+  //             response.data[j].disease_cases + " ",
+  //           ]);
+  //         }
+  //       }
+  //     });
+  //   } else setDropDownState(null);
+  // }, [dropDownState, diseaseType, compareStates, year]);
+
+  //end
 
   const ChoosenStatePicker = (currState) => {
     setChoosenState(currState);
@@ -66,6 +105,10 @@ export default function DiseaseApp() {
     }
   }, [compareStates, rankingPage]);
 
+  useEffect(() => {
+    choosenState ? setStackedDisplay(true) : setStackedDisplay(false);
+  });
+
   return (
     <AppContext.Provider
       value={{
@@ -89,18 +132,24 @@ export default function DiseaseApp() {
         setDeaths,
         rankingPage,
         setRankingPage,
+        stackedDisplay,
+        setStackedDisplay,
       }}
     >
       <TitleHeader />
 
-      <div className="container" id="main-container" theme-value={theme}>
+      <div id="main-container" theme-value={theme}>
         <ComparisonLeft />
-
         <ComparisonRight />
-        <Nation />
-        <ChoosenStateView />
-        <Map />
+        <div id="map-nation" stack-display={stackedDisplay.toString()}>
+          <div id="state-view">
+            <ChoosenStateView />
+            <Map />
+          </div>
+          <Nation />
+        </div>
       </div>
+      <Prediction />
       <Team />
     </AppContext.Provider>
   );

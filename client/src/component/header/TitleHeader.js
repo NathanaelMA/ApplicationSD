@@ -8,42 +8,19 @@ import { Link } from "react-router-dom";
 import Axios from "axios";
 export default function TitleHeader() {
   const {
-    choosenState,
-    USMainMap,
+    setChoosenState,
     setUSMainMap,
     setDiseaseType,
-    compareStates,
     setCompareStates,
     theme,
-    setTheme,
-    rankingPage,
     setRankingPage,
   } = useContext(AppContext);
 
-  const [isOn, setIsOn] = useState(false);
-
-  // const toggleSwitch = () => {
-  //   theme === "Dark" ? setTheme("Light") : setTheme("Dark");
-  //   setIsOn(!isOn);
-  // };
-
-  // const spring = {
-  //   type: "spring",
-  //   stiffness: 700,
-  //   damping: 30,
-  // };
-
-  function handleMapView() {
+  function handleHome() {
+    setChoosenState(null);
     setUSMainMap(true);
+    setRankingPage(true);
     setCompareStates(false);
-    setRankingPage(false);
-    // if (choosenState || compareStates || rankingPage) {
-    //   setUSMainMap(true);
-    //   setCompareStates(false);
-    //   setRankingPage(false);
-    // } else {
-    //   setUSMainMap(false);
-    // }
   }
 
   function handleCompare() {
@@ -54,13 +31,6 @@ export default function TitleHeader() {
   function handleDiseaseSelection(e) {
     setDiseaseType(e.target.value);
   }
-
-  function handleRanking() {
-    setCompareStates(false);
-    setUSMainMap(false);
-    setRankingPage(true);
-  }
-
   return (
     <nav id="menu" className="navbar navbar-default navbar-fixed-top">
       <div className="container">
@@ -86,13 +56,8 @@ export default function TitleHeader() {
         >
           <ul className="nav navbar-nav navbar-right">
             <li>
-              <a className="page-scroll" onClick={handleRanking}>
-                Nation
-              </a>
-            </li>
-            <li>
-              <a className="page-scroll" onClick={handleMapView}>
-                Map
+              <a className="page-scroll" onClick={handleHome}>
+                Home
               </a>
             </li>
             <li>
@@ -111,7 +76,7 @@ export default function TitleHeader() {
                 <option value="covid">Covid</option>
                 <option value="campylobacteriosis">Campylobacteriosis</option>
                 <option value="chlamydia">Chlamydia</option>
-                <option value="gonorrhea">gonorrhea</option>
+                <option value="gonorrhea">Gonorrhea</option>
                 <option value="malaria">Malaria</option>
                 <option value="pneumococcal">Pneumococcal Diseases</option>
                 <option value="syphilis">Syphilis</option>

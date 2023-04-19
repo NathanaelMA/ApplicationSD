@@ -14,7 +14,6 @@ export default function ChoosenStateView() {
     compareStates,
     theme,
   } = useContext(AppContext);
-  const [dropDownState, setDropDownState] = useState(null);
   const [date, setDate] = useState([]);
   const [deaths, setDeaths] = useState([]);
   const [cases, setCases] = useState([]);
@@ -82,11 +81,9 @@ export default function ChoosenStateView() {
     compareStates ? setChoosenState(null) : setChoosenState(choosenState);
 
     if (choosenState) {
-      diseaseType === "covid" ? setScroll("true") : setScroll("false");
+      diseaseType === "Covid" ? setScroll("true") : setScroll("false");
 
-      serverStateName = compareStates
-        ? dropDownState
-        : states.find((state) => state[1] === choosenState.id)[0];
+      serverStateName = states.find((state) => state[1] === choosenState.id)[0];
 
       setDate([]);
       setDeaths([]);
@@ -105,12 +102,12 @@ export default function ChoosenStateView() {
           for (let j = 0; j < response.data.length; j++) {
             if (response.data[j].state === serverStateName) {
               setDate((prevData) => [...prevData, response.data[j].week + " "]);
-              // diseaseType === "Covid"
-              //   ? setDeaths((prevData) => [
-              //       ...prevData,
-              //       response.data[j].disease_deaths + " ",
-              //     ])
-              //   : setDeaths([]);
+              diseaseType === "Covid"
+                ? setDeaths((prevData) => [
+                    ...prevData,
+                    response.data[j].disease_deaths + " ",
+                  ])
+                : setDeaths([]);
               setCases((prevData) => [
                 ...prevData,
                 response.data[j].disease_cases + " ",
@@ -118,19 +115,21 @@ export default function ChoosenStateView() {
             }
           }
         });
-    } else setDropDownState(null);
+    } else {
+      setYear(null);
+    }
   }, [choosenState, compareStates, diseaseType, year]);
 
   return (
     <>
       <AnimatePresence>
-        {choosenState && USMainMap && (
+        {choosenState && (
           <motion.div
             className="data-section"
             theme-value={theme}
             layout
-            initial={{ x: "-70%" }}
-            animate={{ x: "0%", transition: { duration: 2 } }}
+            // initial={{ x: "-70%" }}
+            // animate={{ x: "0%", transition: { duration: 2 } }}
             active-state={JSON.stringify(compareStates)}
           >
             <div id="year-selector">
@@ -163,6 +162,9 @@ export default function ChoosenStateView() {
                       id: 1,
                       label: diseaseType + " Cases",
                       data: [...cases],
+                      fill: true,
+                      pointRadius: 0.5,
+                      lineTension: 0.5,
                     },
                   ],
                 }}
@@ -183,8 +185,42 @@ export default function ChoosenStateView() {
                   },
                 }}
               />
-              <h1> % of Population infected</h1>
-              <h2>total confirmed cases</h2>
+              {diseaseType === "Covid" && (
+                <Line
+                  datasetIdKey="id"
+                  data={{
+                    labels: [...date],
+                    datasets: [
+                      {
+                        id: 1,
+                        label: diseaseType + " Deaths",
+                        data: [...deaths],
+                        fill: true,
+                        pointRadius: 0.5,
+                        lineTension: 0.5,
+                      },
+                    ],
+                  }}
+                  options={{
+                    scales: {
+                      x: {
+                        title: {
+                          display: true,
+                          text: "Week",
+                        },
+                      },
+                      y: {
+                        title: {
+                          display: true,
+                          text: "Cases",
+                        },
+                      },
+                    },
+                  }}
+                />
+              )}
+              {/* <h1> % of Population infected</h1>
+              <h2>total confirmed cases</h2> */}
             </div>
           </motion.div>
         )}

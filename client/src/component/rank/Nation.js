@@ -2,13 +2,13 @@ import React, { useContext, useEffect, useState, useMemo } from "react";
 import "./Nation.css";
 import { motion } from "framer-motion";
 import { AppContext } from "../pages/DiseaseApp";
-import { Line, PolarArea } from "react-chartjs-2";
+import { Doughnut, Line, PolarArea } from "react-chartjs-2";
 import StateRanking from "./StateRanking";
 import "chart.js/auto";
 import Axios from "axios";
 
 export default function Nation() {
-  const { rankingPage, diseaseType } = useContext(AppContext);
+  const { rankingPage, diseaseType, stackedDisplay } = useContext(AppContext);
   const [openView, setOpenView] = useState();
   const [states, setStates] = useState([]);
   const [weeks, setWeeks] = useState([]);
@@ -26,7 +26,6 @@ export default function Nation() {
     Axios.get(
       "http://127.0.0.1:3001/getCurrentWeekTotal?diseaseType=" + diseaseType
     ).then((response) => {
-      console.log(response.data);
       setCases([]);
       for (let j = 0; j < response.data.length; j++) {
         response.data[j].disease === "covid" &&
@@ -59,12 +58,14 @@ export default function Nation() {
   return (
     rankingPage && (
       <motion.div
+        id="piechart-topstates"
+        stack-display={stackedDisplay.toString()}
         layout
         initial={{ opacity: 0 }}
         animate={{ opacity: 1, transition: { duration: 0.7 } }}
       >
         <div id="case-charts">
-          <PolarArea
+          <Doughnut
             data={{
               labels: [
                 "Covid",
@@ -111,48 +112,11 @@ export default function Nation() {
                 },
               ],
             }}
-            height={400}
-            width={600}
+            height={200}
+            width={400}
           />
 
           <StateRanking />
-        </div>
-
-        <div id="cases-chart">
-          <Line
-            data={{
-              labels: ["January", "February", "March", "April"],
-              datasets: [
-                {
-                  label: diseaseType + " Cases",
-                  data: [10, 25, 40, 60],
-                  backgroundColor: "rgb(255, 99, 132)",
-                  borderColor: "rgb(154, 16, 235)",
-                  order: 2,
-                },
-                {
-                  label: diseaseType + " Predictions",
-                  data: [null, null, 10, 15],
-                  backgroundColor: "rgb(25, 235, 132)",
-                  borderColor: "rgb(25, 235, 132)",
-                  order: 2,
-                },
-              ],
-            }}
-            options={{
-              scales: {
-                x: {
-                  title: {
-                    display: true,
-                    text: "Months",
-                  },
-                },
-                y: {
-                  beginAtZero: true,
-                },
-              },
-            }}
-          />
         </div>
       </motion.div>
     )

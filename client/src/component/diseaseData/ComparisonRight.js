@@ -72,7 +72,6 @@ export default function ComparisonRight() {
           setIncrementingCases([]);
           setDate([]);
           for (let j = 0; j < response.data.length; j++) {
-            // console.log(response.data);
             if (response.data[j].state === serverStateName) {
               setDate((prevData) => [...prevData, response.data[j].week + " "]);
               // diseaseType === "Covid"
@@ -196,6 +195,9 @@ export default function ComparisonRight() {
                       id: 1,
                       label: diseaseType + " total per year (non-growing)",
                       data: [...cases],
+                      fill: true,
+                      pointRadius: 0.5,
+                      lineTension: 0.5,
                     },
                   ],
                 }}
@@ -226,6 +228,9 @@ export default function ComparisonRight() {
                       id: 1,
                       label: diseaseType + " growing",
                       data: [...incrementingCases],
+                      fill: true,
+                      pointRadius: 0.5,
+                      lineTension: 0.5,
                     },
                   ],
                 }}

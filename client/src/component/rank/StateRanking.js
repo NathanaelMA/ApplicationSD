@@ -12,7 +12,6 @@ export default function StateRanking() {
       "http://127.0.0.1:3001/getTopStates?diseaseType=" +
         diseaseType.toLowerCase()
     ).then((response) => {
-      console.log(response.data);
       setStates([]);
       setCases([]);
       response.data.sort((a, b) => b.disease_cases - a.disease_cases);
@@ -32,6 +31,9 @@ export default function StateRanking() {
         <caption className="text-center font-weight-bold" id="table-caption">
           {diseaseType}
         </caption>
+        <caption className="text-center font-weight-bold" id="table-caption">
+          {"Top 5 states of current week"}
+        </caption>
         <thead>
           <tr>
             <th scope="col">Current Rank</th>
@@ -40,7 +42,6 @@ export default function StateRanking() {
           </tr>
         </thead>
         <tbody>
-          {}
           {states.map((state, index) => {
             return (
               <tr key={index}>
