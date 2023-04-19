@@ -1,13 +1,9 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import "./TitleHeader.css";
-import Maplogo from "../../images/NAMap.png";
-import scalelogo from "../../images/scale.png";
-import Rank from "../../images/rank.png";
 import { AppContext } from "../pages/DiseaseApp";
-import { Link } from "react-router-dom";
-import Axios from "axios";
 export default function TitleHeader() {
   const {
+    setChangeMapColor,
     setChoosenState,
     setUSMainMap,
     setDiseaseType,
@@ -21,6 +17,7 @@ export default function TitleHeader() {
     setUSMainMap(true);
     setRankingPage(true);
     setCompareStates(false);
+    setChangeMapColor(true);
   }
 
   function handleCompare() {

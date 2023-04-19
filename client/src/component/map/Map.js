@@ -6,7 +6,7 @@ import { AppContext } from "../pages/DiseaseApp";
 import { AnimatePresence, motion } from "framer-motion";
 
 export default function Map() {
-  const { choosenState, setChoosenState, choosenStateTitle, USMainMap, theme } =
+  const { choosenState, setChoosenState, USMainMap, theme } =
     useContext(AppContext);
 
   useEffect(() => {
@@ -18,12 +18,13 @@ export default function Map() {
       const zoom = d3.zoom().scaleExtent([1, 3]).on("zoom", zoomed);
       d3.select(choosenState).style("fill", "red");
 
-      const svg = d3.select("svg").attr("viewBox", [0, 0, width, height]);
+      // const svg = d3.select("svg").attr("viewBox", [0, 0, width, height]);
 
-      let x0 = choosenStateTitle.getBBox().x;
-      let y0 = choosenStateTitle.getBBox().y;
-      let x1 = choosenStateTitle.getBBox().width + x0;
-      let y1 = choosenStateTitle.getBBox().height + y0;
+      // let x0 = choosenStateTitle.getBBox().x;
+      // let y0 = choosenStateTitle.getBBox().y;
+      // let x1 = choosenStateTitle.getBBox().width + x0;
+      // let y1 = choosenStateTitle.getBBox().height + y0;
+
       // svg.call(zoom);
 
       // svg
@@ -58,14 +59,7 @@ export default function Map() {
   return (
     <AnimatePresence>
       {USMainMap ? (
-        <motion.div
-          layout
-          theme-value={theme}
-          key="USmap"
-          // initial={{ opacity: 0 }}
-          // animate={{ opacity: 1, transition: { duration: 1.2 } }}
-          id="map-svg"
-        >
+        <motion.div layout theme-value={theme} id="map-svg">
           <SvgUsMap />
         </motion.div>
       ) : null}

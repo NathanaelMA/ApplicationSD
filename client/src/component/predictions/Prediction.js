@@ -24,7 +24,6 @@ export default function Prediction() {
       Axios.get(
         "http://localhost:3001/getCurrentYear?diseaseType=" + diseaseType
       ).then((response) => {
-        console.log(response.data);
         for (let j = 0; j < response.data.length; j++) {
           setDate((prevData) => [...prevData, response.data[j].week + " "]);
           diseaseType === "Covid"
@@ -44,8 +43,6 @@ export default function Prediction() {
 
   return (
     <div id="cases-chart">
-      {console.log(futureDates)}
-      {console.log(date)}
       <Line
         data={{
           labels: [...date, 14, 15, 16, 17],
