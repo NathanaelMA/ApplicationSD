@@ -26,7 +26,6 @@ export default function Nation() {
     Axios.get(
       "http://127.0.0.1:3001/getCurrentWeekTotal?diseaseType=" + diseaseType
     ).then((response) => {
-      console.log(response.data);
       setCases([]);
       for (let j = 0; j < response.data.length; j++) {
         response.data[j].disease === "covid" &&
@@ -65,7 +64,6 @@ export default function Nation() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1, transition: { duration: 0.7 } }}
       >
-        {console.log(stackedDisplay)}
         <div id="case-charts">
           <Doughnut
             data={{
@@ -116,106 +114,10 @@ export default function Nation() {
             }}
             height={200}
             width={400}
-            // options={{
-            //   maintainAspectRatio: false,
-            //   scales: {
-            //     y: {
-            //       beginAtZero: true,
-            //     },
-            //   },
-            // }}
           />
-
-          {/* <PolarArea
-            data={{
-              labels: [
-                "Covid",
-                "Gonorrhea",
-                "Malaria",
-                "Campylobacteriosis",
-                "Chlamydia",
-                "Pneumococcal",
-                "Syphilis",
-                "Tuberculosis",
-              ],
-              datasets: [
-                {
-                  label: "Cases",
-                  data: [
-                    covidTotals,
-                    gonorrheaTotals,
-                    malariaTotals,
-                    campylobacteriosisTotals,
-                    chlamydiaTotals,
-                    pneumoccalTotals,
-                    syphilisTotals,
-                    tuberculosisTotals,
-                  ],
-                  backgroundColor: [
-                    "rgba(255, 99, 132, 0.2)",
-                    "rgba(54, 162, 235, 0.2)",
-                    "rgba(255, 206, 86, 0.2)",
-                    "rgba(75, 192, 192, 0.2)",
-                    "rgba(153, 102, 255, 0.2)",
-                    "rgba(255, 159, 64, 0.2)",
-                    "rgba(255, 99, 132, 0.2)",
-                  ],
-                  borderColor: [
-                    "rgba(255, 99, 132, 1)",
-                    "rgba(54, 162, 235, 1)",
-                    "rgba(255, 206, 86, 1)",
-                    "rgba(75, 192, 192, 1)",
-                    "rgba(153, 102, 255, 1)",
-                    "rgba(255, 159, 64, 1)",
-                    "rgba(255, 99, 132, 1)",
-                  ],
-                  borderWidth: 1,
-                },
-              ],
-            }}
-            height={400}
-            width={600}
-          /> */}
 
           <StateRanking />
         </div>
-
-        {/* <div id="cases-chart">
-          <Line
-            data={{
-              labels: ["January", "February", "March", "April"],
-              datasets: [
-                {
-                  label: diseaseType + " Cases",
-                  data: [10, 25, 40, 60],
-                  backgroundColor: "rgb(255, 99, 132)",
-                  borderColor: "rgb(154, 16, 235)",
-                  order: 2,
-                },
-                {
-                  label: diseaseType + " Predictions",
-                  data: [null, null, 10, 15],
-                  backgroundColor: "rgb(25, 235, 132)",
-                  borderColor: "rgb(25, 235, 132)",
-                  order: 2,
-                },
-              ],
-            }}
-            options={{
-              scales: {
-                x: {
-                  title: {
-                    display: true,
-                    text: "Months",
-                  },
-                },
-                y: {
-                  beginAtZero: true,
-                },
-              },
-            }}
-          />
-        </div> */}
       </motion.div>
     )
   );

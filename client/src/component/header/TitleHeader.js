@@ -8,24 +8,13 @@ import { Link } from "react-router-dom";
 import Axios from "axios";
 export default function TitleHeader() {
   const {
-    choosenState,
     setChoosenState,
-    USMainMap,
     setUSMainMap,
     setDiseaseType,
-    compareStates,
     setCompareStates,
     theme,
-    setTheme,
-    rankingPage,
     setRankingPage,
   } = useContext(AppContext);
-
-  function handleMapView() {
-    setUSMainMap(true);
-    setCompareStates(false);
-    setRankingPage(false);
-  }
 
   function handleHome() {
     setChoosenState(null);
@@ -42,13 +31,6 @@ export default function TitleHeader() {
   function handleDiseaseSelection(e) {
     setDiseaseType(e.target.value);
   }
-
-  function handleRanking() {
-    setCompareStates(false);
-    setUSMainMap(false);
-    setRankingPage(true);
-  }
-
   return (
     <nav id="menu" className="navbar navbar-default navbar-fixed-top">
       <div className="container">
@@ -73,11 +55,6 @@ export default function TitleHeader() {
           id="bs-example-navbar-collapse-1"
         >
           <ul className="nav navbar-nav navbar-right">
-            {/* <li>
-              <a className="page-scroll" onClick={handleRanking}>
-                Nation
-              </a>
-            </li> */}
             <li>
               <a className="page-scroll" onClick={handleHome}>
                 Home
@@ -99,7 +76,7 @@ export default function TitleHeader() {
                 <option value="covid">Covid</option>
                 <option value="campylobacteriosis">Campylobacteriosis</option>
                 <option value="chlamydia">Chlamydia</option>
-                <option value="gonorrhea">gonorrhea</option>
+                <option value="gonorrhea">Gonorrhea</option>
                 <option value="malaria">Malaria</option>
                 <option value="pneumococcal">Pneumococcal Diseases</option>
                 <option value="syphilis">Syphilis</option>

@@ -6,16 +6,8 @@ import { AppContext } from "../pages/DiseaseApp";
 import { AnimatePresence, motion } from "framer-motion";
 
 export default function Map() {
-  const {
-    choosenState,
-    setChoosenState,
-    choosenStateTitle,
-    USMainMap,
-    setUSMainMap,
-    compareStates,
-    theme,
-    rankingPage,
-  } = useContext(AppContext);
+  const { choosenState, setChoosenState, choosenStateTitle, USMainMap, theme } =
+    useContext(AppContext);
 
   useEffect(() => {
     if (choosenState && USMainMap) {
@@ -57,7 +49,7 @@ export default function Map() {
     } else {
       d3.selectAll("path").style("fill", "#88a4bc");
       setChoosenState(null);
-      const svg = d3.select("svg").attr("viewBox", [-20, 3, 700, 280]);
+      const svg = d3.select("svg").attr("viewBox", [0, 0, 487, 360]);
       svg.on(".zoom", null);
       d3.select("g").attr("transform", "translate(0,0) scale(1.0)");
     }

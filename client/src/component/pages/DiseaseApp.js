@@ -138,9 +138,8 @@ export default function DiseaseApp() {
     >
       <TitleHeader />
 
-      <div className="container" id="main-container" theme-value={theme}>
+      <div id="main-container" theme-value={theme}>
         <ComparisonLeft />
-        {console.log(stackedDisplay)}
         <ComparisonRight />
         <div id="map-nation" stack-display={stackedDisplay.toString()}>
           <div id="state-view">

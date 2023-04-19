@@ -12,7 +12,6 @@ export default function StateRanking() {
       "http://127.0.0.1:3001/getTopStates?diseaseType=" +
         diseaseType.toLowerCase()
     ).then((response) => {
-      console.log(response.data);
       setStates([]);
       setCases([]);
       response.data.sort((a, b) => b.disease_cases - a.disease_cases);
