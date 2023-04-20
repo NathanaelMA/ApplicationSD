@@ -47,7 +47,6 @@ app.get("/getIncrementingTotal", (req, res) => {
 });
 
 app.get("/getCurrentWeekTotal", (req, res) => {
-  const diseaseType = req.query.diseaseType;
   db.query(
     "SELECT * FROM disease_weekly_totals WHERE year = 2023 and week = 12",
     (err, result) => {
@@ -103,7 +102,7 @@ app.get("/getTopStates", (req, res) => {
 app.get("/getMapColorCode", (req, res) => {
   const diseaseType = req.query.diseaseType;
   db.query(
-    "SELECT * FROM highest_weekly_data WHERE disease_name = ? and year = 2023 and week = 12",
+    "SELECT * FROM weekly_data WHERE disease_name = ? and year = 2023 and week = 12",
     [diseaseType],
     (err, result) => {
       if (err) {
@@ -114,21 +113,6 @@ app.get("/getMapColorCode", (req, res) => {
     }
   );
 });
-
-// app.get("/getTotals", (req, res) => {
-//   const diseaseType = req.query.diseaseType;
-//   db.query(
-//     "SELECT * FROM diseasetotals WHERE disease_name = ?",
-//     [diseaseType],
-//     (err, result) => {
-//       if (err) {
-//         console.log(err);
-//       } else {
-//         res.send(result);
-//       }
-//     }
-//   );
-// });
 
 app.listen(3001, () => {
   console.log("server is running on port 3001");
