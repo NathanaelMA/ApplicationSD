@@ -3,7 +3,6 @@ import "./Nation.css";
 import { motion } from "framer-motion";
 import { AppContext } from "../pages/DiseaseApp";
 import { Doughnut, Line, PolarArea } from "react-chartjs-2";
-import StateRanking from "./StateRanking";
 import "chart.js/auto";
 import Axios from "axios";
 
@@ -52,13 +51,7 @@ export default function Nation() {
 
   return (
     rankingPage && (
-      <motion.div
-        id="piechart-topstates"
-        stack-display={stackedDisplay.toString()}
-        layout
-        // initial={{ opacity: 0 }}
-        // animate={{ opacity: 1, transition: { duration: 0.7 } }}
-      >
+      <motion.div layout>
         <Doughnut
           id="doughnut-chart"
           stack-display={stackedDisplay.toString()}
@@ -113,14 +106,13 @@ export default function Nation() {
               legend: {
                 labels: {
                   font: {
-                    size: 17,
+                    size: 14,
                   },
                 },
               },
             },
           }}
         />
-        {/* <StateRanking /> */}
       </motion.div>
     )
   );

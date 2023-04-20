@@ -30,7 +30,6 @@ export default function TitleHeader() {
   }
   function handleDiseaseSelection(e) {
     setDiseaseType(e.target.dataset.value);
-    console.log(e.target.dataset.value);
   }
   return (
     <nav id="menu" className="navbar navbar-default navbar-fixed-top">
@@ -42,10 +41,10 @@ export default function TitleHeader() {
             data-toggle="collapse"
             data-target="#bs-example-navbar-collapse-1"
           >
-            <span className="sr-only">Toggle navigation</span>{" "}
-            <span className="icon-bar"></span>{" "}
-            <span className="icon-bar"></span>{" "}
-            <span className="icon-bar"></span>{" "}
+            <span className="sr-only">Toggle navigation</span>
+            <span className="icon-bar"></span>
+            <span className="icon-bar"></span>
+            <span className="icon-bar"></span>
           </button>
           <a className="navbar-brand page-scroll">
             Infectious Disease Risk Predictor

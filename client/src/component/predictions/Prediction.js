@@ -51,9 +51,9 @@ export default function Prediction() {
 
   return (
     <div id="chart_center">
-      {/* <button onClick={setDisplayPredictions(!displayPredictions)}>
+      <button onClick={() => setDisplayPredictions(!displayPredictions)}>
         Click me
-      </button> */}
+      </button>
       <div id="cases-chart">
         <Line
           data={{
@@ -70,10 +70,11 @@ export default function Prediction() {
                 order: 2,
               },
               {
-                label:
-                  diseaseType[0].toUpperCase() +
-                  diseaseType.slice(1) +
-                  " Predictions",
+                label: displayPredictions
+                  ? diseaseType[0].toUpperCase() +
+                    diseaseType.slice(1) +
+                    " Predictions"
+                  : null,
                 data: displayPredictions
                   ? [...futureDates, ...predictions]
                   : [...futureDates],

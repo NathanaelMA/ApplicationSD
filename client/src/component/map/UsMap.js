@@ -10,7 +10,6 @@ const SvgUsMap = (props) => (
         position: "relative",
       }}
       viewBox="0 0 487 360"
-      id="svg2"
       preserveAspectRatio="xMinYMin"
       {...props}
     >

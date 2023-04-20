@@ -3,6 +3,14 @@
     font-weight: bold;
 }
 
-.table{
+
+.table[stack-display="false"]{
+    width: 25vw;
+    height: 25em;
+}
+
+
+.table[stack-display="true"]{
     width: 50vw;
+    height: 30em;
 }

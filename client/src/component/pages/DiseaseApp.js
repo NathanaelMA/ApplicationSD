@@ -6,7 +6,6 @@ import ComparisonRight from "../diseaseData/ComparisonRight";
 import Map from "../map/Map";
 import ColorLegend from "../map/ColorLegend";
 import { useEffect, useState } from "react";
-import Rank from "../rank/Nation";
 import ChoosenStateView from "../diseaseData/ChoosenStateView";
 import Team from "../team/Team";
 import Nation from "../rank/Nation";
@@ -90,10 +89,6 @@ export default function DiseaseApp() {
   ];
 
   useEffect(() => {
-    // setDeaths([]);
-    // setCases([]);
-    // setDate([]);
-
     Axios.get(
       "http://localhost:3001/getMapColorCode?diseaseType=" + diseaseType
     ).then((response) => {
@@ -107,23 +102,9 @@ export default function DiseaseApp() {
           : null;
         setStatesData((prevData) => [...prevData, stateData]);
         setHighestDiseaseCase(response.data[0].disease_cases);
-        // setStatesData((prevData) => [...prevData, response.data[j]]);
-        // setDate((prevData) => [...prevData, response.data[j].week + " "]);
-        // diseaseType === "Covid"
-        //   ? setDeaths((prevData) => [
-        //       ...prevData,
-        //       response.data[j].disease_deaths + " ",
-        //     ])
-        //   : setDeaths([]);
-        // setCases((prevData) => [
-        //   ...prevData,
-        //   response.data[j].disease_cases + " ",
-        // ]);
       }
     });
   }, [diseaseType]);
-
-  //end
 
   const ChoosenStatePicker = (currState) => {
     setChoosenState(currState);
@@ -173,7 +154,6 @@ export default function DiseaseApp() {
             d3.select(stateTitle).style("fill", "white");
       });
     }
-    //end test
 
     states_and_titles.map((SaT) => {
       SaT.addEventListener("click", function () {
@@ -185,7 +165,7 @@ export default function DiseaseApp() {
         setChoosenStateTitle(stateTitle);
       });
     });
-
+    // console.log("running use effect about map color code");
     if (choosenState) {
       states_and_titles.map((SaT) => {
         SaT.removeEventListener("click", function () {
@@ -203,7 +183,7 @@ export default function DiseaseApp() {
   useEffect(() => {
     choosenState ? setStackedDisplay(true) : setStackedDisplay(false);
     choosenState ? setChangeMapColor(false) : setChangeMapColor(true);
-  });
+  }, [choosenState]);
 
   return (
     <AppContext.Provider
@@ -235,7 +215,6 @@ export default function DiseaseApp() {
       }}
     >
       <TitleHeader />
-
       <div id="main-container" theme-value={theme}>
         <ComparisonLeft />
         <ComparisonRight />

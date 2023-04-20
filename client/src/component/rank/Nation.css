@@ -1,15 +1,12 @@
 #doughnut-chart[stack-display="true"]{
-    height: 50em !important;
-    width: 40vw !important;
+    height: 75vh;
+    width: 45vw !important;
+    /* margin-top: 2rem; */
 }
 
 #doughnut-chart[stack-display="false"]{
-    margin-top: 5em;
-    height: 40em;
-    width: 20vw;
+    margin-top: 2.5em;
+    height: 20vh;
+    width: 25vw;
+    background-color: aqua;
 }
-
-#disease-name {
-    width: 5em;
-}
-
