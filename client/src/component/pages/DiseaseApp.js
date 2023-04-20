@@ -13,6 +13,7 @@ import Nation from "../rank/Nation";
 import Prediction from "../predictions/Prediction";
 import Axios from "axios";
 import * as d3 from "d3";
+import StateRanking from "../rank/StateRanking";
 
 export const AppContext = React.createContext();
 export default function DiseaseApp() {
@@ -243,7 +244,13 @@ export default function DiseaseApp() {
             <ChoosenStateView />
             <Map />
           </div>
-          <Nation />
+          <div
+            id="piechart-topstates"
+            stack-display={stackedDisplay.toString()}
+          >
+            <Nation />
+            <StateRanking />
+          </div>
         </div>
       </div>
       <Prediction />

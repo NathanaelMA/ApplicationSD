@@ -15,7 +15,14 @@
 
 }
 
-
 #state-view {
     display: flex;
+}
+
+#piechart-topstates{
+    display: flex;
+}
+
+#piechart-topstates[stack-display="false"] {
+    width: 50vw;
 }

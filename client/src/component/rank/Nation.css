@@ -1,29 +1,15 @@
 #doughnut-chart[stack-display="true"]{
     height: 50em !important;
-    width: 50vw !important;
+    width: 40vw !important;
 }
 
 #doughnut-chart[stack-display="false"]{
+    margin-top: 5em;
     height: 40em;
-    /* width: 25vw; */
-}
-
-#piechart-topstates{
-    display: flex;
+    width: 20vw;
 }
 
 #disease-name {
     width: 5em;
 }
-
-
-#piechart-topstates[stack-display="false"] {
-    width: 30vw;
-}
-
-/* #piechart-topstates[stack-display="false"] > * {
-    width: 25vw;
-    /* border: 1px red solid; 
-    /* background-color: aqua; 
-} */
 

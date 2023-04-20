@@ -56,8 +56,8 @@ export default function Nation() {
         id="piechart-topstates"
         stack-display={stackedDisplay.toString()}
         layout
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1, transition: { duration: 0.7 } }}
+        // initial={{ opacity: 0 }}
+        // animate={{ opacity: 1, transition: { duration: 0.7 } }}
       >
         <Doughnut
           id="doughnut-chart"
@@ -120,7 +120,7 @@ export default function Nation() {
             },
           }}
         />
-        <StateRanking />
+        {/* <StateRanking /> */}
       </motion.div>
     )
   );

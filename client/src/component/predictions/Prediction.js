@@ -14,6 +14,7 @@ export default function Prediction() {
   const [year, setYear] = useState(null);
   const [futureDates, setFutureDates] = useState([]);
   const [predictions, setPredictions] = useState([]);
+  const [displayPredictions, setDisplayPredictions] = useState(true);
 
   useEffect(() => {
     setDate([]);
@@ -50,6 +51,9 @@ export default function Prediction() {
 
   return (
     <div id="chart_center">
+      {/* <button onClick={setDisplayPredictions(!displayPredictions)}>
+        Click me
+      </button> */}
       <div id="cases-chart">
         <Line
           data={{
@@ -70,7 +74,9 @@ export default function Prediction() {
                   diseaseType[0].toUpperCase() +
                   diseaseType.slice(1) +
                   " Predictions",
-                data: [...futureDates, ...predictions],
+                data: displayPredictions
+                  ? [...futureDates, ...predictions]
+                  : [...futureDates],
                 backgroundColor: "rgb(25, 235, 132)",
                 borderColor: "rgb(25, 235, 132)",
                 order: 2,
