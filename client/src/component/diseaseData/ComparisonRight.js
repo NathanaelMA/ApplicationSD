@@ -193,7 +193,10 @@ export default function ComparisonRight() {
                   datasets: [
                     {
                       id: 1,
-                      label: diseaseType + " total per year (non-growing)",
+                      label:
+                        diseaseType[0].toUpperCase() +
+                        diseaseType.slice(1) +
+                        " total per year ",
                       data: [...cases],
                       fill: true,
                       pointRadius: 0.5,
@@ -216,6 +219,15 @@ export default function ComparisonRight() {
                       },
                     },
                   },
+                  plugins: {
+                    legend: {
+                      labels: {
+                        font: {
+                          size: 17,
+                        },
+                      },
+                    },
+                  },
                 }}
               />
 
@@ -226,7 +238,10 @@ export default function ComparisonRight() {
                   datasets: [
                     {
                       id: 1,
-                      label: diseaseType + " growing",
+                      label:
+                        diseaseType[0].toUpperCase() +
+                        diseaseType.slice(1) +
+                        " total per year (Cumulative)",
                       data: [...incrementingCases],
                       fill: true,
                       pointRadius: 0.5,
@@ -246,6 +261,15 @@ export default function ComparisonRight() {
                       title: {
                         display: true,
                         text: "Cases",
+                      },
+                    },
+                  },
+                  plugins: {
+                    legend: {
+                      labels: {
+                        font: {
+                          size: 17,
+                        },
                       },
                     },
                   },

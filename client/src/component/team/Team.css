@@ -1,115 +1,101 @@
-h1 {
-    color: black;
-    }
-    
-    #home-page {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-       background-color: #f6f6f6;
-    }
-    
-    #inFocusBio h2 {
-        color: rgb(208, 208, 208);
-    }
-    
+section {
+    width: 100%;
+    display: inline-block;
+    background: #ccc;
+    height: 60vh;
+    text-align: center;
+    font-size: 22px;
+    font-weight: 700;
+    text-decoration: underline;
+  }
   
+  .footer-distributed {
+    background-color: #292c2f;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
+    box-sizing: border-box;
+    width: 100%;
+    text-align: left;
+    font: normal 16px sans-serif;
+    padding: 45px 50px;
+  }
+  
+  .footer-distributed .footer-left p {
+    color: #8f9296;
+    font-size: 14px;
+    margin: 0;
+  }
+  /* Footer links */
+  
+  .footer-distributed p.footer-links {
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffffff;
+    margin: 0 0 10px;
+    padding: 0;
+    transition: ease .25s;
+  }
+  
+  .footer-distributed p.footer-links a {
+    display: inline-block;
+    line-height: 1.8;
+    text-decoration: none;
+    color: inherit;
+    transition: ease .25s;
+  }
+  
+  .footer-distributed .footer-links a:before {
+    content: "Â·";
+    font-size: 20px;
+    left: 0;
+    color: #fff;
+    display: inline-block;
+    padding-right: 5px;
+  }
+  
+  .footer-distributed .footer-links .link-1:before {
+    content: none;
+  }
+  
+  .footer-distributed .footer-right {
+    float: right;
+    margin-top: 3px;
+    max-width: 280px;
+  }
+  
+  .footer-distributed .footer-right a {
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    background-color: #33383b;
+    border-radius: 2px;
+    font-size: 20px;
+    color: #ffffff;
+    text-align: center;
+    line-height: 35px;
+    margin-left: 3px;
+    transition:all .25s;
+  }
+  
+  .footer-distributed .footer-left a
+  {
+    font-weight: 500;
+  }
 
-    
-    #our-team {
-        color: rgb(35, 14, 14);
+  .footer-distributed .footer-right a:hover{transform:scale(1.1); -webkit-transform:scale(1.1);}
+  
+  .footer-distributed p.footer-links a:hover{text-decoration:underline;}
+  
+  /* Media Queries */
+  
+  @media (max-width: 600px) {
+    .footer-distributed .footer-left, .footer-distributed .footer-right {
+      text-align: center;
     }
-    
-    
-    #inFocusBio{
-        display: flex;
+    .footer-distributed .footer-right {
+      float: none;
+      margin: 0 auto 20px;
     }
-    
-    #inFocusBio img {
-        width: 15rem;
-        height: 15rem;
-        margin: 0 0 0 2em;
+    .footer-distributed .footer-left p.footer-links {
+      line-height: 1.8;
     }
-    
-    #inFocusBio p {
-        width: 70%;
-    }
-    
-    #inFocusBioInfo{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        margin: 0 0 0 2em;
-    }
-    
-    
-    #teamImages {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        margin: 7em 2em 1em 2em;
-    }
-    
-    #teamImages img {
-        width: 15rem;
-        height: 12rem;
-        border: 1px black solid;
-        border-radius: 50%;
-        margin: 0 2em;
-        cursor: pointer;
-    }
-    
-    #teamImages img:hover {
-        border: 1px black solid;
-        border-radius: 50%;
-        margin: 0 2em;
-        cursor: pointer;
-        transform: scale(1.1);
-    }
-    
-    #teamImages h3 {
-        margin: 0;
-        text-align: center;
-    }
-    
-    #credits {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: black;
-    }
-    
-    #credits a {
-        margin: 0 .25em 0 .25em;
-        color: black;
-    }
-    
-    #dev-tools-container {
-        height: auto;
-        background: rgb(255,255,255);
-        background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 92%, rgba(0,0,0,1) 99%);
-    }
-    
-    #dev-tools-container img {
-        width: 15rem;
-        height: 15rem;
-    }
-    
-    #dev-tools-container #client {
-        display: flex;
-        justify-content: space-around;
-        margin: 2em 0;
-    }
-    
-    #dev-tools-container #server  {
-        display: flex;
-        justify-content: space-around;
-        margin: 2em 0;
-    }
-    
-    #dev-tools-container #database-cloud {
-        display: flex;
-        justify-content: space-around;
-        margin-bottom:  4em ;
-    }
+  }

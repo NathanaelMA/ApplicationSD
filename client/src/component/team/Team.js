@@ -60,99 +60,44 @@ export default function Team() {
 
   return (
     <>
-      <div className="container" id="home-page">
-        <div className="col-md section-title">
-          <h2>Our Team</h2>
-        </div>
-        <div id="inFocusBio">
-          <div id="inFocusBioInfo">
-            <h2>{bioName}</h2>
-            {/* <p>{bioInfo}</p> */}
-          </div>
-          <img src={focusedPerson.pic} alt=""></img>
-        </div>
-        <div id="teamImages" className="text-center">
-          <div>
-            <img
-              src={person1.pic}
-              alt=""
-              onClick={() => {
-                setFocusedPerson(person1);
-                setPerson1(focusedPerson);
-                setBioName(person1.name);
-              }}
-            ></img>
-            <h3>{person1.name}</h3>
-          </div>
-          <div>
-            <img
-              src={person2.pic}
-              alt=""
-              onClick={() => {
-                setFocusedPerson(person2);
-                setPerson2(focusedPerson);
-                setBioName(person2.name);
-                setBioInfo();
-              }}
-            ></img>
-            <h3>{person2.name}</h3>
-          </div>
-          <div>
-            <img
-              src={person3.pic}
-              alt=""
-              onClick={() => {
-                setFocusedPerson(person3);
-                setPerson3(focusedPerson);
-                setBioName(person3.name);
-              }}
-            ></img>
-            <h3> {person3.name} </h3>
-          </div>
-          <div>
-            <img
-              src={person4.pic}
-              alt=""
-              onClick={() => {
-                setFocusedPerson(person4);
-                setPerson4(focusedPerson);
-                setBioName(person4.name);
-              }}
-            ></img>
-            <h3> {person4.name}</h3>
-          </div>
-        </div>
-      </div>
-      <div className="container" id="dev-tools-container">
-        <div className="text-center section-title">
-          <h2>Dev Tools</h2>
-        </div>
-        <div id="client">
-          <img src={ReactImg} alt=""></img>
-          <img src={CSSImg} alt=""></img>
-          <img src={D3Img} alt=""></img>
-          <img src={ChartJSImg} alt=""></img>
-        </div>
-        <div id="server">
-          <img src={NodeJSImg} alt=""></img>
-          <img src={PythonImg} alt=""></img>
-          <img src={PytorchImg} alt=""></img>
-        </div>
-        <div id="database-cloud">
-          <img src={MysqlImg} alt=""></img>
-          <img src={AzureImg} alt=""></img>
-        </div>
-      </div>
-      <div className="container">
-        <p id="credits">
-          For more information on the data used on this webpage, please visit
-          the <a href="https://www.who.int/"> WHO </a> and
-          <a href="https://covid.cdc.gov/covid-data-tracker/#datatracker-home">
-            CDC
+      <footer className="footer-distributed">
+        <div className="footer-right">
+          <a href="#">
+            <i className="fa fa-facebook"></i>
           </a>
-          websites
-        </p>
-      </div>
+          <a href="#">
+            <i className="fa fa-twitter"></i>
+          </a>
+          <a href="#">
+            <i className="fa fa-linkedin"></i>
+          </a>
+          <a href="#">
+            <i className="fa fa-github"></i>
+          </a>
+        </div>
+
+        <div className="footer-left">
+          <p className="footer-links">
+            <a className="link-1" href="#">
+              Home
+            </a>
+            <a href="#">Team</a>
+            <a href="#">Contact</a>
+            <a href="#">About</a>
+          </p>
+
+          <p>
+            Cleveland State University &copy; 2023
+            <br></br>
+            For more information on the data used on this webpage, please visit
+            the <a href="https://www.who.int/"> WHO </a> and{" "}
+            <a href="https://covid.cdc.gov/covid-data-tracker/#datatracker-home">
+              CDC
+            </a>{" "}
+            websites.
+          </p>
+        </div>
+      </footer>
     </>
   );
 }

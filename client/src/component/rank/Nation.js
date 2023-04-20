@@ -9,10 +9,6 @@ import Axios from "axios";
 
 export default function Nation() {
   const { rankingPage, diseaseType, stackedDisplay } = useContext(AppContext);
-  const [openView, setOpenView] = useState();
-  const [states, setStates] = useState([]);
-  const [weeks, setWeeks] = useState([]);
-  const [cases, setCases] = useState([]);
   const [covidTotals, setCovidTotals] = useState(0);
   const [campylobacteriosisTotals, setCampylobacteriosisTotals] = useState(0);
   const [chlamydiaTotals, setChlamydiaTotals] = useState(0);
@@ -26,7 +22,6 @@ export default function Nation() {
     Axios.get(
       "http://127.0.0.1:3001/getCurrentWeekTotal?diseaseType=" + diseaseType
     ).then((response) => {
-      setCases([]);
       for (let j = 0; j < response.data.length; j++) {
         response.data[j].disease === "covid" &&
           setCovidTotals(response.data[j].CasesInWeek);
@@ -64,60 +59,68 @@ export default function Nation() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1, transition: { duration: 0.7 } }}
       >
-        <div id="case-charts">
-          <Doughnut
-            data={{
-              labels: [
-                "Covid",
-                "Gonorrhea",
-                "Malaria",
-                "Campylobacteriosis",
-                "Chlamydia",
-                "Pneumococcal",
-                "Syphilis",
-                "Tuberculosis",
-              ],
-              datasets: [
-                {
-                  label: "Cases",
-                  data: [
-                    covidTotals,
-                    gonorrheaTotals,
-                    malariaTotals,
-                    campylobacteriosisTotals,
-                    chlamydiaTotals,
-                    pneumoccalTotals,
-                    syphilisTotals,
-                    tuberculosisTotals,
-                  ],
-                  backgroundColor: [
-                    "rgba(255, 99, 132, 0.2)",
-                    "rgba(54, 162, 235, 0.2)",
-                    "rgba(255, 206, 86, 0.2)",
-                    "rgba(75, 192, 192, 0.2)",
-                    "rgba(153, 102, 255, 0.2)",
-                    "rgba(255, 159, 64, 0.2)",
-                    "rgba(255, 99, 132, 0.2)",
-                  ],
-                  borderColor: [
-                    "rgba(255, 99, 132, 1)",
-                    "rgba(54, 162, 235, 1)",
-                    "rgba(255, 206, 86, 1)",
-                    "rgba(75, 192, 192, 1)",
-                    "rgba(153, 102, 255, 1)",
-                    "rgba(255, 159, 64, 1)",
-                    "rgba(255, 99, 132, 1)",
-                  ],
-                  borderWidth: 1,
+        <Doughnut
+          id="doughnut-chart"
+          stack-display={stackedDisplay.toString()}
+          data={{
+            labels: [
+              "Covid",
+              "Gonorrhea",
+              "Malaria",
+              "Campylobacteriosis",
+              "Chlamydia",
+              "Pneumococcal",
+              "Syphilis",
+              "Tuberculosis",
+            ],
+            datasets: [
+              {
+                label: "Cases",
+                data: [
+                  covidTotals,
+                  gonorrheaTotals,
+                  malariaTotals,
+                  campylobacteriosisTotals,
+                  chlamydiaTotals,
+                  pneumoccalTotals,
+                  syphilisTotals,
+                  tuberculosisTotals,
+                ],
+                backgroundColor: [
+                  "rgba(255, 99, 132, 0.2)",
+                  "rgba(54, 162, 235, 0.2)",
+                  "rgba(255, 206, 86, 0.2)",
+                  "rgba(75, 192, 192, 0.2)",
+                  "rgba(153, 102, 255, 0.2)",
+                  "rgba(255, 159, 64, 0.2)",
+                  "rgba(255, 99, 132, 0.2)",
+                ],
+                borderColor: [
+                  "rgba(255, 99, 132, 1)",
+                  "rgba(54, 162, 235, 1)",
+                  "rgba(255, 206, 86, 1)",
+                  "rgba(75, 192, 192, 1)",
+                  "rgba(153, 102, 255, 1)",
+                  "rgba(255, 159, 64, 1)",
+                  "rgba(255, 99, 132, 1)",
+                ],
+                borderWidth: 1,
+              },
+            ],
+          }}
+          options={{
+            plugins: {
+              legend: {
+                labels: {
+                  font: {
+                    size: 17,
+                  },
                 },
-              ],
-            }}
-            height={200}
-            width={400}
-          />
-
-          <StateRanking />
-        </div>
+              },
+            },
+          }}
+        />
+        <StateRanking />
       </motion.div>
     )
   );

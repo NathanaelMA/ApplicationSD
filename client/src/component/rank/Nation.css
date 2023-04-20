@@ -1,28 +1,29 @@
-#case-charts{
-    height: 38em;
-    display: flex;
+#doughnut-chart[stack-display="true"]{
+    height: 50em !important;
+    width: 50vw !important;
 }
 
-#ranking-bottom-half {
+#doughnut-chart[stack-display="false"]{
+    height: 40em;
+    /* width: 25vw; */
+}
+
+#piechart-topstates{
     display: flex;
-    height: 38em;
 }
 
 #disease-name {
     width: 5em;
 }
 
-#piechart-topstates[stack-display="true"] {
-    width: 80em;    
-    /* background-color: red; */
-}
 
 #piechart-topstates[stack-display="false"] {
-    width: 40em;
-    /* background-color: aqua; */
+    width: 30vw;
 }
 
+/* #piechart-topstates[stack-display="false"] > * {
+    width: 25vw;
+    /* border: 1px red solid; 
+    /* background-color: aqua; 
+} */
 
-#map-nation[stack-display="false"] {
-    display: flex;
-}

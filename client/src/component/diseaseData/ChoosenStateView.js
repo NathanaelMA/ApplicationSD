@@ -81,7 +81,7 @@ export default function ChoosenStateView() {
     compareStates ? setChoosenState(null) : setChoosenState(choosenState);
 
     if (choosenState) {
-      diseaseType === "Covid" ? setScroll("true") : setScroll("false");
+      diseaseType === "covid" ? setScroll("true") : setScroll("false");
 
       serverStateName = states.find((state) => state[1] === choosenState.id)[0];
 
@@ -128,8 +128,6 @@ export default function ChoosenStateView() {
             className="data-section"
             theme-value={theme}
             layout
-            // initial={{ x: "-70%" }}
-            // animate={{ x: "0%", transition: { duration: 2 } }}
             active-state={JSON.stringify(compareStates)}
           >
             <div id="year-selector">
@@ -160,7 +158,10 @@ export default function ChoosenStateView() {
                   datasets: [
                     {
                       id: 1,
-                      label: diseaseType + " Cases",
+                      label:
+                        diseaseType[0].toUpperCase() +
+                        diseaseType.slice(1) +
+                        " Cases",
                       data: [...cases],
                       fill: true,
                       pointRadius: 0.5,
@@ -183,9 +184,18 @@ export default function ChoosenStateView() {
                       },
                     },
                   },
+                  plugins: {
+                    legend: {
+                      labels: {
+                        font: {
+                          size: 17,
+                        },
+                      },
+                    },
+                  },
                 }}
               />
-              {diseaseType === "Covid" && (
+              {diseaseType === "covid" && (
                 <Line
                   datasetIdKey="id"
                   data={{
@@ -193,7 +203,10 @@ export default function ChoosenStateView() {
                     datasets: [
                       {
                         id: 1,
-                        label: diseaseType + " Deaths",
+                        label:
+                          diseaseType[0].toUpperCase() +
+                          diseaseType.slice(1) +
+                          " Deaths",
                         data: [...deaths],
                         fill: true,
                         pointRadius: 0.5,
@@ -213,6 +226,15 @@ export default function ChoosenStateView() {
                         title: {
                           display: true,
                           text: "Cases",
+                        },
+                      },
+                    },
+                    plugins: {
+                      legend: {
+                        labels: {
+                          font: {
+                            size: 17,
+                          },
                         },
                       },
                     },

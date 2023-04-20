@@ -1,11 +1,13 @@
 #main-container{
     display: flex;
     background: rgb(255,255,255);
-    margin-top: 8em;
+    margin-top: 10em;
 }
 
 #map-nation[stack-display="true"] {
     display: block;
+    padding-left: 15px;
+    width: 100vw;
 }
 
 #map-nation[stack-display="false"] {
