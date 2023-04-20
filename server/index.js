@@ -100,6 +100,21 @@ app.get("/getTopStates", (req, res) => {
   );
 });
 
+app.get("/getMapColorCode", (req, res) => {
+  const diseaseType = req.query.diseaseType;
+  db.query(
+    "SELECT * FROM highest_weekly_data WHERE disease_name = ? and year = 2023 and week = 12",
+    [diseaseType],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
+
 // app.get("/getTotals", (req, res) => {
 //   const diseaseType = req.query.diseaseType;
 //   db.query(
