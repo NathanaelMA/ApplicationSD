@@ -16,12 +16,47 @@
 
 }
 
+#disease_list {
+    color: black;
+    font-size: 1.25em;
+    font-weight: bold;
+    text-decoration: none;
+    margin-top: 9px;
+    /* border: 1px red solid; */
+    width: auto;
+    display: flex; 
+    justify-content: space-between; 
+}
+
+.virus {
+    padding-left: 15px;
+    padding-right: 15px;
+    border: 3px #131313 solid;
+    color: #131313;
+    border-radius: 10px;
+    vertical-align: top;
+    display: inline-block;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.virus:hover {
+    border: 3px #5ecc62 solid;
+    color: #5ecc62;
+    cursor: pointer;
+    box-shadow: #131313 1px 1px;
+}
+
 #diseases {
     padding: .7rem;
-    border-radius: 50px;
-    background: rgb(255,255,255);
+    border: 3px #131313 solid;
+    color: #131313;
+    border-radius: 10px;
+    vertical-align: top;
+    display: inline-block;
+    font-weight: 700;
+    font-size: large;
     margin-top: 9px;
-    background: linear-gradient(94deg, rgba(255,255,255,1) 0%, rgba(160,172,255,1) 50%, rgba(55,79,255,1) 97%);
 }
 
 #home {

@@ -1,6 +1,3 @@
-
-/* light mode */
-
 .data-section {
     background: rgb(255,255,255);
     /* width: auto; */
@@ -12,80 +9,21 @@ p[theme-value='Light'] {
     color: black;
 }
 
-
-
-/* .data-section[active-state='true'][theme-value='Light']  {
-    background: rgb(255,255,255);
-    height: auto;
-
-} */
-
 .data-section #left-display-state-data[scroll-value="true"] {
-    height: 28em;
+    height: 42em;
     overflow-y: scroll;
-    width: 42em;
+    scroll-behavior: smooth;
+    width: 50vw;
 } 
 
 .data-section #left-display-state-data[scroll-value="false"] {
      width: 42em;
+     width: 50vw;
 } 
-
-
-/* @media only screen and (max-width: 768px) {
-
-    .data-section[theme-value='Light'] {
-        height: auto;
-    }
-     
-    .data-section #left-display-state-data[scroll-value="true"] {
-        height: 15em;
-        overflow-y: scroll;
-        width: 100%;
-    }
-    
-    .data-section #left-display-state-data[scroll-value="false"] {
-        width: 100%;
-    }
-    
-} */
 
 #year-selector{
     display: flex;
     justify-content: space-around;
 }
 
-    
-    @media only screen and (max-width: 480px) {
-    /* Modify styles for phones and smaller screens */
-    
-    .data-section {
-    height: auto;
-    }
-    
-    .data-section[theme-value='Dark'], .data-section[active-state='true'][theme-value='Dark'] {
-    background: #000;
-    }
-    
-    p[theme-value='Dark'] {
-    color: #fff;
-    }
-    
-    .data-section[theme-value='Light'], .data-section[active-state='true'][theme-value='Light'] {
-    background: #fff;
-    }
-    
-    p[theme-value='Light'] {
-    color: #000;
-    }
-    
-    .data-section #left-display-state-data[scroll-value="true"] {
-    height: auto;
-    max-height: 35rem;
-    overflow-y: scroll;
-    width: 100%;
-    }
-    
-    .data-section #left-display-state-data[scroll-value="false"] {
-    width: 100%;
-    }
-    }
+

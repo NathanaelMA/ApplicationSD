@@ -13,6 +13,7 @@ export default function Prediction() {
   const [scroll, setScroll] = useState("true");
   const [year, setYear] = useState(null);
   const [futureDates, setFutureDates] = useState([]);
+  const [predictions, setPredictions] = useState([]);
 
   useEffect(() => {
     setDate([]);
@@ -24,7 +25,6 @@ export default function Prediction() {
       Axios.get(
         "http://localhost:3001/getCurrentYear?diseaseType=" + diseaseType
       ).then((response) => {
-        console.log(response.data);
         for (let j = 0; j < response.data.length; j++) {
           setDate((prevData) => [...prevData, response.data[j].week + " "]);
           diseaseType === "Covid"
@@ -37,49 +37,67 @@ export default function Prediction() {
             ...prevData,
             response.data[j].CasesInWeek + " ",
           ]);
-          setFutureDates((prevData) => [...prevData, null + " "]);
+          j > 0 && setFutureDates((prevData) => [...prevData, null + " "]);
         }
+        setPredictions([
+          response.data[response.data.length - 1].CasesInWeek,
+          response.data[response.data.length - 5].CasesInWeek,
+          response.data[response.data.length - 7].CasesInWeek,
+          response.data[response.data.length - 3].CasesInWeek,
+        ]);
       });
   }, [diseaseType]);
 
   return (
-    <div id="cases-chart">
-      {console.log(futureDates)}
-      {console.log(date)}
-      <Line
-        data={{
-          labels: [...date, 14, 15, 16, 17],
-          datasets: [
-            {
-              label: diseaseType + " Cases",
-              data: [...cases],
-              backgroundColor: "rgb(255, 99, 132)",
-              borderColor: "rgb(154, 16, 235)",
-              order: 2,
-            },
-            {
-              label: diseaseType + " Predictions",
-              data: [...futureDates, 1502, 35431],
-              backgroundColor: "rgb(25, 235, 132)",
-              borderColor: "rgb(25, 235, 132)",
-              order: 2,
-            },
-          ],
-        }}
-        options={{
-          scales: {
-            x: {
-              title: {
-                display: true,
-                text: "Months",
+    <div id="chart_center">
+      <div id="cases-chart">
+        <Line
+          data={{
+            labels: [...date, 14, 15, 16, 17],
+            datasets: [
+              {
+                label:
+                  diseaseType[0].toUpperCase() +
+                  diseaseType.slice(1) +
+                  " Cases",
+                data: [...cases],
+                backgroundColor: "rgb(255, 99, 132)",
+                borderColor: "rgb(154, 16, 235)",
+                order: 2,
+              },
+              {
+                label:
+                  diseaseType[0].toUpperCase() +
+                  diseaseType.slice(1) +
+                  " Predictions",
+                data: [...futureDates, ...predictions],
+                backgroundColor: "rgb(25, 235, 132)",
+                borderColor: "rgb(25, 235, 132)",
+                order: 2,
+              },
+            ],
+          }}
+          options={{
+            scales: {
+              x: {
+                title: {
+                  display: true,
+                  text: "Months",
+                },
               },
             },
-            y: {
-              beginAtZero: true,
+            plugins: {
+              legend: {
+                labels: {
+                  font: {
+                    size: 17,
+                  },
+                },
+              },
             },
-          },
-        }}
-      />
+          }}
+        />
+      </div>
     </div>
   );
 }

@@ -29,7 +29,8 @@ export default function TitleHeader() {
     setRankingPage(false);
   }
   function handleDiseaseSelection(e) {
-    setDiseaseType(e.target.value);
+    setDiseaseType(e.target.dataset.value);
+    console.log(e.target.dataset.value);
   }
   return (
     <nav id="menu" className="navbar navbar-default navbar-fixed-top">
@@ -66,7 +67,7 @@ export default function TitleHeader() {
               </a>
             </li>
 
-            <span>
+            {/* <span>
               <select
                 id="diseases"
                 className="page-scroll"
@@ -82,8 +83,67 @@ export default function TitleHeader() {
                 <option value="syphilis">Syphilis</option>
                 <option value="tuberculosis">Tuberculosis</option>
               </select>
-            </span>
+            </span> */}
           </ul>
+        </div>
+
+        <div id="disease_list">
+          <a
+            className="virus"
+            data-value="covid"
+            onClick={handleDiseaseSelection}
+          >
+            Covid
+          </a>
+          <a
+            className="virus"
+            data-value="campylobacteriosis"
+            onClick={handleDiseaseSelection}
+          >
+            Campylobacteriosis
+          </a>
+          <a
+            className="virus"
+            data-value="chlamydia"
+            onClick={handleDiseaseSelection}
+          >
+            Chlamydia
+          </a>
+          <a
+            className="virus"
+            data-value="gonorrhea"
+            onClick={handleDiseaseSelection}
+          >
+            Gonorrhea
+          </a>
+          <a
+            className="virus"
+            data-value="malaria"
+            onClick={handleDiseaseSelection}
+          >
+            Malaria
+          </a>
+          <a
+            className="virus"
+            data-value="pneumococcal"
+            onClick={handleDiseaseSelection}
+          >
+            Pneumococcal Diseases
+          </a>
+          <a
+            className="virus"
+            data-value="syphilis"
+            onClick={handleDiseaseSelection}
+          >
+            Syphilis
+          </a>
+          <a
+            className="virus"
+            data-value="tuberculosis"
+            onClick={handleDiseaseSelection}
+          >
+            Tuberculosis
+          </a>
         </div>
       </div>
     </nav>

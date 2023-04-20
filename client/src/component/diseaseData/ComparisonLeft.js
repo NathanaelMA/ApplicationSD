@@ -5,14 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Line } from "react-chartjs-2";
 import Axios from "axios";
 export default function ComparisonLeft() {
-  const {
-    rankingPage,
-    choosenState,
-    setCompareStates,
-    diseaseType,
-    compareStates,
-    theme,
-  } = useContext(AppContext);
+  const { diseaseType, compareStates, theme } = useContext(AppContext);
   const [dropDownState, setDropDownState] = useState(null);
   const [year, setYear] = useState(null);
   const [date, setDate] = useState([]);
@@ -187,11 +180,7 @@ export default function ComparisonLeft() {
               </div>
             </div>
 
-            <div
-              id="left-display-state-data"
-              theme-value={theme}
-              // scroll-value={scroll}
-            >
+            <div id="left-display-state-data" theme-value={theme}>
               <Line
                 datasetIdKey="id"
                 data={{
@@ -199,7 +188,10 @@ export default function ComparisonLeft() {
                   datasets: [
                     {
                       id: 1,
-                      label: diseaseType + " total per year (non growing)",
+                      label:
+                        diseaseType[0].toUpperCase() +
+                        diseaseType.slice(1) +
+                        " total cases per year",
                       data: [...cases],
                       fill: true,
                       pointRadius: 0.5,
@@ -222,7 +214,15 @@ export default function ComparisonLeft() {
                       },
                     },
                   },
-                  bezierCurve: true,
+                  plugins: {
+                    legend: {
+                      labels: {
+                        font: {
+                          size: 17,
+                        },
+                      },
+                    },
+                  },
                 }}
               />
 
@@ -233,7 +233,10 @@ export default function ComparisonLeft() {
                   datasets: [
                     {
                       id: 1,
-                      label: diseaseType + " growing",
+                      label:
+                        diseaseType[0].toUpperCase() +
+                        diseaseType.slice(1) +
+                        " total cases per year (Cumulative)",
                       data: [...incrementingCases],
                       fill: true,
                       pointRadius: 0.5,
@@ -253,6 +256,15 @@ export default function ComparisonLeft() {
                       title: {
                         display: true,
                         text: "Cases",
+                      },
+                    },
+                  },
+                  plugins: {
+                    legend: {
+                      labels: {
+                        font: {
+                          size: 17,
+                        },
                       },
                     },
                   },
