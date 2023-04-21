@@ -90,6 +90,7 @@ export default function TitleHeader() {
           <a
             className="virus"
             data-value="covid"
+            tabIndex={0}
             onClick={handleDiseaseSelection}
           >
             Covid
@@ -97,6 +98,7 @@ export default function TitleHeader() {
           <a
             className="virus"
             data-value="campylobacteriosis"
+            tabIndex={1}
             onClick={handleDiseaseSelection}
           >
             Campylobacteriosis
@@ -104,6 +106,7 @@ export default function TitleHeader() {
           <a
             className="virus"
             data-value="chlamydia"
+            tabIndex={2}
             onClick={handleDiseaseSelection}
           >
             Chlamydia
@@ -111,6 +114,7 @@ export default function TitleHeader() {
           <a
             className="virus"
             data-value="gonorrhea"
+            tabIndex={3}
             onClick={handleDiseaseSelection}
           >
             Gonorrhea
@@ -118,6 +122,7 @@ export default function TitleHeader() {
           <a
             className="virus"
             data-value="malaria"
+            tabIndex={4}
             onClick={handleDiseaseSelection}
           >
             Malaria
@@ -125,6 +130,7 @@ export default function TitleHeader() {
           <a
             className="virus"
             data-value="pneumococcal"
+            tabIndex={5}
             onClick={handleDiseaseSelection}
           >
             Pneumococcal Diseases
@@ -132,6 +138,7 @@ export default function TitleHeader() {
           <a
             className="virus"
             data-value="syphilis"
+            tabIndex={6}
             onClick={handleDiseaseSelection}
           >
             Syphilis
@@ -139,6 +146,7 @@ export default function TitleHeader() {
           <a
             className="virus"
             data-value="tuberculosis"
+            tabIndex={7}
             onClick={handleDiseaseSelection}
           >
             Tuberculosis

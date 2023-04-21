@@ -1,20 +1,15 @@
 .data-section{
     background: rgb(255,255,255);
     height: auto;
+    margin-left: 5%;
 }
 
 p {
     color: black;
 }
 
-.data-section {
-    background: rgb(255,255,255);
-    height: 40rem;
-
-}
-
 .data-section #left-display-state-data {
-     width: 42em;
+     width: 40vw;
 
 } 
 

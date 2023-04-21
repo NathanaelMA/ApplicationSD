@@ -47,6 +47,22 @@
     box-shadow: #131313 1px 1px;
 }
 
+/* 
+new */
+.virus:active {
+    border: 3px #5ecc62 solid;
+    color: #5ecc62;
+    cursor: pointer;
+    box-shadow: #131313 1px 1px;
+}
+
+a[tabindex]:focus {
+    color: blue;
+    outline: none;
+  }
+/* 
+end */
+
 #diseases {
     padding: .7rem;
     border: 3px #131313 solid;

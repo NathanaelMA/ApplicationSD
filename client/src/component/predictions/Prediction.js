@@ -26,6 +26,10 @@ export default function Prediction() {
       Axios.get(
         "http://localhost:3001/getCurrentYear?diseaseType=" + diseaseType
       ).then((response) => {
+        setDate([]);
+        setDeaths([]);
+        setCases([]);
+        setFutureDates([]);
         for (let j = 0; j < response.data.length; j++) {
           setDate((prevData) => [...prevData, response.data[j].week + " "]);
           diseaseType === "Covid"
@@ -45,14 +49,18 @@ export default function Prediction() {
           response.data[response.data.length - 5].CasesInWeek,
           response.data[response.data.length - 7].CasesInWeek,
           response.data[response.data.length - 3].CasesInWeek,
+          response.data[response.data.length - 2].CasesInWeek,
         ]);
       });
   }, [diseaseType]);
 
   return (
     <div id="chart_center">
-      <button onClick={() => setDisplayPredictions(!displayPredictions)}>
-        Click me
+      <button
+        id="prediction-button"
+        onClick={() => setDisplayPredictions(!displayPredictions)}
+      >
+        Show Predictions
       </button>
       <div id="cases-chart">
         <Line
@@ -65,6 +73,9 @@ export default function Prediction() {
                   diseaseType.slice(1) +
                   " Cases",
                 data: [...cases],
+                // fill: true,
+                pointRadius: 0.7,
+                // lineTension: 0.5,
                 backgroundColor: "rgb(255, 99, 132)",
                 borderColor: "rgb(154, 16, 235)",
                 order: 2,
@@ -78,6 +89,9 @@ export default function Prediction() {
                 data: displayPredictions
                   ? [...futureDates, ...predictions]
                   : [...futureDates],
+                // fill: true,
+                pointRadius: 0.5,
+                // lineTension: 0.7,
                 backgroundColor: "rgb(25, 235, 132)",
                 borderColor: "rgb(25, 235, 132)",
                 order: 2,

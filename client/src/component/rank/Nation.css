@@ -1,5 +1,5 @@
 #doughnut-chart[stack-display="true"]{
-    height: 75vh;
+    height: 70vh !important;
     width: 45vw !important;
     /* margin-top: 2rem; */
 }
@@ -8,5 +8,4 @@
     margin-top: 2.5em;
     height: 20vh;
     width: 25vw;
-    background-color: aqua;
 }

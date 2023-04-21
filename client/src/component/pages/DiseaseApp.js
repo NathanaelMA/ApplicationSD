@@ -178,7 +178,7 @@ export default function DiseaseApp() {
         });
       });
     }
-  }, [changeMapColor, highestDiseaseCase]);
+  }, [changeMapColor, highestDiseaseCase, compareStates]);
 
   useEffect(() => {
     choosenState ? setStackedDisplay(true) : setStackedDisplay(false);
@@ -216,20 +216,30 @@ export default function DiseaseApp() {
     >
       <TitleHeader />
       <div id="main-container" theme-value={theme}>
+        {/* <div id="comparison-container" className="container"> */}
         <ComparisonLeft />
         <ComparisonRight />
+        {/* </div> */}
         <div id="map-nation" stack-display={stackedDisplay.toString()}>
           <div id="state-view">
             <ChoosenStateView />
             <Map />
           </div>
-          <div
-            id="piechart-topstates"
-            stack-display={stackedDisplay.toString()}
-          >
-            <Nation />
-            <StateRanking />
-          </div>
+          {!stackedDisplay && !compareStates && (
+            <div
+              id="piechart-topstates"
+              stack-display={stackedDisplay.toString()}
+            >
+              <Nation />
+              <StateRanking />
+            </div>
+          )}
+          {stackedDisplay && (
+            <div id="piechart-topstates">
+              <Nation />
+              <StateRanking />
+            </div>
+          )}
         </div>
       </div>
       <Prediction />

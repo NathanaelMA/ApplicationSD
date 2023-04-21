@@ -85,9 +85,6 @@ export default function ChoosenStateView() {
 
       serverStateName = states.find((state) => state[1] === choosenState.id)[0];
 
-      setDate([]);
-      setDeaths([]);
-      setCases([]);
       diseaseType &&
         serverStateName &&
         year &&
@@ -99,6 +96,9 @@ export default function ChoosenStateView() {
             "&year=" +
             year
         ).then((response) => {
+          setDate([]);
+          setDeaths([]);
+          setCases([]);
           for (let j = 0; j < response.data.length; j++) {
             if (response.data[j].state === serverStateName) {
               setDate((prevData) => [...prevData, response.data[j].week + " "]);

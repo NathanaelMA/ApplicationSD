@@ -1,5 +1,3 @@
-/* light mode */
-
 .data-section {
     background: rgb(255,255,255);
     height: auto;
@@ -19,7 +17,7 @@ p {
 }
 
 .data-section #right-display-state-data {
-    width: 42em;
+    width: 40vw;
 } 
 
 

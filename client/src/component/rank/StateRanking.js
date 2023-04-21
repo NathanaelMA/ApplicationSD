@@ -31,7 +31,7 @@ export default function StateRanking() {
       {rankingPage && (
         <table className="table" stack-display={stackedDisplay.toString()}>
           <caption className="text-center font-weight-bold" id="table-caption">
-            {diseaseType}
+            {diseaseType[0].toUpperCase() + diseaseType.slice(1)}
           </caption>
           <caption className="text-center font-weight-bold" id="table-caption">
             {"Top 5 states of current week"}
