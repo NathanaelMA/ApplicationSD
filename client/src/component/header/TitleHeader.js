@@ -16,6 +16,8 @@ export default function TitleHeader() {
     setRankingPage,
   } = useContext(AppContext);
 
+  const [selectedDisease, setSelectedDisease] = useState("covid");
+
   function handleHome() {
     setChoosenState(null);
     setUSMainMap(true);
@@ -30,6 +32,7 @@ export default function TitleHeader() {
   }
   function handleDiseaseSelection(e) {
     setDiseaseType(e.target.dataset.value);
+    setSelectedDisease(e.target.dataset.value);
   }
   return (
     <nav id="menu" className="navbar navbar-default navbar-fixed-top">
@@ -65,88 +68,72 @@ export default function TitleHeader() {
                 Compare
               </a>
             </li>
-
-            {/* <span>
-              <select
-                id="diseases"
-                className="page-scroll"
-                theme-value={theme}
-                onChange={handleDiseaseSelection}
-              >
-                <option value="covid">Covid</option>
-                <option value="campylobacteriosis">Campylobacteriosis</option>
-                <option value="chlamydia">Chlamydia</option>
-                <option value="gonorrhea">Gonorrhea</option>
-                <option value="malaria">Malaria</option>
-                <option value="pneumococcal">Pneumococcal Diseases</option>
-                <option value="syphilis">Syphilis</option>
-                <option value="tuberculosis">Tuberculosis</option>
-              </select>
-            </span> */}
           </ul>
         </div>
 
         <div id="disease_list">
           <a
             className="virus"
+            id={selectedDisease === "covid" ? "selected-disease" : ""}
             data-value="covid"
-            tabIndex={0}
             onClick={handleDiseaseSelection}
           >
             Covid
           </a>
           <a
             className="virus"
+            id={
+              selectedDisease === "campylobacteriosis" ? "selected-disease" : ""
+            }
             data-value="campylobacteriosis"
-            tabIndex={1}
             onClick={handleDiseaseSelection}
           >
             Campylobacteriosis
           </a>
           <a
             className="virus"
+            id={selectedDisease === "chlamydia" ? "selected-disease" : ""}
             data-value="chlamydia"
-            tabIndex={2}
             onClick={handleDiseaseSelection}
           >
             Chlamydia
           </a>
           <a
             className="virus"
+            id={selectedDisease === "gonorrhea" ? "selected-disease" : ""}
             data-value="gonorrhea"
-            tabIndex={3}
             onClick={handleDiseaseSelection}
           >
             Gonorrhea
           </a>
           <a
             className="virus"
+            id={selectedDisease === "malaria" ? "selected-disease" : ""}
             data-value="malaria"
-            tabIndex={4}
             onClick={handleDiseaseSelection}
           >
             Malaria
           </a>
           <a
             className="virus"
+            id={selectedDisease === "pneumococcal" ? "selected-disease" : ""}
             data-value="pneumococcal"
-            tabIndex={5}
             onClick={handleDiseaseSelection}
           >
             Pneumococcal Diseases
           </a>
           <a
             className="virus"
+            id={selectedDisease === "syphilis" ? "selected-disease" : ""}
             data-value="syphilis"
-            tabIndex={6}
             onClick={handleDiseaseSelection}
           >
             Syphilis
           </a>
           <a
             className="virus"
+            id={selectedDisease === "tuberculosis" ? "selected-disease" : ""}
             data-value="tuberculosis"
-            tabIndex={7}
             onClick={handleDiseaseSelection}
           >
             Tuberculosis

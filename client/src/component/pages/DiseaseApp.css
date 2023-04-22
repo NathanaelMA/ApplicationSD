@@ -26,10 +26,6 @@
     display: flex;
 }
 
-#piechart-topstates[stack-display="false"] {
-    width: 50vw;
-}
-
 #comparison-container{
     display: flex;
 }

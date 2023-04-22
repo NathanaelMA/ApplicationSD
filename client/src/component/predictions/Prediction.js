@@ -60,64 +60,118 @@ export default function Prediction() {
         id="prediction-button"
         onClick={() => setDisplayPredictions(!displayPredictions)}
       >
-        Show Predictions
+        {displayPredictions ? "Hide" : "Show"} Predictions
       </button>
       <div id="cases-chart">
-        <Line
-          data={{
-            labels: [...date, 14, 15, 16, 17],
-            datasets: [
-              {
-                label:
-                  diseaseType[0].toUpperCase() +
-                  diseaseType.slice(1) +
-                  " Cases",
-                data: [...cases],
-                // fill: true,
-                pointRadius: 0.7,
-                // lineTension: 0.5,
-                backgroundColor: "rgb(255, 99, 132)",
-                borderColor: "rgb(154, 16, 235)",
-                order: 2,
-              },
-              {
-                label: displayPredictions
-                  ? diseaseType[0].toUpperCase() +
+        {!displayPredictions && (
+          <Line
+            data={{
+              labels: [...date],
+              datasets: [
+                {
+                  label:
+                    diseaseType[0].toUpperCase() +
                     diseaseType.slice(1) +
-                    " Predictions"
-                  : null,
-                data: displayPredictions
-                  ? [...futureDates, ...predictions]
-                  : [...futureDates],
-                // fill: true,
-                pointRadius: 0.5,
-                // lineTension: 0.7,
-                backgroundColor: "rgb(25, 235, 132)",
-                borderColor: "rgb(25, 235, 132)",
-                order: 2,
-              },
-            ],
-          }}
-          options={{
-            scales: {
-              x: {
-                title: {
-                  display: true,
-                  text: "Months",
+                    " Cases",
+                  data: [...cases],
+                  // fill: true,
+                  pointRadius: 0.7,
+                  // lineTension: 0.5,
+                  backgroundColor: "rgb(255, 99, 132)",
+                  borderColor: "rgb(154, 16, 235)",
+                  order: 2,
                 },
-              },
-            },
-            plugins: {
-              legend: {
-                labels: {
-                  font: {
-                    size: 17,
+              ],
+            }}
+            options={{
+              scales: {
+                x: {
+                  title: {
+                    display: true,
+                    text: "Weeks",
+                  },
+                },
+                y: {
+                  title: {
+                    display: true,
+                    text: "Cases",
                   },
                 },
               },
-            },
-          }}
-        />
+              plugins: {
+                legend: {
+                  labels: {
+                    font: {
+                      size: 17,
+                    },
+                  },
+                },
+              },
+            }}
+          />
+        )}
+        {displayPredictions && (
+          <Line
+            data={{
+              labels: [...date, 14, 15, 16, 17],
+              datasets: [
+                {
+                  label:
+                    diseaseType[0].toUpperCase() +
+                    diseaseType.slice(1) +
+                    " Cases",
+                  data: [...cases],
+                  // fill: true,
+                  pointRadius: 0.7,
+                  // lineTension: 0.5,
+                  backgroundColor: "rgb(255, 99, 132)",
+                  borderColor: "rgb(154, 16, 235)",
+                  order: 2,
+                },
+                {
+                  label:
+                    diseaseType[0].toUpperCase() +
+                    diseaseType.slice(1) +
+                    " Predictions",
+                  data: displayPredictions
+                    ? [...futureDates, ...predictions]
+                    : [...futureDates],
+                  // fill: true,
+                  pointRadius: 0.5,
+                  // lineTension: 0.7,
+                  backgroundColor: "rgb(25, 235, 132)",
+                  borderColor: "rgb(25, 235, 132)",
+                  order: 2,
+                },
+              ],
+            }}
+            options={{
+              scales: {
+                x: {
+                  title: {
+                    display: true,
+                    text: "Weeks",
+                  },
+                },
+                y: {
+                  title: {
+                    display: true,
+                    text: "Cases",
+                  },
+                },
+              },
+              plugins: {
+                legend: {
+                  labels: {
+                    font: {
+                      size: 17,
+                    },
+                  },
+                },
+              },
+            }}
+          />
+        )}
       </div>
     </div>
   );

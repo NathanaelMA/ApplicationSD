@@ -10,7 +10,7 @@ p[theme-value='Light'] {
 }
 
 .data-section #left-display-state-data[scroll-value="true"] {
-    height: 42em;
+    height: 26em;
     overflow-y: scroll;
     scroll-behavior: smooth;
     width: 50vw;

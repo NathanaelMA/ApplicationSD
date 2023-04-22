@@ -111,6 +111,8 @@ export default function Nation() {
                 },
               },
             },
+            // maintainAspectRatio: true,
+            // responsive: true,
           }}
         />
       </motion.div>

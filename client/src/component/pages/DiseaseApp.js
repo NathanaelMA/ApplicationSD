@@ -19,7 +19,7 @@ export default function DiseaseApp() {
   const [choosenState, setChoosenState] = useState(null);
   const [choosenStateTitle, setChoosenStateTitle] = useState(null);
   const [USMainMap, setUSMainMap] = useState(true);
-  const [diseaseType, setDiseaseType] = useState("Covid");
+  const [diseaseType, setDiseaseType] = useState("covid");
   const [compareStates, setCompareStates] = useState(false);
   const [theme, setTheme] = useState("Light");
   const [date, setDate] = useState([]);
@@ -226,16 +226,13 @@ export default function DiseaseApp() {
             <Map />
           </div>
           {!stackedDisplay && !compareStates && (
-            <div
-              id="piechart-topstates"
-              stack-display={stackedDisplay.toString()}
-            >
+            <div id="piechart-topstates">
               <Nation />
               <StateRanking />
             </div>
           )}
           {stackedDisplay && (
-            <div id="piechart-topstates">
+            <div id="piechart-topstates" className="container">
               <Nation />
               <StateRanking />
             </div>

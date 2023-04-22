@@ -102,7 +102,7 @@ export default function ChoosenStateView() {
           for (let j = 0; j < response.data.length; j++) {
             if (response.data[j].state === serverStateName) {
               setDate((prevData) => [...prevData, response.data[j].week + " "]);
-              diseaseType === "Covid"
+              diseaseType === "covid"
                 ? setDeaths((prevData) => [
                     ...prevData,
                     response.data[j].disease_deaths + " ",

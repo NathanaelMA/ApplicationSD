@@ -1,7 +1,5 @@
 #doughnut-chart[stack-display="true"]{
-    height: 70vh !important;
-    width: 45vw !important;
-    /* margin-top: 2rem; */
+    width: 32vw ;
 }
 
 #doughnut-chart[stack-display="false"]{
