@@ -1,22 +1,16 @@
 import React, { useContext, useState } from "react";
 import "./TitleHeader.css";
-import Maplogo from "../../images/NAMap.png";
-import scalelogo from "../../images/scale.png";
-import Rank from "../../images/rank.png";
 import { AppContext } from "../pages/DiseaseApp";
-import { Link } from "react-router-dom";
-import Axios from "axios";
 export default function TitleHeader() {
   const {
     setChoosenState,
     setUSMainMap,
     setDiseaseType,
     setCompareStates,
-    theme,
     setRankingPage,
   } = useContext(AppContext);
 
-  const [selectedDisease, setSelectedDisease] = useState("covid");
+  const [selectedDisease, setSelectedDisease] = useState("malaria");
 
   function handleHome() {
     setChoosenState(null);

@@ -1,43 +1,28 @@
 import React, { useState, useContext, useEffect } from "react";
 import "./Prediction.css";
 import { AppContext } from "../pages/DiseaseApp";
-import { Doughnut, Line, PolarArea } from "react-chartjs-2";
+import { Line } from "react-chartjs-2";
 import "chart.js/auto";
 import Axios from "axios";
 
 export default function Prediction() {
   const { diseaseType } = useContext(AppContext);
   const [date, setDate] = useState([]);
-  const [deaths, setDeaths] = useState([]);
   const [cases, setCases] = useState([]);
-  const [scroll, setScroll] = useState("true");
-  const [year, setYear] = useState(null);
   const [futureDates, setFutureDates] = useState([]);
   const [predictions, setPredictions] = useState([]);
-  const [displayPredictions, setDisplayPredictions] = useState(true);
+  const [displayPredictions, setDisplayPredictions] = useState(false);
 
   useEffect(() => {
-    setDate([]);
-    setDeaths([]);
-    setCases([]);
-    setFutureDates([]);
-
     diseaseType &&
       Axios.get(
         "http://localhost:3001/getCurrentYear?diseaseType=" + diseaseType
       ).then((response) => {
         setDate([]);
-        setDeaths([]);
         setCases([]);
         setFutureDates([]);
         for (let j = 0; j < response.data.length; j++) {
           setDate((prevData) => [...prevData, response.data[j].week + " "]);
-          diseaseType === "Covid"
-            ? setDeaths((prevData) => [
-                ...prevData,
-                response.data[j].disease_deaths + " ",
-              ])
-            : setDeaths([]);
           setCases((prevData) => [
             ...prevData,
             response.data[j].CasesInWeek + " ",

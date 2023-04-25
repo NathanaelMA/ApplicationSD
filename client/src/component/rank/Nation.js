@@ -1,8 +1,8 @@
-import React, { useContext, useEffect, useState, useMemo } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Nation.css";
 import { motion } from "framer-motion";
 import { AppContext } from "../pages/DiseaseApp";
-import { Doughnut, Line, PolarArea } from "react-chartjs-2";
+import { Doughnut } from "react-chartjs-2";
 import "chart.js/auto";
 import Axios from "axios";
 

@@ -19,7 +19,7 @@ export default function DiseaseApp() {
   const [choosenState, setChoosenState] = useState(null);
   const [choosenStateTitle, setChoosenStateTitle] = useState(null);
   const [USMainMap, setUSMainMap] = useState(true);
-  const [diseaseType, setDiseaseType] = useState("covid");
+  const [diseaseType, setDiseaseType] = useState("malaria");
   const [compareStates, setCompareStates] = useState(false);
   const [theme, setTheme] = useState("Light");
   const [date, setDate] = useState([]);
@@ -30,8 +30,6 @@ export default function DiseaseApp() {
   const [statesData, setStatesData] = useState([]);
   const [highestDiseaseCase, setHighestDiseaseCase] = useState(0);
   const [changeMapColor, setChangeMapColor] = useState(true);
-
-  //test
 
   const statesAbbre = [
     ["Alabama", "AL"],
@@ -145,13 +143,7 @@ export default function DiseaseApp() {
 
         stateData.disease_cases < highestDiseaseCase / 5
           ? d3.select(stateTitle).style("fill", "black")
-          : //  : stateData.disease_cases < (highestDiseaseCase / 5) * 2
-            //   ? d3.select(stateTitle).style("fill", "#afc1d0")
-            //   : stateData.disease_cases < (highestDiseaseCase / 5) * 3
-            //   ? d3.select(state).style("fill", "#5e83a1")
-            //   : stateData.disease_cases < (highestDiseaseCase / 5) * 4
-            //   ? d3.select(state).style("fill", "#3e566a")
-            d3.select(stateTitle).style("fill", "white");
+          : d3.select(stateTitle).style("fill", "white");
       });
     }
 
@@ -165,7 +157,6 @@ export default function DiseaseApp() {
         setChoosenStateTitle(stateTitle);
       });
     });
-    // console.log("running use effect about map color code");
     if (choosenState) {
       states_and_titles.map((SaT) => {
         SaT.removeEventListener("click", function () {
@@ -216,10 +207,8 @@ export default function DiseaseApp() {
     >
       <TitleHeader />
       <div id="main-container" theme-value={theme}>
-        {/* <div id="comparison-container" className="container"> */}
         <ComparisonLeft />
         <ComparisonRight />
-        {/* </div> */}
         <div id="map-nation" stack-display={stackedDisplay.toString()}>
           <div id="state-view">
             <ChoosenStateView />

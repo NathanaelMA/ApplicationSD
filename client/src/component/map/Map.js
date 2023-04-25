@@ -11,20 +11,9 @@ export default function Map() {
 
   useEffect(() => {
     if (choosenState && USMainMap) {
-      let width = 487,
-        height = 360;
       d3.selectAll("path").style("fill", "#88a4bc");
       d3.selectAll("text").style("fill", "#d5ddec");
-
-      // const zoom = d3.zoom().scaleExtent([1, 3]).on("zoom", zoomed);
       d3.select(choosenState).style("fill", "red");
-
-      // const svg = d3.select("svg").attr("viewBox", [0, 0, width, height]);
-
-      // let x0 = choosenStateTitle.getBBox().x;
-      // let y0 = choosenStateTitle.getBBox().y;
-      // let x1 = choosenStateTitle.getBBox().width + x0;
-      // let y1 = choosenStateTitle.getBBox().height + y0;
 
       function zoomed(event) {
         const { transform } = event;
@@ -33,7 +22,6 @@ export default function Map() {
         d3.select("g").attr("stroke-width", 1 / transform.k);
       }
     } else {
-      // d3.selectAll("path").style("fill", "#88a4bc");
       setChoosenState(null);
       const svg = d3.select("svg").attr("viewBox", [0, 0, 487, 360]);
       svg.on(".zoom", null);

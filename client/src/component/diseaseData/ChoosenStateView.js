@@ -5,15 +5,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Line } from "react-chartjs-2";
 import Axios from "axios";
 export default function ChoosenStateView() {
-  const {
-    rankingPage,
-    choosenState,
-    USMainMap,
-    setChoosenState,
-    diseaseType,
-    compareStates,
-    theme,
-  } = useContext(AppContext);
+  const { choosenState, setChoosenState, diseaseType, compareStates } =
+    useContext(AppContext);
   const [date, setDate] = useState([]);
   const [deaths, setDeaths] = useState([]);
   const [cases, setCases] = useState([]);
@@ -126,7 +119,6 @@ export default function ChoosenStateView() {
         {choosenState && (
           <motion.div
             className="data-section"
-            theme-value={theme}
             layout
             active-state={JSON.stringify(compareStates)}
           >
@@ -146,11 +138,7 @@ export default function ChoosenStateView() {
                 </select>
               </div>
             </div>
-            <div
-              id="left-display-state-data"
-              theme-value={theme}
-              scroll-value={scroll}
-            >
+            <div id="left-display-state-data" scroll-value={scroll}>
               <Line
                 datasetIdKey="id"
                 data={{
